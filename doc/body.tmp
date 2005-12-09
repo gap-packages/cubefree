@@ -1,0 +1,386 @@
+%%Page: 1 1
+TeXDict begin HPSdict begin 1 0 bop 846 872 a Fp(Cub)9
+b(efree)102 b(Groups)1022 1174 y Fo(Construction)62 b(Algo)-5
+b(rithm)1257 1653 y(A)63 b(GAP4)g(P)-5 b(ack)g(age)1891
+2525 y Fn(b)m(y)1612 3183 y(Heik)m(o)36 b(Dietrich)1253
+3333 y Fm(Institute)28 b(Computational)f(Mathematics)1620
+3482 y(TU)h(Braunsc)n(h)n(w)n(eig)1694 3632 y(P)n(o)r(c)n(k)n(elsstr.)d
+(14)1532 3731 y(D-38106)g(Braunsc)n(h)n(w)n(eig)1471
+3881 y(email:)i(h.dietric)n(h@tu-bs.de)1627 4531 y Fn(Octob)s(er)38
+b(2005)p eop end end
+%%Page: 2 2
+TeXDict begin HPSdict begin 2 1 bop 2709 600 a Fp(Contents)152
+1248 y Fl(1)99 b(In)m(tro)s(duction)3013 b(3)93 1397
+y Fm(1.1)99 b(Ov)n(erview)26 b(and)h(Bac)n(kground)71
+b(.)77 b(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)
+h(.)g(.)f(.)h(.)g(.)f(.)h(.)196 b(3)152 1546 y Fl(2)99
+b(F)-8 b(unctionalit)m(y)32 b(of)g(the)g(Cub)s(efree)f(pac)m(k)-5
+b(age)1953 b(4)93 1696 y Fm(2.1)99 b(New)28 b(metho)r(ds)142
+b(.)77 b(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)
+g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)196 b(4)93
+1845 y(2.2)99 b(Commen)n(ts)27 b(on)g(the)h(implemen)n(tation)97
+b(.)77 b(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)
+h(.)g(.)f(.)h(.)196 b(5)93 1995 y(2.3)99 b(Accuracy)26
+b(c)n(hec)n(k)75 b(.)i(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h
+(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)196
+b(6)152 2144 y Fl(3)99 b(Installing)30 b(and)j(loading)e(the)g(Cub)s
+(efree)h(pac)m(k)-5 b(age)1703 b(7)93 2294 y Fm(3.1)99
+b(Installing)27 b(the)h(Cub)r(efree)g(pac)n(k)-5 b(age)90
+b(.)76 b(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)
+f(.)h(.)g(.)f(.)h(.)196 b(7)93 2443 y(3.2)99 b(Loading)26
+b(the)i(Cub)r(efree)g(pac)n(k)-5 b(age)138 b(.)76 b(.)h(.)g(.)f(.)h(.)f
+(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)f(.)h(.)g(.)f(.)h(.)g(.)f(.)h(.)196
+b(7)299 2593 y Fl(Bibliograph)m(y)3003 b(8)299 2742 y(Index)3303
+b(9)p eop end end
+%%Page: 3 3
+TeXDict begin HPSdict begin 3 2 bop -71 600 a Fk(1)1872
+b Fp(Intro)9 b(duction)0 1167 y Fn(1.1)55 b(Overview)36
+b(and)h(Background)0 1352 y Fm(This)27 b(man)n(ual)e(describ)r(es)h
+(the)h Fj(Cub)r(efree)h Fm(pac)n(k)-5 b(age,)25 b(a)h
+Fj(GAP)h Fm(pac)n(k)-5 b(age)26 b(for)g(constructing)f(groups)h(of)g
+(cub)r(efree)h(order;)e(that)0 1452 y(is,)j(groups)e(whose)h(order)f
+(is)h(not)h(divisible)g(b)n(y)f(an)n(y)g(third)h(p)r(o)n(w)n(er)e(of)h
+(a)h(prime.)0 1587 y(The)j(groups)e(of)h(squarefree)f(order)h(are)f
+(kno)n(wn)h(for)g(a)g(long)g(time,)i(since)e(Ho)r(elder)g([Ho)r(e95])g
+(in)n(v)n(estigated)f(them)j(at)e(the)0 1687 y(end)d(of)g(the)g(19th)g
+(cen)n(tury)-7 b(.)26 b(T)-7 b(aun)n(t)27 b([T)-7 b(au55])26
+b(has)g(considered)g(solv)-5 b(able)26 b(groups)g(of)g(cub)r(efree)h
+(order,)f(since)h(he)g(examined)0 1787 y(solv)-5 b(able)26
+b(groups)f(with)i(ab)r(elian)f(Sylo)n(w)g(subgroups.)f(Cub)r(efree)h
+(groups)f(in)i(general)e(are)h(in)n(v)n(estigated)f(\014rstly)h(in)h
+([Die05])0 1886 y(and)g([DE05],)g(and)h(this)g(pac)n(k)-5
+b(age)26 b(con)n(tains)g(the)i(implemen)n(tation)g(of)f(the)h
+(algorithms)f(describ)r(ed)g(there.)0 2022 y(Some)22
+b(general)f(approac)n(hes)f(to)i(construct)f(groups)g(of)h(an)g
+(arbitrarily)f(giv)n(en)g(order)g(are)g(describ)r(ed)h(in)g([BE99a],)f
+([BE99b],)0 2121 y(and)27 b([BEO02].)0 2257 y(The)d(main)f(function)h
+(of)g(this)g(pac)n(k)-5 b(age)22 b(is)h(a)h(metho)r(d)g(to)f(construct)
+g(up)h(to)g(isomorphism)e(all)i(groups)e(of)h(a)h(giv)n(en)e(cub)r
+(efree)0 2356 y(order.)27 b(The)h(algorithm)e(b)r(ehind)j(this)f
+(function)h(is)e(describ)r(ed)h(completely)g(in)g([Die05])f(and)h
+([DE05].)f(It)h(is)g(a)g(re\014nemen)n(t)0 2456 y(of)g(the)g(metho)r
+(ds)f(of)h(the)g Fj(GrpConst)f Fm(pac)n(k)-5 b(age)26
+b(whic)n(h)i(are)f(describ)r(ed)g(in)h([BE99c].)0 2591
+y(This)22 b(main)g(function)h(needs)f(a)f(metho)r(d)i(to)f(construct)g
+(up)g(to)g(conjugacy)f(the)h(solv)-5 b(able)22 b(cub)r(efree)g
+(subgroups)f(of)h(GL\(2)p Fi(;)14 b Fh(p)5 b Fm(\))0
+2691 y(coprime)31 b(to)g Fh(p)5 b Fm(.)32 b(These)f(subgroups)f(are)g
+(constructed)h(using)g(the)h(irreducible)e(subgroups)g(of)h(GL\(2)p
+Fi(;)14 b Fh(p)5 b Fm(\).)33 b(T)-7 b(o)30 b(determine)0
+2790 y(these)e(irreducible)f(subgroups)g(w)n(e)g(use)h(the)g(metho)r(d)
+h(describ)r(ed)e(in)i([F)n(O05])d(for)i(whic)n(h)f(this)i(pac)n(k)-5
+b(age)26 b(also)h(con)n(tains)g(an)0 2890 y(implemen)n(tation.)h
+(Alternativ)n(ely)-7 b(,)27 b(the)h Fj(Irredsol)f Fm(pac)n(k)-5
+b(age)26 b([Ho)r(e00])h(could)h(b)r(e)g(used)f(for)g
+Fh(p)i Fg(\024)23 b Fm(251.)0 3025 y(The)k(algorithm)f(of)h([F)n(O05])f
+(requires)g(a)h(metho)r(d)g(to)g(rewrite)g(a)g(represen)n(tation.)e(W)
+-7 b(e)28 b(use)f(and)g(implemen)n(t)g(the)h(metho)r(d)0
+3125 y(of)g([GH97])f(for)g(this)h(purp)r(ose.)0 3260
+y(F)-7 b(or)26 b(the)g(construction)f(of)h(groups)f(of)h(squarefree)f
+(order)f(it)j(is)f(more)f(practical)g(to)h(use)g(the)h(e\016cien)n(t)f
+(function)h Fh(A)n(l)t(lSmal)t(l-)0 3360 y(Gr)l(oups)35
+b Fm(of)27 b(the)h Fj(GrpConst)g Fm(pac)n(k)-5 b(age.)0
+3495 y(A)28 b(more)f(detailed)g(describtion)g(of)h(the)g(implemen)n
+(ted)g(metho)r(ds)g(can)f(b)r(e)h(found)g(in)g(Chapter)f(2.)0
+3631 y(Chapter)g(3)g(explains)g(ho)n(w)g(to)h(install)f(and)h(load)f
+(the)h Fj(Cub)r(efree)g Fm(pac)n(k)-5 b(age.)p eop end
+end
+%%Page: 4 4
+TeXDict begin HPSdict begin 4 3 bop -71 600 a Fk(2)1298
+235 y Fp(F)-9 b(unctionalit)g(y)114 b(of)h(the)1545 600
+y(Cub)9 b(efree)116 b(pack)-9 b(age)0 1089 y Fm(This)28
+b(c)n(hapter)e(describ)r(es)h(the)h(metho)r(ds)g(a)n(v)-5
+b(ailable)26 b(from)i(the)g Fj(Cub)r(efree)g Fm(pac)n(k)-5
+b(age.)0 1324 y Fn(2.1)55 b(New)36 b(metho)s(ds)0 1509
+y Fm(This)28 b(section)f(lists)g(the)h(implemen)n(ted)h(functions.)-143
+1659 y Ff(1)-93 1648 y Fe(I)0 1659 y Fd(ConstructAllCFGr)o(oup)o(s\()37
+b Fh(or)l(der)53 b Fd(\))0 1819 y Fm(The)37 b Fh(or)l(der)46
+b Fm(is)37 b(the)g(size)g(of)f(the)h(desired)g(groups)e(and)h
+(therefore)g(has)g(to)h(b)r(e)g(a)g(cub)r(efree)f(in)n(teger.)g(The)h
+(output)g(is)g(a)0 1919 y(complete)e(and)g(irredundan)n(t)f(list)i(of)f
+(isomorphism)f(t)n(yp)r(e)h(represen)n(tativ)n(es)e(of)i(groups)f(of)h
+(this)h(size.)f(If)g(p)r(ossible,)g(the)0 2018 y(groups)26
+b(are)h(giv)n(en)g(as)g(p)r(c)h(groups)e(and)h(as)g(p)r(erm)n(utations)
+g(groups)f(otherwise.)-143 2168 y Ff(2)-93 2157 y Fe(I)0
+2168 y Fd(ConstructAllCFSo)o(lva)o(bl)o(eG)o(rou)o(ps)o(\()38
+b Fh(or)l(der)53 b Fd(\))0 2328 y Fm(The)37 b Fh(or)l(der)46
+b Fm(is)37 b(the)g(size)g(of)f(the)h(desired)g(groups)e(and)h
+(therefore)g(has)g(to)h(b)r(e)g(a)g(cub)r(efree)f(in)n(teger.)g(The)h
+(output)g(is)g(a)0 2428 y(complete)28 b(and)f(irredundan)n(t)g(list)h
+(of)f(isomorphism)g(t)n(yp)r(e)g(represen)n(tativ)n(es)f(of)h(solv)-5
+b(able)27 b(groups)f(of)i(this)g(size.)-143 2577 y Ff(3)-93
+2566 y Fe(I)0 2577 y Fd(ConstructAllCFNi)o(lpo)o(te)o(nt)o(Gro)o(up)o
+(s\()37 b Fh(or)l(der)54 b Fd(\))0 2737 y Fm(The)37 b
+Fh(or)l(der)46 b Fm(is)37 b(the)g(size)g(of)f(the)h(desired)g(groups)e
+(and)h(therefore)g(has)g(to)h(b)r(e)g(a)g(cub)r(efree)f(in)n(teger.)g
+(The)h(output)g(is)g(a)0 2837 y(complete)28 b(and)f(irredundan)n(t)g
+(list)h(of)f(isomorphism)g(t)n(yp)r(e)g(represen)n(tativ)n(es)f(of)h
+(nilp)r(oten)n(t)h(groups)f(of)g(this)h(size.)-143 2986
+y Ff(4)-93 2975 y Fe(I)0 2986 y Fd(ConstructAllCFSi)o(mpl)o(eG)o(ro)o
+(ups)o(\()37 b Fh(or)l(der)54 b Fd(\))0 3147 y Fm(The)20
+b Fh(or)l(der)29 b Fm(is)20 b(the)g(size)f(of)g(the)h(desired)g(groups)
+e(and)h(therefore)g(has)g(to)g(b)r(e)h(a)g(cub)r(efree)f(in)n(teger.)g
+(The)h(output)g(is)f(a)h(complete)0 3246 y(and)30 b(irredundan)n(t)g
+(list)h(of)f(isomorphism)g(t)n(yp)r(e)g(represen)n(tativ)n(es)f(of)h
+(simple)h(groups)e(of)i(this)f(size.)h(In)f(particular,)g(there)0
+3346 y(exists)d(either)h(none)f(or)g(exactly)g(one)g(simple)h(group)e
+(of)i(the)g(required)e(order.)-143 3495 y Ff(5)-93 3484
+y Fe(I)0 3495 y Fd(ConstructAllCFFr)o(att)o(in)o(iF)o(ree)o(Gr)o(oup)o
+(s\()37 b Fh(or)l(der)53 b Fd(\))0 3656 y Fm(The)37 b
+Fh(or)l(der)46 b Fm(is)37 b(the)g(size)g(of)f(the)h(desired)g(groups)e
+(and)h(therefore)g(has)g(to)h(b)r(e)g(a)g(cub)r(efree)f(in)n(teger.)g
+(The)h(output)g(is)g(a)0 3755 y(complete)28 b(and)f(irredundan)n(t)g
+(list)h(of)f(isomorphism)g(t)n(yp)r(e)g(represen)n(tativ)n(es)f(of)h(F)
+-7 b(rattini-free)27 b(groups)g(of)g(this)h(size.)-143
+3905 y Ff(6)-93 3894 y Fe(I)0 3905 y Fd(CountAllCFGroups)o(UpT)o(o\()37
+b Fh(n)50 b Fd(\))0 4065 y Fm(The)19 b(input)h(is)g(an)f(in)n(teger)f
+Fh(n)25 b Fm(and)19 b(the)h(output)g(is)f(a)g(list)g
+Fh(L)h Fm(of)f(size)g Fh(n)25 b Fm(suc)n(h)19 b(that)h
+Fh(L)p Fm([)p Fh(i)8 b Fm(])20 b(con)n(tains)f(the)g(n)n(um)n(b)r(er)g
+(of)h(isomorphism)0 4165 y(t)n(yp)r(es)27 b(of)f(groups)f(of)i(order)e
+Fh(i)35 b Fm(if)27 b Fh(i)36 b Fm(is)26 b(cub)r(efree)h(and)g
+(IsBound\()p Fh(L)p Fm([)p Fh(i)8 b Fm(]\))24 b(=)e Fh(false)34
+b Fm(otherwise,)26 b(1)d Fg(\024)f Fh(i)32 b Fg(\024)23
+b Fh(n)6 b Fm(.)27 b(The)f(SmallGroups)0 4264 y(library)c(is)i(used)f
+(whenev)n(er)g(p)r(ossible.)g(If)h(called)f(Coun)n(tAllCF)n(Groups\()p
+Fh(n)6 b Fm(,)p Fh(false)g Fm(\),)25 b(then)f(only)g(the)g(n)n(um)n(b)r
+(ers)f(of)g(squarefree)0 4364 y(groups)j(are)h(tak)n(en)g(from)g(the)h
+(SmallGroups)f(library)-7 b(.)-143 4513 y Ff(7)-93 4502
+y Fe(I)0 4513 y Fd(NumberCFGroups\()37 b Fh(n)50 b Fd(\))0
+4674 y Fm(The)37 b(input)h(is)f(a)f(cub)r(efree)h(in)n(teger)f
+Fh(n)44 b Fm(and)36 b(the)i(output)f(is)g(the)h(n)n(um)n(b)r(er)e(of)h
+(all)g(cub)r(efree)g(groups)f(of)h(order)e Fh(n)6 b Fm(.)37
+b(The)0 4773 y(SmallGroups)25 b(library)g(is)g(used)h(whenev)n(er)f(p)r
+(ossible.)h(If)g(called)g(Num)n(b)r(erCF)n(Groups\()p
+Fh(n)6 b Fm(,)p Fh(false)g Fm(\),)27 b(then)f(only)g(the)g(n)n(um)n(b)r
+(ers)0 4873 y(of)i(squarefree)e(groups)g(are)g(tak)n(en)h(from)h(the)g
+(SmallGroups)e(library)-7 b(.)p eop end end
+%%Page: 5 5
+TeXDict begin HPSdict begin 5 4 bop 0 -116 a Fh(Se)l(ction)30
+b(2.)g(Comments)g(on)g(the)g(implementation)2226 b Fm(5)-143
+83 y Ff(8)-93 72 y Fe(I)0 83 y Fd(NumberCFSolvable)o(Gro)o(up)o(s\()37
+b Fh(n)50 b Fd(\))0 241 y Fm(The)30 b(input)h(is)f(a)f(cub)r(efree)h
+(in)n(teger)f Fh(n)36 b Fm(and)30 b(the)g(output)h(is)f(the)g(n)n(um)n
+(b)r(er)g(of)f(all)h(cub)r(efree)g(solv)-5 b(able)29
+b(groups)g(of)h(order)e Fh(n)6 b Fm(.)0 341 y(The)26
+b(SmallGroups)g(library)f(is)h(used)h(whenev)n(er)e(p)r(ossible.)h(If)h
+(called)f(Num)n(b)r(erCFSolv)-5 b(ableGroups\()p Fh(n)6
+b Fm(,)p Fh(false)g Fm(\),)28 b(then)f(only)0 441 y(the)h(n)n(um)n(b)r
+(ers)f(of)h(squarefree)e(groups)g(are)g(tak)n(en)h(from)h(the)g
+(SmallGroups)e(library)-7 b(.)-143 589 y Ff(9)-93 578
+y Fe(I)0 589 y Fd(IsCubeFreeInt\()38 b Fh(n)49 b Fd(\))0
+747 y Fm(The)28 b(output)g(is)f Fh(true)34 b Fm(if)28
+b Fh(n)33 b Fm(is)28 b(a)f(cub)r(efree)h(in)n(teger)e(and)i
+Fh(false)35 b Fm(otherwise.)-178 895 y Ff(10)-93 884
+y Fe(I)0 895 y Fd(IsSquareFreeInt\()i Fh(n)50 b Fd(\))0
+1054 y Fm(The)28 b(output)g(is)f Fh(true)34 b Fm(if)28
+b Fh(n)33 b Fm(is)28 b(a)f(squarefree)f(in)n(teger)h(and)g
+Fh(false)35 b Fm(otherwise.)-178 1202 y Ff(11)-93 1191
+y Fe(I)0 1202 y Fd(IrreducibleSubgr)o(oup)o(sO)o(fG)o(L\()i
+Fh(n)6 b Fd(,)43 b Fh(q)52 b Fd(\))0 1360 y Fm(The)24
+b(curren)n(t)g(v)n(ersion)f(of)h(this)h(metho)r(d)g(allo)n(ws)e(only)h
+Fh(n)6 b Fm(=2.)23 b(The)i(input)g Fh(q)32 b Fm(has)24
+b(to)g(b)r(e)h(a)f(prime-p)r(o)n(w)n(er)e Fh(q)7 b Fm(=)24
+b Fh(p)3440 1330 y Fc(r)3500 1360 y Fm(with)h Fh(p)j
+Fg(\025)23 b Fm(5)0 1460 y(a)k(prime.)h(The)f(output)h(is)g(a)f(list)h
+(of)g(all)f(irreducible)g(subgroups)f(of)i(GL\(2)p Fi(;)14
+b Fh(q)7 b Fm(\))28 b(up)g(to)f(conjugacy)-7 b(.)-178
+1608 y Ff(12)-93 1597 y Fe(I)0 1608 y Fd(RewriteAbsolutel)o(yIr)o(re)o
+(du)o(cib)o(le)o(Mat)o(ri)o(xGr)o(ou)o(p\()37 b Fh(G)51
+b Fd(\))0 1767 y Fm(The)21 b(input)h Fh(G)29 b Fm(has)21
+b(to)g(b)r(e)h(an)f(absolutely)f(irreducible)h(matrix)g(group)f(o)n(v)n
+(er)f(a)i(\014nite)h(\014eld)g(GF\()p Fh(q)7 b Fm(\).)23
+b(If)e(p)r(ossible,)g(the)h(output)0 1866 y(is)32 b Fh(G)40
+b Fm(rewritten)31 b(o)n(v)n(er)g(the)h(sub\014eld)h(of)f(GF\()p
+Fh(q)7 b Fm(\))34 b(generated)c(b)n(y)i(the)h(traces)e(of)h(the)h
+(elemen)n(ts)f(of)g(G.)g(If)h(no)e(rewriting)h(is)0 1966
+y(p)r(ossible,)27 b(then)h(the)g(input)h Fh(G)35 b Fm(is)27
+b(returned.)0 2197 y Fn(2.2)55 b(Comments)37 b(on)g(the)g
+(implementation)0 2380 y Fm(This)28 b(section)f(pro)n(vides)f(some)h
+(useful)h(information)f(ab)r(out)g(the)h(implemen)n(tations.)0
+2514 y Fl(ConstructAllCF)m(Groups)0 2648 y Fm(The)38
+b(function)h Fh(ConstructA)n(l)t(lCF)n(Gr)l(oups)46 b
+Fm(constructs)37 b(all)h(groups)f(of)h(a)g(giv)n(en)f(cub)r(efree)h
+(order)f(up)i(to)f(isomorphism)0 2748 y(using)24 b(the)h(F)-7
+b(rattini)25 b(Extension)f(Metho)r(d)h(as)f(describ)r(ed)g(in)h
+([Die05],)f([DE05],)g([BE99a],)f(and)h([BE99b].)f(One)i(step)f(in)h
+(the)0 2847 y(F)-7 b(rattini)23 b(Extension)e(Metho)r(d)i(is)g(to)f
+(compute)h(F)-7 b(rattini)23 b(extensions)f(and)g(for)g(this)h(purp)r
+(ose)f(some)g(already)f(implemen)n(ted)0 2947 y(metho)r(ds)28
+b(of)f(the)h(required)f Fj(GAP)h Fm(pac)n(k)-5 b(age)26
+b Fj(GrpConst)i Fm(are)f(used.)0 3081 y(Since)j Fh(ConstructA)n(l)t
+(lCF)n(Gr)l(oups)37 b Fm(requires)29 b(only)h(some)f(sp)r(ecial)h(t)n
+(yp)r(es)f(of)h(irreducible)g(subgroups)e(of)i(GL\(2)p
+Fi(;)14 b Fh(p)5 b Fm(\))31 b(\(e.g.)f(of)0 3181 y(cub)r(efree)25
+b(order\),)f(it)h(con)n(tains)f(an)h(abbreviated)e(and)i(mo)r(di\014ed)
+g(in)n(ternal)g(v)n(ersion)e(of)i Fh(Irr)l(e)l(ducibleSub)l(gr)l
+(oupsOfGL)p Fm(.)h(This)0 3280 y(means)h(that)h(the)g(latter)f(is)h
+(not)f(called)h(explicitely)f(b)n(y)h Fh(ConstructA)n(l)t(lCF)n(Gr)l
+(oups)7 b Fm(.)0 3414 y(T)-7 b(o)29 b(reduce)f(run)n(time,)h(the)h
+(generators)c(of)j(the)g(reducible)g(subgroups)f(of)h(GL\(2)p
+Fi(;)14 b Fh(p)5 b Fm(\),)29 b(2)c Fg(\024)g Fh(p)31
+b Fg(\024)25 b Fm(100)j(a)g(prime,)h(are)f(stored)0 3514
+y(in)g(the)g(\014le)g('diagonalMatrices.gi'.)0 3648 y(Since)34
+b(the)h Fj(GrpConst)f Fm(pac)n(k)-5 b(age)33 b(con)n(tains)g(a)h(v)n
+(ery)f(e\016cien)n(t)h(metho)r(d)h(to)f(construct)g(the)g(groups)f(of)h
+(squarefree)f(order,)0 3748 y(it)e(migh)n(t)g(b)r(e)g(more)f(practical)
+f(to)i(use)f Fh(A)n(l)t(lSmal)t(lGr)l(oups)39 b Fm(\(see)31
+b Fj(GrpConst)p Fm(\))g(instead)f(of)h Fh(ConstructA)n(l)t(lCF)n(Gr)l
+(oups)38 b Fm(in)31 b(the)0 3847 y(squarefree)26 b(case.)0
+3981 y Fl(ConstructAllCFSimpleGroups)k(and)i(ConstructAllCFNilp)s(oten)
+m(tGroups)0 4115 y Fm(The)h(construction)g(of)g(simple)h(or)e(nilp)r
+(oten)n(t)i(groups)e(of)h(cub)r(efree)h(order)e(is)h(rather)f(easy)-7
+b(,)33 b(see)f([Die05])h(or)g([DE05].)f(In)0 4215 y(particular,)26
+b(the)i(metho)r(ds)f(used)g(in)h(these)f(cases)f(are)h(indep)r(enden)n
+(t)h(from)f(the)h(metho)r(ds)f(used)g(in)h(the)g(general)d(cub)r(efree)
+0 4315 y(case.)0 4449 y Fl(Coun)m(tAllCF)m(GroupsUpT)-8
+b(o)32 b(and)h(Num)m(b)s(erCF)m(Groups)0 4583 y Fm(As)h(describ)r(ed)g
+(in)g([Die05])g(and)f([DE05],)g(ev)n(ery)g(cub)r(efree)h(group)f
+Fh(G)42 b Fm(has)33 b(the)h(form)g Fh(G)41 b Fm(=)33
+b Fh(A)23 b Fg(\002)f Fh(I)47 b Fm(where)34 b Fh(A)f
+Fm(is)h(trivial)0 4682 y(or)27 b(non-ab)r(elian)f(simple)i(and)g
+Fh(I)40 b Fm(is)28 b(solv)-5 b(able.)27 b(F)-7 b(urther,)27
+b(there)h(is)f(a)g(one-to-one)f(corresp)r(ondence)g(b)r(et)n(w)n(een)h
+(the)h(solv)-5 b(able)0 4782 y(cub)r(efree)26 b(groups)e(and)i
+Fh(some)32 b Fm(solv)-5 b(able)25 b(F)-7 b(rattini-free)26
+b(groups.)e(This)i(one-to-one)e(corresp)r(ondence)g(allo)n(ws)g(to)i
+(coun)n(t)f(the)0 4882 y(n)n(um)n(b)r(er)k(of)h(groups)e(of)i(a)f(giv)n
+(en)g(cub)r(efree)g(order)g(without)h(computing)f(an)n(y)g(F)-7
+b(rattini)30 b(extension.)f(T)-7 b(o)29 b(reduce)g(run)n(time,)0
+4981 y(the)24 b(computed)f(irreducible)g(and)g(reducible)g(subgroups)f
+(of)h(the)h(general)d(linear)i(groups)f(GL\(2)p Fi(;)14
+b Fh(p)5 b Fm(\))24 b(and)f(also)f(the)i(n)n(um)n(b)r(er)0
+5081 y(of)f(the)h(computed)f(solv)-5 b(able)23 b(F)-7
+b(rattini-free)22 b(groups)g(are)g(stored)h(during)g(the)g(whole)g
+(computation.)g(This)g(is)g(v)n(ery)f(memory)0 5181 y(consuming)27
+b(but)h(reduces)f(the)h(run)n(time)g(signi\014can)n(tly)-7
+b(.)26 b(It)i(is)g(easy)f(to)g(mo)r(dify)h(the)g(co)r(de)f(to)h(one's)f
+(priorities.)p eop end end
+%%Page: 6 6
+TeXDict begin HPSdict begin 6 5 bop 0 -116 a Fm(6)2077
+b Fh(Chapter)31 b(2.)g(F)-6 b(unctionality)30 b(of)h(the)e(Cub)l(efr)l
+(e)l(e)i(p)l(ackage)0 83 y Fl(IrreducibleSubgroupsOfGL)0
+218 y Fm(The)37 b(size)g(of)f(the)i(input)f(of)g Fh(Irr)l(e)l
+(ducibleSub)l(gr)l(oupsOfGL)h Fm(is)f(b)r(ounded)g(b)n(y)g(the)g
+(abilit)n(y)g(of)f Fj(GAP)i Fm(to)f(compute)g('large')0
+318 y(\014nite)25 b(\014elds)f(since)h(the)g(used)f(algorithm)f(to)i
+(construct)f(the)g(irreducible)g(groups)f(uses)h(\014nite)h(\014elds)g
+(of)f(order)f(at)i(least)f Fh(q)3825 288 y Fb(3)3862
+318 y Fm(.)0 418 y(Therefore,)i(if)j Fh(q)35 b Fm(is)27
+b(already)f(a)i('large')e(prime-p)r(o)n(w)n(er,)g(then)i
+Fh(q)1979 388 y Fb(3)2044 418 y Fm(migh)n(t)g(b)r(e)g(to)r(o)f(large)f
+(for)h Fj(GAP)i Fm(to)e(construct)g(GF\()p Fh(q)3724
+388 y Fb(3)3763 418 y Fm(\).)0 553 y Fl
+(RewriteAbsolutelyIrreducibleMatrixGroup)0 688 y Fm(The)e(function)h
+Fh(R)l(ewriteA)n(bsolutelyIrr)l(e)l(ducibleMatrixGr)l(oup)33
+b Fm(as)24 b(describ)r(ed)h(algorithmically)f(in)h([GH97])g(is)g
+(probabilis-)0 788 y(tic.)j(If)g(the)g(input)g(is)g Fh(G)i
+Fg(\024)p Fm(GL\()p Fh(d)9 b Fi(;)14 b Fh(p)1117 758
+y Fc(r)1153 788 y Fm(\),)28 b(then)g(the)g(exp)r(ected)g(running)f
+(time)h(is)g Fh(O)8 b Fm(\()p Fh(r)l(d)2682 758 y Fb(3)2718
+788 y Fm(\).)0 1033 y Fn(2.3)55 b(Accuracy)37 b(check)0
+1218 y Fm(W)-7 b(e)33 b(ha)n(v)n(e)e(compared)h(the)g(results)g(of)h
+Fh(ConstructA)n(l)t(lCF)n(Gr)l(oups)40 b Fm(with)33 b(the)g(library)e
+(of)h(cub)r(efree)h(groups)e(of)i Fj(GrpConst)p Fm(.)0
+1318 y(F)-7 b(urther,)25 b(w)n(e)g(compared)g(the)h(n)n(um)n(b)r(er)f
+(and)g(size)g(of)h(the)g(solv)-5 b(able)24 b(groups)g(constructed)h(b)n
+(y)h Fh(Irr)l(e)l(ducibleSub)l(gr)l(oupsOfGL)0 1418 y
+Fm(with)i(the)g(library)e(of)i Fj(Irredsol)p Fm(.)p eop
+end end
+%%Page: 7 7
+TeXDict begin HPSdict begin 7 6 bop -71 600 a Fk(3)1076
+235 y Fp(Installing)110 b(and)g(loading)1023 600 y(the)f(Cub)9
+b(efree)107 b(pack)-9 b(age)0 1212 y Fn(3.1)55 b(Installing)36
+b(the)h(Cub)s(efree)g(pack)m(age)0 1397 y Fm(The)29 b(installation)f
+(of)h(the)g Fj(Cub)r(efree)g Fm(pac)n(k)-5 b(age)27 b(follo)n(ws)h
+(standard)g Fj(GAP)h Fm(rules.)f(So)h(the)g(standard)f(metho)r(d)h(is)g
+(to)f(unpac)n(k)0 1497 y(the)g(pac)n(k)-5 b(age)26 b(in)n(to)h(the)h
+Fd(pkg)f Fm(directory)f(of)i(y)n(our)e Fj(GAP)i Fm(distribution.)g
+(This)g(will)g(create)e(an)i Fd(cubefree)c Fm(sub)r(directory)-7
+b(.)0 1632 y(F)g(or)27 b(other)g(non-standard)f(options)h(please)g(see)
+g(Chapter)g(74.1)g(in)g(the)h Fj(GAP)h Fm(Reference)e(Man)n(ual.)0
+1867 y Fn(3.2)55 b(Loading)37 b(the)g(Cub)s(efree)f(pack)m(age)0
+2052 y Fm(T)-7 b(o)25 b(use)h(the)f Fj(Cub)r(efree)i
+Fm(P)n(ac)n(k)-5 b(age)23 b(y)n(ou)h(ha)n(v)n(e)h(to)g(request)g(it)h
+(explicitly)-7 b(.)26 b(This)f(is)h(done)f(b)n(y)g(calling)g
+Fd(LoadPackage)c Fm(lik)n(e)k(this:)118 2202 y Fd(gap>)42
+b(LoadPackage\("Cub)o(efr)o(ee)o("\);)118 2301 y(Loading)f(Cubefree)f
+(1.0)i(...)249 2501 y(----------------)o(--)o(---)o(--)o(---)o(--)o(--)
+o(---)o(--)o(---)o(--)o(--)o(---)o(--)o(-)249 2600 y(--)h(Construction)
+38 b(Algorithm)i(for)i(Cubefree)f(Groups)g(--)249 2700
+y(-----)g(Heiko)h(Dietrich,)e(H.Dietrich@tu-bs)o(.d)o(e)d(------)118
+2799 y(true)0 2985 y Fm(The)28 b Fd(LoadPackage)23 b
+Fm(command)k(is)g(describ)r(ed)h(in)g(Section)f(74.2.1)f(in)i(the)g
+Fj(GAP)g Fm(Reference)g(Man)n(ual.)p eop end end
+%%Page: 8 8
+TeXDict begin HPSdict begin 8 7 bop 2256 231 a Fp(Bibliography)-29
+724 y Fm([BE99a])68 b(H.)28 b(U.)g(Besc)n(he)e(and)i(B.)f(Eic)n(k.)g
+(Construction)g(of)g(\014nite)i(groups.)d Fa(J.)h(Sym)n(b.)h(Comput.)p
+Fm(,)g(27:387{404,)23 b(1999.)-33 860 y([BE99b])62 b(H.)23
+b(U.)f(Besc)n(he)g(and)g(B.)g(Eic)n(k.)f(The)i(groups)d(of)j(order)d
+(at)i(most)h(1000)d(except)i(512)f(and)h(768.)f Fa(J.)h(Sym)n(b.)g
+(Comput.)p Fm(,)299 959 y(27:405{413,)h(1999.)-24 1095
+y([BE99c])68 b(H.)28 b(U.)g(Besc)n(he)e(and)i(B.)f(Eic)n(k.)g
+Fa(GrpConst)p Fm(,)g(1999.)f(A)i(GAP)f(4)h(pac)n(k)-5
+b(age,)26 b(see)h([GAP05].)-52 1230 y([BEO02])61 b(H.)22
+b(U.)g(Besc)n(he,)f(B.)g(Eic)n(k,)f(and)i(E.)f(A.)g(O'Brien.)g(A)h
+(Millennium)g(Pro)5 b(ject:)20 b(Constructing)h(small)g(groups.)f
+Fa(In)n(tern.)299 1330 y(J.)27 b(Alg.)h(and)f(Comput.)p
+Fm(,)h(12:623{644,)c(2002.)8 1465 y([DE05])69 b(H.)28
+b(Dietric)n(h)f(and)h(B.)f(Eic)n(k.)g(On)g(the)h(groups)e(of)i(cub)r
+(e-free)f(order.)g Fa(J.)g(Algebra)p Fm(,)g(292:122{137,)c(2005.)5
+1600 y([Die05])69 b(H.)28 b(Dietric)n(h.)f(On)h(the)g(groups)e(of)h
+(cub)r(e-free)h(order.)e(Diploma)i(thesis,)f(TU)h(Braunsc)n(h)n(w)n
+(eig,)d(2005.)12 1736 y([F)n(O05])69 b(D.)30 b(L.)g(Flannery)f(and)g
+(E.)g(A.)h(O'Brien.)e(Linear)h(groups)f(of)h(small)h(degree)e(o)n(v)n
+(er)g(\014nite)i(\014elds.)f Fa(In)n(tern.)g(J.)h(Alg.)299
+1835 y(Comput.)p Fm(,)e(15:467{502,)23 b(2005.)-56 1971
+y([GAP05])69 b(The)27 b(GAP)h(Group.)f Fa(GAP)h({)f(Groups,)g
+(Algorithms,)g(and)g(Programming,)e(V)-7 b(ersion)27
+b(4.4)p Fm(,)g(2005.)417 2106 y Fd(http://www.gap-s)o(yst)o(em)o(.o)o
+(rg)-6 b Fm(.)1 2242 y([GH97])65 b(S.)24 b(P)-7 b(.)23
+b(Glasb)n(y)g(and)h(R.)g(B.)g(Ho)n(wlett.)g(W)-7 b(riting)23
+b(represen)n(tations)f(o)n(v)n(er)g(minimal)i(\014elds.)g
+Fa(Comm.)g(Alg.)p Fm(,)g(25:1703{)299 2341 y(1711,)i(1997.)-15
+2477 y([Ho)r(e95])61 b(O.)20 b(Ho)r(elder.)g(Die)g(Grupp)r(en)h(mit)f
+(quadratfreier)f(Ordn)n(ung.)g Fa(Nac)n(hr.)g(Ko)r(enigl.)g(Ges.)h
+(Wiss.)g(Go)r(ettingen)h(Math.-)299 2576 y(Ph)n(ys.)26
+b(K)p Fm(,)i(1:211{229,)c(1895.)-15 2712 y([Ho)r(e00])69
+b(B.)27 b(Ho)r(e\015ing.)h Fa(Irredsol)p Fm(,)e(2000.)g(A)h(GAP)h(4)f
+(pac)n(k)-5 b(age,)26 b(see)i([GAP05].)-12 2847 y([T)-7
+b(au55])68 b(D.)30 b(R.)e(T)-7 b(aun)n(t.)29 b(Remarks)e(on)i(the)f
+(Isomorphism)g(Problem)f(in)i(Theories)e(of)i(Construction)f(of)g
+(\014nite)h(Groups.)299 2947 y Fa(Pro)r(c.)d(Cam)n(bridge)h(Philos.)f
+(So)r(c.)p Fm(,)i(51:16{24,)c(1955.)p eop end end
+%%Page: 9 9
+TeXDict begin HPSdict begin 9 8 bop 3182 231 a Fp(Index)0
+698 y Fm(This)35 b(index)g(co)n(v)n(ers)d(only)j(this)g(man)n(ual.)f(A)
+h(page)f(n)n(um)n(b)r(er)h(in)g Fh(italics)h Fm(refers)e(to)g(a)h
+(whole)f(section)h(whic)n(h)f(is)h(dev)n(oted)0 798 y(to)29
+b(the)h(indexed)f(sub)5 b(ject.)29 b(Keyw)n(ords)f(are)g(sorted)g(with)
+i(case)e(and)h(spaces)g(ignored,)f(e.g.,)h(\\)p Fd(PermutationCha)o
+(rac)o(te)o(r)p Fm(")0 897 y(comes)e(b)r(efore)g(\\p)r(erm)n(utation)g
+(group".)0 1096 y Fn(C)0 1196 y Fm(Commen)n(ts)g(on)h(the)g(implemen)n
+(tation,)f Fh(5)0 1295 y Fd(ConstructAllCFFr)o(att)o(in)o(iF)o(ree)o
+(Gr)o(oup)o(s)p Fm(,)21 b(4)0 1395 y Fd(ConstructAllCFGr)o(oup)o(s)p
+Fm(,)g(4)0 1495 y Fd(ConstructAllCFGr)o(oup)o(sU)o(pT)o(o)p
+Fm(,)h(4)0 1594 y Fd(ConstructAllCFNi)o(lpo)o(te)o(nt)o(Gro)o(up)o(s)p
+Fm(,)g(4)0 1694 y Fd(ConstructAllCFSi)o(mpl)o(eG)o(ro)o(ups)o
+Fm(,)g(4)0 1794 y Fd(ConstructAllCFSo)o(lva)o(bl)o(eG)o(rou)o(ps)o
+Fm(,)g(4)0 1893 y Fj(Cub)r(efree)p Fm(,)28 b(3)0 2043
+y Fn(F)0 2142 y Fm(functionalit)n(y)g(of)f(the)h Fj(Cub)r(efree)g
+Fm(pac)n(k)-5 b(age,)26 b(4)0 2292 y Fn(I)0 2391 y Fm(installing)h(and)
+h(loading)e(the)i Fj(Cub)r(efree)g Fm(pac)n(k)-5 b(age,)27
+b(6)1993 1096 y(installing)g(the)h Fj(Cub)r(efree)g Fm(pac)n(k)-5
+b(age,)26 b(6)1993 1196 y Fd(IrreducibleSubg)o(ro)o(ups)o(Of)o(GL)p
+Fm(,)21 b(4)1993 1295 y Fd(IsCubeFreeInt)p Fm(,)h(4)1993
+1395 y Fd(IsSquareFreeInt)o Fm(,)g(4)1993 1544 y Fn(L)1993
+1644 y Fm(loading)k(the)i Fj(Cub)r(efree)g Fm(pac)n(k)-5
+b(age,)26 b(6)1993 1794 y Fn(N)1993 1893 y Fm(New)h(metho)r(ds,)h
+Fh(4)1993 2043 y Fn(O)1993 2142 y Fm(Ov)n(erview)d(and)j(Bac)n
+(kground,)d Fh(3)1993 2292 y Fn(R)1993 2391 y Fd(RewriteAbsolute)o(ly)o
+(Irr)o(ed)o(uci)o(bl)o(eMa)o(tr)o(ix)o(Gro)o(up)o Fm(,)d(4)p
+eop end end
+%%Trailer
+
+end
