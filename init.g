@@ -7,7 +7,7 @@
 ##
 #D Declare the package
 ##
-DeclarePackage( "Cubefree", "1.03",
+DeclarePackage( "Cubefree", "1.0",
     function()
 
     if VERSION{[1,2,3]} <> "4.1" then

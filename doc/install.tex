@@ -19,8 +19,6 @@ So the standard method is to unpack the package into the `pkg'
 directory  of your {\GAP} distribution.  This will create an `cubefree'
 subdirectory.
 
-For other non-standard options please see Chapter~"ref:Installing a
-GAP Package" in the {\GAP} Reference Manual.
 
 %To create the documentation, go into the `doc' directory and type
 %`make_doc'.
@@ -33,7 +31,7 @@ To use the {\Cubefree} Package you have to request it explicitly. This  is
 done by calling `LoadPackage' like this:
 
 \beginexample
-gap> LoadPackage("Cubefree");
+gap> RequirePackage("Cubefree");
 Loading Cubefree 1.0 ...
 
    ------------------------------------------------
@@ -42,8 +40,6 @@ Loading Cubefree 1.0 ...
 true
 \endexample
 
-The `LoadPackage' command is described in Section~"ref:LoadPackage"
-in the {\GAP} Reference Manual.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

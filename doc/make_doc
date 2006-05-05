@@ -28,8 +28,8 @@ pdftex manual; pdftex manual
 # The HTML version of the manual
 mkdir -p ../htm
 echo "Creating HTML documentation"
-#../../../etc/convert.pl -t -c -n CubefreeGrps . ../htm
-../../sonata/doc/convert.pl -t -c -n Cubefree . ../htm
+../../../etc/convert.pl -t -c -n CubefreeGrps . ../htm
+
 #############################################################################
 ##
 #E
