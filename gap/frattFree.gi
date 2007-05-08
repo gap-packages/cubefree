@@ -1,11 +1,9 @@
-
-
 #############################################################################
 ##
 #W  frattFree.gi           Cubefree                            Heiko Dietrich
-#W                                                              
+##                                                              
+#H   @(#)$Id: $
 ##
-#############################################################################
 
 ##
 ## These are the functions to construct all Frattini-free groups of
@@ -14,7 +12,7 @@
 
 ##############################################################################
 ##
-#F cf_Th41( p )
+#F  cf_Th41( p )
 ##
 ##  Theorem 4.1 of Flannery and O'Brien (cube-free case).
 ##
@@ -54,7 +52,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_Th42Red( p )
+#F  cf_Th42Red( p )
 ##
 ## Theorem 4.2 of Flannery and O'Brien (cube-free case) and the 
 ## required cube-free reducible subgroups of GL(2,p)
@@ -222,7 +220,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_Th43( p )
+#F  cf_Th43( p )
 ##
 ## Theorem 4.3 of Flannary and O'Brien (cube-free case)
 ##
@@ -313,7 +311,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_AutGroupsGL2( p )
+#F  cf_AutGroupsGL2( p )
 ##
 ## Returns the cube-free subgroups U of GL(2,p) with p \nmid |U|
 ## up to conjugacy
@@ -362,7 +360,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_AutGroupsC( p )
+#F  cf_AutGroupsC( p )
 ##
 ## Computes the cube-free subgroups U of Z(GL(2,p))\cong C_{p-1} 
 ##
@@ -408,7 +406,7 @@ end;
  
 ##############################################################################
 ##
-#F cf_FrattFreeSolvGroups( n )
+#F  cf_FrattFreeSolvGroups( n )
 ##
 ## Returns all solvable Frattini-free groups of order n up to isomorphism
 ##
@@ -535,7 +533,7 @@ end;
 
 ##############################################################################
 ##
-#F ConstructAllCFFrattiniFreeGroups( n )
+#F  ConstructAllCFFrattiniFreeGroups( n )
 ##
 ## Returns all Frattini-free groups of order n up to isomorphism
 ##

@@ -1,6 +1,8 @@
 #############################################################################
 ##
 #W    read.g               share package 'Cubefree'            Heiko Dietrich
+##
+#H   @(#)$Id: $
 ##                                                             
 
 #############################################################################
@@ -15,7 +17,7 @@ fi;
 ##
 ## Files containing the algorithm to construct and count cubefree groups
 ##
-ReadPackage( "Cubefree", "gap/diagonalMatrices.gi");
+ReadPackage( "Cubefree", "gap/diagonalMatrices.dat");
 ReadPackage( "Cubefree", "gap/prelim.gi");
 ReadPackage( "Cubefree", "gap/frattFree.gi");
 ReadPackage( "Cubefree", "gap/frattExt.gi");

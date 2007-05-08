@@ -1,5 +1,10 @@
 README file for the Cubefree Package by Heiko Dietrich.
 
+The installation of the Cubefree package follows standard GAP rules.
+So the standard method is to unpack the package into the `pkg'
+directory  of your GAP distribution.  This will create an `cubefree'
+subdirectory. 
+
 This package contains an implementation of an algorithm to construct all 
 groups of a given cubefree order up to isomorphism. The algorithm is
 based on the ideas in [1] and [2] and it is fully described in [3].
@@ -13,7 +18,7 @@ algorithm described in [5] for this purpose.
 The main functions of the package are:
 
 (1) ConstructAllCFGroups( n ) 
-... constructs all  groups of a given cubefree order n.
+... constructs all groups of a given cubefree order n.
 
 (2) ConstructAllCFSimpleGroups( n ) 
 ... constructs all simple groups of a given cubefree order n.

@@ -1,49 +1,36 @@
-
 #############################################################################
 ##
 #W  prelim.gi           Cubefree                               Heiko Dietrich
-#W                                                              
 ##
-#############################################################################
+#H   @(#)$Id: $
+##
 
 
 ##############################################################################
 ##
-#F IsCubeFreeInt( n )
+#P  IsCubeFreeInt( n )
 ##
 ## return true if the integer n is cube-free
 ##
-InstallGlobalFunction( IsCubeFreeInt, function( n ) 
-    local list;
-
-    if not IsInt( n ) then
-        return( false );
-    else
-        list := Collected( FactorsInt( n ) );
-        return( ForAll( list, x -> x[2] < 3 ) );
-    fi;
-end);
+InstallMethod( IsCubeFreeInt,
+    "for integers",  
+    [ IsInt ], 0,
+    n-> ForAll( Collected( FactorsInt( n ) ), x -> x[2] < 3 ) );
 
 ##############################################################################
 ##
-#F IsSquareFreeInt( n )
+#P  IsSquareFreeInt( n )
 ##
 ## returns true if the integer n is square-free
 ##
-InstallGlobalFunction( IsSquareFreeInt, function( n ) 
-    local list;
-
-    if not IsInt( n ) then
-        return( false );
-    else
-        list := Collected( FactorsInt( n ) );
-        return( ForAll( list, x -> x[2] < 2 ) );
-    fi; 
-end );
+InstallMethod( IsSquareFreeInt,
+    "for integers",
+    [ IsInt ], 0,
+    n-> ForAll(Collected( FactorsInt( n ) ) , x -> x[2] < 2 ) );
 
 ############################################################################# 
 ## 
-#F ConstructAllCFSimpleGroups( n ) 
+#F  ConstructAllCFSimpleGroups( n ) 
 ## 
 ## returns all cube-free simple groups of order n up to isomorphism
 ##
@@ -75,7 +62,7 @@ end );
  
 ############################################################################# 
 ## 
-#F ConstructAllCFNilpotentGroups( n ) 
+#F  ConstructAllCFNilpotentGroups( n ) 
 ## 
 ## returns all cube-free nilpotent groups of order n up to isomorphism
 ##
@@ -109,5 +96,3 @@ InstallGlobalFunction(ConstructAllCFNilpotentGroups, function ( size )
 
     return List(groups, x -> AbelianGroup( x ) ); 
 end );
-
-
