@@ -2,7 +2,7 @@
 ##
 #W  Makefile              GAP documentation                Heiko Dietrich 
 ##
-#H  $Id: $
+#H  $Id: Makefile,v 1.1 2007/05/08 07:47:21 gap Exp $
 ##
 
 ##
@@ -12,11 +12,10 @@
 DOCU := $(shell grep Input manual.tex | sed 's:\\Input{\([a-z]*\)}:\1.tex:')
 
 AUXFILES = manual.bbl manual.idx manual.blg manual.lab \
-	   manual.aux manual.log manual.ind manual.ilg \
-	   manual.toc
+	   manual.aux manual.log manual.ind manual.ilg 
 
 MANUALINDEX = ../../../doc/manualindex 
-CONVERT = ../../../etc/convert.pl 
+CONVERT = ./convert.pl 
 
 all: manual.dvi manual.ps manual.pdf html
 

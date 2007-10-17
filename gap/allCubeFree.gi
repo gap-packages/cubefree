@@ -2,20 +2,22 @@
 ##
 #W  allCubeFree.gi                Cubefree                    Heiko Dietrich
 ##                                                             
-#H   @(#)$Id: $
 ##
 
-
 ##
-## Difference to NumberCFGroups:
+## The implementation of the code  below can be improved; actually, it
+## was implemented only for experimental purposes.
 ##
-## These are the functions of the modified algorithm where the automorphism 
-## groups AutGroupsGL2 and AutGroupsC are stored globally. This reduces
-## runtime when constructing the solvable Frattini-free groups.
+##
+## Difference to NumberCFGroups: These are the functions of the modified 
+## algorithm where the automorphism groups AutGroupsGL2
+## and AutGroupsC are stored globally. This reduces runtime
+## when constructing the solvable Frattini-free groups.
 ## Further, the number of the Frattini-free groups are stored for later 
 ## computations.
 ## The output format of AutGroupsGL2 and AutGroupsC has changed.
 ##
+
 
 # to store globally 
 cf_atGrps := [];
@@ -33,7 +35,7 @@ cf_AllAutGroupsGL2 := function( p )
 
     #computating of the subgroups
     if p>2 then
-        groups := Concatenation(cf_Th42Red(p),cf_Th43(p),cf_Th41(p));
+        groups := Concatenation(cf_Th52Red(p),cf_Th53(p),cf_Th51(p));
     else
        groups  := [];
        lv      := Group([[Z(2),0*Z(2)],[0*Z(2),Z(2)]]);
@@ -47,8 +49,7 @@ cf_AllAutGroupsGL2 := function( p )
     #for technical reasons
     iso  := IsomorphismPermGroup(GL(2,p));
     imag := Image(iso);
-    inv  := InverseGeneralMapping(iso);
-    
+    inv  := InverseGeneralMapping(iso); 
     list := [GeneratorsOfGroup(imag),[inv]];
     new  := [];
     for U in groups do
@@ -88,7 +89,6 @@ cf_AllAutGroupsC := function( p )
 
     for lv in divs do
         gr      := Group(b^((p-1)/lv));
-        gr!.red := true;
         SetSize(gr,lv);
         Add(groups,gr);
     od;
@@ -101,11 +101,7 @@ cf_AllAutGroupsC := function( p )
     for U in groups do
         gen := GeneratorsOfGroup(U);
         gen := List(gen,x->Image(iso,x));
-        if U!.red then
-            temp := [gen,Size(U),[1,1]];
-        else
-            temp := [gen,Size(U),[2]];
-        fi;
+        temp := [gen,Size(U),[1]];
         Add(new,temp);  
     od; 
     Add(list,new);
@@ -344,7 +340,9 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
                         if IsBound(SolvFrattFree[lv]) then
                             free := free + SolvFrattFree[lv];
                         else
-                            if smallGrp and lv<50001 then
+                            if IsSquareFreeInt(lv) or 
+                               Length(Collected(FactorsInt(lv)))<3 or
+                               (smallGrp and lv<50001) then
 			        if IsOddInt(lv) then
                                     tm := Size(Filtered(
                                        [1..NumberSmallGroups(lv)],

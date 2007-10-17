@@ -1,28 +1,23 @@
 #############################################################################
 ##
-#W    init.g               share package 'Cubefree'            Heiko Dietrich
+#W    init.g            GAP 4 package 'cubefree'               Heiko Dietrich
+#W                                                             
 ##
-#H   @(#)$Id: $
-##                                                             
+
+
+#############################################################################
+##
+## Put the name of the package into a single variable.  This makes it
+## easer to change it to something else if necessary.
+##
+CubefreePkgName := "cubefree";
 
 #############################################################################
 ##
 #D Declare the package
 ##
-DeclarePackage( "Cubefree", "1.0",
-    function()
-
-    if VERSION{[1,2,3]} <> "4.1" then
-        return true;
-    else
-        Print("The versions of Cubefree and GAP4 you are using\n");
-        Print("are not compatible. You need at least version 4.2 of\n");
-        Print("GAP to work with this version of Cubefree.\n");
-        return false;
-    fi;
-
-    end );
-DeclarePackageDocumentation( "Cubefree", "doc" );
+DeclarePackage( CubefreePkgName, "1.06", function() return true; end );
+DeclarePackageDocumentation( CubefreePkgName, "doc" );
 
 ############################################################################
 ##
@@ -34,11 +29,19 @@ DeclareInfoClass( "InfoCF" );
 ##
 #D Read .gd files
 ##
-ReadPackage("cubefree","gap/allCubeFree.gd");
-ReadPackage("cubefree","gap/cubefree.gd");
-ReadPackage("cubefree","gap/frattExt.gd");
-ReadPackage("cubefree","gap/frattFree.gd");
-ReadPackage("cubefree","gap/glasby.gd");
-ReadPackage("cubefree","gap/irrGL2.gd");
-ReadPackage("cubefree","gap/number.gd");
-ReadPackage("cubefree","gap/prelim.gd");
+ReadPackage(CubefreePkgName,"gap/prelim.gd");      #preliminary functions
+ReadPackage(CubefreePkgName,"gap/frattExt.gd");    #construct frat. ext.
+ReadPackage(CubefreePkgName,"gap/frattFree.gd");   #construct frat. free gr.
+ReadPackage(CubefreePkgName,"gap/glasby.gd");      #matrix rewriting alg.
+ReadPackage(CubefreePkgName,"gap/irrGL2.gd");      #irred. subg. of gl(2,p)
+ReadPackage(CubefreePkgName,"gap/number.gd");      #count cf groups
+ReadPackage(CubefreePkgName,"gap/allCubeFree.gd"); #count cf groups up to
+
+
+#############################################################################
+##
+#D require other packages
+##
+RequirePackage("grpconst");
+
+

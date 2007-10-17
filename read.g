@@ -1,8 +1,7 @@
 #############################################################################
 ##
-#W    read.g               share package 'Cubefree'            Heiko Dietrich
+#W    read.g               GAP 4 package Cubefree             Heiko Dietrich
 ##
-#H   @(#)$Id: $
 ##                                                             
 
 #############################################################################
@@ -10,30 +9,29 @@
 ## the banner
 ##
 if not QUIET and BANNER then
-    ReadPackage( "Cubefree", "gap/banner.g");
+    ReadPackage( CubefreePkgName, "gap/banner.g");
 fi;
 
 #############################################################################
 ##
 ## Files containing the algorithm to construct and count cubefree groups
 ##
-ReadPackage( "Cubefree", "gap/diagonalMatrices.dat");
-ReadPackage( "Cubefree", "gap/prelim.gi");
-ReadPackage( "Cubefree", "gap/frattFree.gi");
-ReadPackage( "Cubefree", "gap/frattExt.gi");
-ReadPackage( "Cubefree", "gap/allCubeFree.gi");
-ReadPackage( "Cubefree", "gap/number.gi");
+ReadPackage( CubefreePkgName, "gap/prelim.gi");
+ReadPackage( CubefreePkgName, "gap/frattFree.gi");
+ReadPackage( CubefreePkgName, "gap/frattExt.gi");
+ReadPackage( CubefreePkgName, "gap/allCubeFree.gi");
+ReadPackage( CubefreePkgName, "gap/number.gi");
 
 #############################################################################
 ##
-## Files containing the algorithm to rewrite absolutely irreducible matrix
-## groups over minimal subfields
+## File containing the algorithm to rewrite absolutely irreducible matrix
+## groups over minimal subfields 
 ##
-ReadPackage( "Cubefree", "gap/glasby.gi");
+ReadPackage( CubefreePkgName, "gap/glasby.gi");
 
 #############################################################################
 ##
-## Files containing the algorithm to construct all irreducible subgroups
+## File containing the algorithm to construct all irreducible subgroups
 ## of GL(2,q) up to conjugacy
 ##
-ReadPackage( "Cubefree", "gap/irrGL2.gi");
+ReadPackage( CubefreePkgName, "gap/irrGL2.gi");
