@@ -10,9 +10,9 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.07",
-Date := "17/10/2007",
-ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.07",
+Version := "1.08",
+Date := "22/10/2007",
+ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.08",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -33,7 +33,9 @@ Persons := [
 
 ],
 
-Status := "deposited",
+Status := "accepted",
+CommunicatedBy := "David Joyner (Annapolis)",
+AcceptDate := "10/2007",
 
 README_URL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/README",
 PackageInfoURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/PackageInfo.g",
@@ -54,12 +56,12 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.3",
-  NeededOtherPackages := [["GrpConst","1,0"],["Polycyclic","1,0"]],
+  NeededOtherPackages := [["GrpConst","1.0"],["Polycyclic","1.0"]],
   SuggestedOtherPackages := [],
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.07 ... \n",
+BannerString := "Loading Cubefree 1.08 ... \n",
 Autoload := false,
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 

@@ -87,9 +87,18 @@ more information.
 Test files:
 -----------
 There are several test files to call to check the results of the standard
-methods: These are tst/testQuick.g, tst/testSG.g, tst/testSGlong.g, 
-tst/testBig.g and tst/testMat.g. 
+methods. The standard test file is tst/testQuick.g.
+Moreover, there are  tst/testSG.g, tst/testSGlong.g, tst/testBig.g 
+and tst/testMat.g. 
 Please see the documentation for more information.
+
+
+Contact:
+-----------
+Heiko Dietrich
+H.Dietrich@tu-bs.de
+TU Braunschweig
+Institut Computational Mathematics
 
 
 References:
