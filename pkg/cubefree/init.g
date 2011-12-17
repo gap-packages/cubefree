@@ -1,6 +1,8 @@
 #############################################################################
 ##
 #W    init.g               share package 'Cubefree'            Heiko Dietrich
+##
+#H   @(#)$Id: $
 ##                                                             
 
 #############################################################################
@@ -22,11 +24,21 @@ DeclarePackage( "Cubefree", "1.0",
     end );
 DeclarePackageDocumentation( "Cubefree", "doc" );
 
+############################################################################
+##
+#I InfoClass
+##
+DeclareInfoClass( "InfoCF" );
 
 #############################################################################
 ##
 #D Read .gd files
 ##
-
-ReadPackage("cubefree/gap/cubefree.gd");
-
+ReadPackage("cubefree","gap/allCubeFree.gd");
+ReadPackage("cubefree","gap/cubefree.gd");
+ReadPackage("cubefree","gap/frattExt.gd");
+ReadPackage("cubefree","gap/frattFree.gd");
+ReadPackage("cubefree","gap/glasby.gd");
+ReadPackage("cubefree","gap/irrGL2.gd");
+ReadPackage("cubefree","gap/number.gd");
+ReadPackage("cubefree","gap/prelim.gd");

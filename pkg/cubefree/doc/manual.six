@@ -1,7 +1,7 @@
 C intro.tex 1. Introduction
 I 1.0. Cubefree
 S 1.1. Overview and Background
-C Cubefree.tex 2. Functionality of the Cubefree package
+C cubefree.tex 2. Functionality of the Cubefree package
 I 2.0. Functionality of the Cubefree package
 S 2.1. New methods
 F 2.1. ConstructAllCFGroups

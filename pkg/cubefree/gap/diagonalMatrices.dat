@@ -1,18 +1,15 @@
+#############################################################################
+##
+#W  diagonalMatrices.dat           Cubefree                    Heiko Dietrich
+##                                                              
+#H   @(#)$Id: $
+##
 
-#############################################################################
-##
-#W  diagonalMatrices.gi           Cubefree                    Heiko Dietrich
-#W                                                              
-##
-#############################################################################
-##
+
 ##
 ## The generators of the needed reducible subgroups of GL(2,p) are stored 
 ## in cf_diagonalMatrices (in a parametrized form).
 ##
-##
-##
-#############################################################################
 
 BindGlobal("cf_diagonalMatrices",[ [ [ [ [ 1, 0, 0, 1 ] ], [ [ 2, 0, 0, 1 ] ], 
           [ [ 2, 0, 0, 1 ], [ 1, 0, 0, 2 ] ], [ [ 2, 0, 0, 2 ] ] ], 

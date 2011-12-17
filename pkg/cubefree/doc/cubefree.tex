@@ -2,7 +2,7 @@
 %%
 %W  Cubefree.tex        Cubefree documentation             Heiko Dietrich
 %%
-%Y  2005
+%H  $Id: $
 %%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,71 +21,68 @@ This chapter describes the methods available from the {\Cubefree} package.
 This section lists the implemented functions.
 
 
-\>ConstructAllCFGroups( <order> ) 
+\>ConstructAllCFGroups( <order> ) F
 
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of groups of this size. If possible, the groups are given
 as pc groups and as permutations groups otherwise.
 
-\>ConstructAllCFSolvableGroups( <order> ) 
+\>ConstructAllCFSolvableGroups( <order> ) F
 
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of solvable groups of this size. The groups are given as pc groups.
 
-\>ConstructAllCFNilpotentGroups( <order> ) 
+\>ConstructAllCFNilpotentGroups( <order> ) F
 
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of nilpotent groups of this size. The groups are given as pc groups.
 
-\>ConstructAllCFSimpleGroups( <order> ) 
+\>ConstructAllCFSimpleGroups( <order> ) F
 
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of simple groups of this size. In particular, there
 exists either none or exactly one simple group of the given order.
 
-\>ConstructAllCFFrattiniFreeGroups( <order> ) 
+\>ConstructAllCFFrattiniFreeGroups( <order> ) F
 
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of Frattini-free groups of this size.
 
-\>NumberCFGroups( <n> )
+\>NumberCFGroups( <n>[, <bool> ] ) F
 
 The input <n> has to be a positive cubefree integer and the output is the number of all
 cubefree groups of order <n>. The SmallGroups library  is used whenever
-possible, i.e. when $n\leq 50000$. Alternatively, one can call
-<NumberCFGroups>(<n>,<false>): In this case only the numbers of
+possible, i.e. when $n\leq 50000$. Only if <bool> is set to false, then only the numbers of
 squarefree groups are taken from the SmallGroups library.
 
 
-\>NumberCFSolvableGroups( <n> )
+\>NumberCFSolvableGroups( <n>[, <bool> ] ) F 
 
 The input <n> has to be a positive cubefree integer and the output is the number of all
 cubefree solvable groups of order <n>. The SmallGroups library is used whenever
-possible. Alternatively, one can call
-<NumberCFSolvableGroups>(<n>,<false>): In this case only the numbers of
+possible, i.e. when $n\leq 50000$. Only if <bool> is set to false, then only the numbers of
 squarefree groups are taken from the SmallGroups library.
 
 
-\>CountAllCFGroupsUpTo( <n> )
+\>CountAllCFGroupsUpTo( <n>[, <bool> ]) F  
 
 The input is a positive integer <n> and the output is a list $L$ of size <n> such that
 $L[i]$ contains the number of isomorphism types of groups of order $i$ if $i$
-is cubefree and IsBound$(L[i])=false$ otherwise, $1\leq i \leq n$. The SmallGroups library is used whenever
-possible. Alternatively, one can call <CountAllCFGroups>(<n>,<false>): In this
-case only the numbers of
+is cubefree and $L[i]$ is not bound, otherwise, $1\leq i \leq n$. The SmallGroups library is used whenever
+possible, i.e. when $n\leq 50000$. Only if <bool> is set to false, then only the numbers of
 squarefree groups are taken from the SmallGroups library.
 
 
-\>IsCubeFreeInt( <n> )
+\>IsCubeFreeInt( <n> ) P
 
 The output is <true> if <n> is a cubefree integer and <false> otherwise.
 
 
-\>IsSquareFreeInt( <n> )
+\>IsSquareFreeInt( <n> ) P
 
 The output is <true> if <n> is a squarefree integer and <false> otherwise.
 
-\>IrreducibleSubgroupsOfGL( <n>, <q> )
+\>IrreducibleSubgroupsOfGL( <n>, <q> ) O
 
 The current version of this function allows only <n>=2. The input <q> has to be a prime-power <q>$=p^r$ with $p\geq 5$ a prime. The output
 is a list of all irreducible subgroups of GL$(2,q)$ up to conjugacy.
@@ -107,21 +104,21 @@ This section provides some useful information about the implementations.
 
 *ConstructAllCFGroups*
 
-The function <ConstructAllCFGroups> constructs all groups of a given
+The function `ConstructAllCFGroups' constructs all groups of a given
 cubefree order up to isomorphism using the Frattini Extension Method as described in \cite{Di05},
   \cite{DiEi05}, \cite{BeEia}, and \cite{BeEib}. One step in the Frattini
   Extension Method is to compute Frattini extensions 
   and for this purpose some already implemented
 methods of the required \GAP ~package \GrpConst ~are used. 
 
-Since <ConstructAllCFGroups> requires only
+Since `ConstructAllCFGroups' requires only
 some special types of irreducible subgroups of GL$(2,p)$ (e.g. of cubefree order), it
-contains an abbreviated and modified internal version of
-<IrreducibleSubgroupsOfGL>. This means that the latter is not called explicitely by
-<ConstructAllCFGroups>.
+contains a modified internal version of
+`IrreducibleSubgroupsOfGL'. This means that the latter is not called explicitely by
+`ConstructAllCFGroups'.
 
 To reduce runtime, the generators of the reducible subgroups of GL$(2,p)$,
-$2\leq p \leq 100$ a prime, are stored in the file 'diagonalMatrices.gi'.
+$2\leq p \leq 100$ a prime, are stored in the file 'diagonalMatrices.dat'.
 
 
 
@@ -145,32 +142,28 @@ To reduce runtime, the
 computed irreducible and reducible subgroups of the general linear groups
 GL$(2,p)$ and also the number of the computed solvable
 Frattini-free groups are stored during the whole computation. This is very
-memory consuming but reduces the runtime significantly.
+memory consuming but reduces the runtime significantly. The alternative is to run a loop over `NumberCFGroups'.
 
 *IrreducibleSubgroupsOfGL*
 
-The size of the input of <IrreducibleSubgroupsOfGL> is bounded by the
-ability of \GAP ~to compute 'large' finite fields since the used algorithm to
-construct the irreducible groups uses finite fields of
-order at least $q^3$. Therefore, if $q$ is already a 'large' prime-power, then
-$q^3$ might be too large for \GAP ~to construct GF$(q^3)$. 
+If the input is a matrix group over GF$(q)$, then the algorithm needs to construct GF$(q^3)$ internally. 
 
 
 
 *RewriteAbsolutelyIrreducibleMatrixGroup*
 
-The function <RewriteAbsolutelyIrreducibleMatrixGroup> as described
+The function `RewriteAbsolutelyIrreducibleMatrixGroup' as described
 algorithmically in
 \cite{GlHo97} is probabilistic. If the input is $G\leq$GL$(d,p^r)$, then the
-expected running time is $O(rd^3)$.
+expected runtime is $O(rd^3)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Accuracy check}
 
-We have compared the results of <ConstructAllCFGroups> with the library of
+We have compared the results of `ConstructAllCFGroups' with the library of
 cubefree groups of {\GrpConst}. Further, we compared the number and size of the
-solvable groups constructed by <IrreducibleSubgroupsOfGL> with the library of {\Irredsol}.
+solvable groups constructed by `IrreducibleSubgroupsOfGL' with the library of {\Irredsol}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

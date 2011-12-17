@@ -1,0 +1,169 @@
+<html><head><title>[cubefree] 2 Functionality of the Cubefree package</title></head>
+<body text="#000000" bgcolor="#ffffff">
+[<a href = "chapters.htm">Up</a>] [<a href ="CHAP001.htm">Previous</a>] [<a href ="CHAP003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<h1>2 Functionality of the Cubefree package</h1><p>
+<P>
+<H3>Sections</H3>
+<oL>
+<li> <A HREF="CHAP002.htm#SECT001">New methods</a>
+<li> <A HREF="CHAP002.htm#SECT002">Comments on the implementation</a>
+<li> <A HREF="CHAP002.htm#SECT003">Accuracy check</a>
+</ol><p>
+<p>
+<a name = "I0"></a>
+
+This chapter describes the methods available from the <font face="Gill Sans,Helvetica,Arial">Cubefree</font> package.
+<p>
+<p>
+<h2><a name="SECT001">2.1 New methods</a></h2>
+<p><p>
+This section lists the implemented functions.
+<p>
+<a name = "SSEC001.1"></a>
+<li><code>ConstructAllCFGroups( </code><var>order</var><code> ) F</code>
+<p>
+The input <var>order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of groups of this size. If possible, the groups are given
+as pc groups and as permutations groups otherwise.
+<p>
+<a name = "SSEC001.2"></a>
+<li><code>ConstructAllCFSolvableGroups( </code><var>order</var><code> ) F</code>
+<p>
+The input <var>order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of solvable groups of this size. The groups are given as pc groups.
+<p>
+<a name = "SSEC001.3"></a>
+<li><code>ConstructAllCFNilpotentGroups( </code><var>order</var><code> ) F</code>
+<p>
+The input <var>order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of nilpotent groups of this size. The groups are given as pc groups.
+<p>
+<a name = "SSEC001.4"></a>
+<li><code>ConstructAllCFSimpleGroups( </code><var>order</var><code> ) F</code>
+<p>
+The input <var>order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of simple groups of this size. In particular, there
+exists either none or exactly one simple group of the given order.
+<p>
+<a name = "SSEC001.5"></a>
+<li><code>ConstructAllCFFrattiniFreeGroups( </code><var>order</var><code> ) F</code>
+<p>
+The input <var>order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of Frattini-free groups of this size.
+<p>
+<a name = "SSEC001.6"></a>
+<li><code>NumberCFGroups( </code><var>n</var><code>[, </code><var>bool</var><code> ] ) F</code>
+<p>
+The input <var>n</var> has to be a positive cubefree integer and the output is the number of all
+cubefree groups of order <var>n</var>. The SmallGroups library  is used whenever
+possible, i.e. when <var>nleq50000</var>. Only if <var>bool</var> is set to false, then only the numbers of
+squarefree groups are taken from the SmallGroups library.
+<p>
+<a name = "SSEC001.7"></a>
+<li><code>NumberCFSolvableGroups( </code><var>n</var><code>[, </code><var>bool</var><code> ] ) F</code>
+<p>
+The input <var>n</var> has to be a positive cubefree integer and the output is the number of all
+cubefree solvable groups of order <var>n</var>. The SmallGroups library is used whenever
+possible, i.e. when <var>nleq50000</var>. Only if <var>bool</var> is set to false, then only the numbers of
+squarefree groups are taken from the SmallGroups library.
+<p>
+<a name = "SSEC001.8"></a>
+<li><code>CountAllCFGroupsUpTo( </code><var>n</var><code>[, </code><var>bool</var><code> ]) F</code>
+<p>
+The input is a positive integer <var>n</var> and the output is a list <var>L</var> of size <var>n</var> such that
+<var>L[i]</var> contains the number of isomorphism types of groups of order <var>i</var> if <var>i</var>
+is cubefree and <var>L[i]</var> is not bound, otherwise, <var>1leqi leqn</var>. The SmallGroups library is used whenever
+possible, i.e. when <var>nleq50000</var>. Only if <var>bool</var> is set to false, then only the numbers of
+squarefree groups are taken from the SmallGroups library.
+<p>
+<a name = "SSEC001.9"></a>
+<li><code>IsCubeFreeInt( </code><var>n</var><code> ) P</code>
+<p>
+The output is <var>true</var> if <var>n</var> is a cubefree integer and <var>false</var> otherwise.
+<p>
+<a name = "SSEC001.10"></a>
+<li><code>IsSquareFreeInt( </code><var>n</var><code> ) P</code>
+<p>
+The output is <var>true</var> if <var>n</var> is a squarefree integer and <var>false</var> otherwise.
+<p>
+<a name = "SSEC001.11"></a>
+<li><code>IrreducibleSubgroupsOfGL( </code><var>n</var><code>, </code><var>q</var><code> ) O</code>
+<p>
+The current version of this function allows only <var>n</var>=2. The input <var>q</var> has to be a prime-power <var>q</var><var>=p<sup>r</sup></var> with <var>pgeq5</var> a prime. The output
+is a list of all irreducible subgroups of GL<var>(2,q)</var> up to conjugacy.
+<p>
+<a name = "SSEC001.12"></a>
+<li><code>RewriteAbsolutelyIrreducibleMatrixGroup( </code><var>G</var><code> )</code>
+<p>
+The input <var>G</var> has to be an absolutely irreducible matrix group over a finite
+field GF<var>(q)</var>. If possible, the output is
+<var>G</var> rewritten over the subfield of GF<var>(q)</var> generated by the traces of the
+elements of <var>G</var>. If no rewriting is possible, then the
+input <var>G</var> is returned. 
+<p>
+<p>
+<h2><a name="SECT002">2.2 Comments on the implementation</a></h2>
+<p><p>
+This section provides some useful information about the implementations.
+<p>
+<strong>ConstructAllCFGroups</strong>
+<p>
+The function <code>ConstructAllCFGroups</code> constructs all groups of a given
+cubefree order up to isomorphism using the Frattini Extension Method as described in <a href="biblio.htm#Di05"><cite>Di05</cite></a>,
+  <a href="biblio.htm#DiEi05"><cite>DiEi05</cite></a>, <a href="biblio.htm#BeEia"><cite>BeEia</cite></a>, and <a href="biblio.htm#BeEib"><cite>BeEib</cite></a>. One step in the Frattini
+  Extension Method is to compute Frattini extensions 
+  and for this purpose some already implemented
+methods of the required <font face="Gill Sans,Helvetica,Arial">GAP</font>&nbsp;package <font face="Gill Sans,Helvetica,Arial">GrpConst</font>&nbsp;are used. 
+<p>
+Since <code>ConstructAllCFGroups</code> requires only
+some special types of irreducible subgroups of GL<var>(2,p)</var> (e.g. of cubefree order), it
+contains a modified internal version of
+<code>IrreducibleSubgroupsOfGL</code>. This means that the latter is not called explicitely by
+<code>ConstructAllCFGroups</code>.
+<p>
+To reduce runtime, the generators of the reducible subgroups of GL<var>(2,p)</var>,
+<var>2leqp leq100</var> a prime, are stored in the file 'diagonalMatrices.dat'.
+<p>
+<strong>ConstructAllCFSimpleGroups and ConstructAllCFNilpotentGroups</strong>
+<p>
+The construction of simple or nilpotent groups of cubefree
+order is rather easy, see <a href="biblio.htm#Di05"><cite>Di05</cite></a> or <a href="biblio.htm#DiEi05"><cite>DiEi05</cite></a>. In particular, the
+methods used in these cases are independent from the methods used in the general cubefree case.
+<p>
+<strong>CountAllCFGroupsUpTo</strong>
+<p>
+As described in <a href="biblio.htm#Di05"><cite>Di05</cite></a> and <a href="biblio.htm#DiEi05"><cite>DiEi05</cite></a>, every cubefree group <var>G</var> has
+the form <var>G=AtimesI</var> where <var>A</var> is trivial or non-abelian simple and <var>I</var> is
+solvable. Further, there is a one-to-one correspondence between the solvable
+cubefree groups and <var>some</var> solvable Frattini-free groups. This one-to-one
+correspondence allows to count the number of groups of a given cubefree order without
+computing any Frattini extension.
+To reduce runtime, the
+computed irreducible and reducible subgroups of the general linear groups
+GL<var>(2,p)</var> and also the number of the computed solvable
+Frattini-free groups are stored during the whole computation. This is very
+memory consuming but reduces the runtime significantly. The alternative is to run a loop over <code>NumberCFGroups</code>.
+<p>
+<strong>IrreducibleSubgroupsOfGL</strong>
+<p>
+If the input is a matrix group over GF<var>(q)</var>, then the algorithm needs to construct GF<var>(q<sup>3</sup>)</var> internally. 
+<p>
+<strong>RewriteAbsolutelyIrreducibleMatrixGroup</strong>
+<p>
+The function <code>RewriteAbsolutelyIrreducibleMatrixGroup</code> as described
+algorithmically in
+<a href="biblio.htm#GlHo97"><cite>GlHo97</cite></a> is probabilistic. If the input is <var>Gleq</var>GL<var>(d,p<sup>r</sup>)</var>, then the
+expected runtime is <var>O(rd<sup>3</sup>)</var>.
+<p>
+<p>
+<h2><a name="SECT003">2.3 Accuracy check</a></h2>
+<p><p>
+We have compared the results of <code>ConstructAllCFGroups</code> with the library of
+cubefree groups of <font face="Gill Sans,Helvetica,Arial">GrpConst</font>. Further, we compared the number and size of the
+solvable groups constructed by <code>IrreducibleSubgroupsOfGL</code> with the library of <font face="Gill Sans,Helvetica,Arial">Irredsol</font>.
+<p>
+<p>
+[<a href = "chapters.htm">Up</a>] [<a href ="CHAP001.htm">Previous</a>] [<a href ="CHAP003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>cubefree manual<br>May 2007
+</address></body></html>

@@ -1,16 +1,14 @@
-
 #############################################################################
 ##
 #W  number.gi           Cubefree                               Heiko Dietrich
-#W                                                              
+##                                                              
+#H   @(#)$Id: $
 ##
-#############################################################################
-
 
 
 ##############################################################################
 ##
-#F NumberCFSolvableGroups( arg )
+#F  NumberCFSolvableGroups( arg )
 ##
 ## Counts the number of all cubefree solvable groups using the one-to-one
 ## correspondence. If the argument is [size,false] then the SmallGrps
@@ -80,12 +78,11 @@ end);
 
 ##############################################################################
 ##
-#F NumberCFGroups( size )
+#F  NumberCFGroups( size )
 ##
-## Counts all groups of cube-free order n.
-## If the argument is [size,false] then the SmallGrps
-## library is not used. If the argument is 'size' or [size,true] then
-## it will be used.
+## Counts all groups of cube-free order n. If the argument is [size,false]
+## then the SmallGrps library is not used. If the argument is 'size' or 
+## [size,true] then the SmallGroups library will be used.
 ##
 InstallGlobalFunction(NumberCFGroups, function( arg ) 
     local nonAb, solvff, number, i, A, l, p, G, cl, FOrders, F, Fcl, psl, I,

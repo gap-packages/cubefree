@@ -1,13 +1,13 @@
-
-
 ##############################################################################
 ##
 #W  glasby.gi           Cubefree                               Heiko Dietrich
 ##
+#H   @(#)$Id: $
+##
 
 ##############################################################################
 ## 
-#F RewriteAbsolutelyIrreducibleMatrixGroup( G ) 
+#F  RewriteAbsolutelyIrreducibleMatrixGroup( G ) 
 ## 
 ## G has to be an absolutely irreducible subgroup of GL(d,q). The output
 ## is a group H such that H is conjugate to G in GL(d,q) and H is a subgroup

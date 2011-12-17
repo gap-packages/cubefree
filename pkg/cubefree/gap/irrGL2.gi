@@ -1,11 +1,9 @@
-
-
 ##############################################################################
 ##
-#W  irrGL.gi           Cubefree                                Heiko Dietrich
+#W  irrGL2.gi          Cubefree                                Heiko Dietrich
 ##
-
-##############################################################################
+#H   @(#)$Id: $
+##
 
 ##
 ## IrreducibleSubgroupsOfGL( 2, q ) constructs all irreducible subgroups of 
@@ -16,7 +14,7 @@
 
 ##############################################################################
 ##
-#F cf_GL2_Th41( q )
+#F  cf_GL2_Th41( q )
 ##
 ## (Theorem 4.1 of Flannary & O'Brien)
 ##
@@ -45,15 +43,13 @@ cf_GL2_Th41 := function( q )
 end;
     
 
-
-
 ##############################################################################
 ##
-#F cf_NormSubD ( q )
-#
-# Constructs the subgroups of D(2,q) normal in M(2,q) of odd order, which are
-# required in cf_GL2_Th42( q ).
-#
+#F  cf_NormSubD ( q )
+##
+## Constructs the subgroups of D(2,q) normal in M(2,q) of odd order, which are
+## required in cf_GL2_Th42( q ).
+##
 cf_NormSubD := function( q )
     local elem, groups, G, proj, subDirProds, elements, toAdd, 
           matGrps, temp, C, makeMat;
@@ -113,7 +109,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_GL2_Th42( q )
+#F  cf_GL2_Th42( q )
 ## 
 ## (Theorem 4.2 of Flannery and O'Brien) 
 ##
@@ -305,7 +301,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_GL2_Th43( q )
+#F  cf_GL2_Th43( q )
 ##
 ## (Theorem 4.3 of Flannery and O'Brien)
 ##
@@ -382,7 +378,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_GL2_Th45( q )    
+#F  cf_GL2_Th45( q )    
 ##
 ## (Theorem 4.5 of Flannery and O'Brien, q=p^r, p>=5)
 ##
@@ -440,7 +436,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_GL2_Th46( q )   
+#F  cf_GL2_Th46( q )   
 ##
 ## (Theorem 4.6 of Flannery and O'Brien, q=p^r, p>=5)
 ##
@@ -497,7 +493,7 @@ end;
 
 ##############################################################################
 ##
-#F cf_GL2_Th48( q )   
+#F  cf_GL2_Th48( q )   
 ##
 ## (Theorem 4.8 of Flannery and O'Brien, q=p^r, p>5)
 ##
@@ -537,7 +533,7 @@ end;
   
 ##############################################################################
 ##
-#F cf_GL2_Th49( q )   
+#F  cf_GL2_Th49( q )   
 ##
 ## (Theorem 4.9 of Flannery and O'Brien, q=p^r, p=5)
 ##
@@ -566,7 +562,7 @@ end;
 
 #############################################################################
 ##
-#F cf_GL2_Th414( q )    
+#F  cf_GL2_Th414( q )    
 ##
 ## (Theorem 4.14 of Flannery and O'Brien, q=p^r, p>5)
 ##
@@ -627,7 +623,7 @@ end;
 
 ###########################################################################
 ##
-#F cf_GL2_Th415( q )   
+#F  cf_GL2_Th415( q )   
 ##
 ## (Theorem 4.15 of Flannery and O'Brien)
 ##
@@ -666,18 +662,25 @@ end;
 
 #############################################################################
 ##
-#F IrreducibleSubgroupsOfGL( 2, q )   
+#M  IrreducibleSubgroupsOfGL( 2, q )   
 ##
 ## computes the irreducible subgroups of GL(2,q), p>=5, up to conjugacy
 ## 
-##
-InstallGlobalFunction(IrreducibleSubgroupsOfGL, function( n, q )
+InstallMethod(IrreducibleSubgroupsOfGL,
+    true, 
+    [ IsPosInt, IsPosInt], 0,
+    function( n, q )
     local p, groups, temp, i;
 
     Info(InfoCF,1,"Construct irreducible subgroups of ",GL(n,q),".");
 
     if not n=2 then
-        Error("Only the subgroups of GL(2,q) are available");
+        Display("Only the subgroups of GL(2,q) are available");
+        TryNextMethod();
+    fi;
+
+    if not IsPrimePowerInt(q) then 
+	Error("q must be a prime power integer");
     fi;
 
     groups := [];
@@ -701,8 +704,7 @@ InstallGlobalFunction(IrreducibleSubgroupsOfGL, function( n, q )
         fi;
         return(groups);
     else
-        Error("A prime power of p>= 5 is needed.");
+        Display("A prime power of p>= 5 is needed.");
+	TryNextMethod();
     fi;
 end);
-
-

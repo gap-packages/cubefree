@@ -2,7 +2,7 @@
 %%
 %W  install.tex            GAP documentation                Heiko Dietrich
 %%
-%Y  2005
+%H  $Id: $
 %%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,26 +17,21 @@
 The installation of the {\Cubefree} package follows standard {\GAP} rules.
 So the standard method is to unpack the package into the `pkg'
 directory  of your {\GAP} distribution.  This will create an `cubefree'
-subdirectory.
-
-
-%To create the documentation, go into the `doc' directory and type
-%`make_doc'.
+subdirectory. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Loading the Cubefree package}\null
 
 \atindex{Loading the Cubefree package}{@loading the {\Cubefree} package}
 To use the {\Cubefree} Package you have to request it explicitly. This  is
-done by calling `LoadPackage' like this:
+done by calling `RequirePackage' like this:
 
 \beginexample
 gap> RequirePackage("Cubefree");
-Loading Cubefree 1.0 ...
+Loading Cubefree 1.05 ...
 
-   ------------------------------------------------
-   -- Construction Algorithm for Cubefree Groups --
-   ----- Heiko Dietrich, H.Dietrich@tu-bs.de ------
+   -- Construction Algorithm for Cubefree Groups, 1.05 --
+   -------- Heiko Dietrich, H.Dietrich@tu-bs.de ---------
 true
 \endexample
 

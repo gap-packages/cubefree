@@ -1,14 +1,19 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `Cubefree` Heiko Dietrich
+#W  PackageInfo.g          share package 'Cubefree'            Heiko Dietrich
+##  
+#H   @(#)$Id: $ 
+##
+##  Based on Frank Luebeck's template for PackageInfo.g.
+##  
 
 SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.04",
-Date := "05/05/2006",
-ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.04",
+Version := "1.05",
+Date := "08/05/2007",
+ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.05",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -31,7 +36,7 @@ Persons := [
 
 Status := "deposited",
 
-README_URL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/readme",
+README_URL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/README",
 PackageInfoURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/PackageInfo.g",
 
 AbstractHTML := 
@@ -55,9 +60,9 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.04 ... \n",
+BannerString := "Loading Cubefree 1.05 ... \n",
 Autoload := false,
-Keywords := ["constructing groups of cubefree order"]
+Keywords := ["cubefree","constructing of groups"]
 
 ));
 

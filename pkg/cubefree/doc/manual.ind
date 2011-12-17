@@ -7,7 +7,7 @@
   `ConstructAllCFNilpotentGroups', 4
   `ConstructAllCFSimpleGroups', 4
   `ConstructAllCFSolvableGroups', 4
-  `CountAllCFGroupsUpTo', 5
+  `CountAllCFGroupsUpTo', 4
   {{\sf Cubefree}}, 3
 \letter F
   functionality of the {{\sf Cubefree}} package, 4

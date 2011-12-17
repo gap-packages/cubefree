@@ -3,49 +3,44 @@ The top-level auxiliary file: manual.aux
 The style file: alpha.bst
 Database file #1: ./manual.bib
 Database file #2: ../../../doc/manual.bib
-Repeated entry---line 1003 of file ../../../doc/manual.bib
- : @manual{GAP4
- :             ,
-I'm skipping whatever remains of this entry
-You've used 12 entries,
+You've used 11 entries,
             2543 wiz_defined-function locations,
-            724 strings with 7273 characters,
-and the built_in function-call counts, 4260 in all, are:
-= -- 450
-> -- 172
+            718 strings with 7161 characters,
+and the built_in function-call counts, 4052 in all, are:
+= -- 426
+> -- 171
 < -- 4
-+ -- 58
++ -- 57
 - -- 53
-* -- 292
-:= -- 712
-add.period$ -- 36
-call.type$ -- 12
-change.case$ -- 66
-chr.to.int$ -- 10
-cite$ -- 12
-duplicate$ -- 162
-empty$ -- 313
+* -- 280
+:= -- 684
+add.period$ -- 33
+call.type$ -- 11
+change.case$ -- 62
+chr.to.int$ -- 9
+cite$ -- 11
+duplicate$ -- 151
+empty$ -- 292
 format.name$ -- 68
-if$ -- 850
+if$ -- 804
 int.to.chr$ -- 3
 int.to.str$ -- 0
 missing$ -- 8
-newline$ -- 63
+newline$ -- 58
 num.names$ -- 33
-pop$ -- 42
+pop$ -- 40
 preamble$ -- 1
-purify$ -- 80
+purify$ -- 74
 quote$ -- 0
-skip$ -- 140
+skip$ -- 131
 stack$ -- 0
-substring$ -- 288
-swap$ -- 13
+substring$ -- 279
+swap$ -- 12
 text.length$ -- 4
-text.prefix$ -- 5
+text.prefix$ -- 4
 top$ -- 0
-type$ -- 96
+type$ -- 88
 warning$ -- 0
 while$ -- 45
-width$ -- 14
-write$ -- 155
-(There was 1 error message)
+width$ -- 13
+write$ -- 143

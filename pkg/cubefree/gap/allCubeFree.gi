@@ -1,9 +1,10 @@
 #############################################################################
 ##
 #W  allCubeFree.gi                Cubefree                    Heiko Dietrich
-#W                                                             
+##                                                             
+#H   @(#)$Id: $
 ##
-#############################################################################
+
 
 ##
 ## Difference to NumberCFGroups:
@@ -21,7 +22,7 @@ cf_atGrps := [];
 
 ##############################################################################
 ##
-#F cf_AllAutGroupsGL2( p )
+#F  cf_AllAutGroupsGL2( p )
 ##
 ## Modified Version of AutGrpsGL2
 ##
@@ -72,7 +73,7 @@ end;
 
 ##############################################################################
 ##
-# cf_AllAutGroupsC( p )
+#F  cf_AllAutGroupsC( p )
 ##
 cf_AllAutGroupsC := function( p )
     local b, divs, lv, groups, gr, list, inv, iso, H, U, G, gen, imag,
@@ -117,7 +118,7 @@ end;
  
 ##############################################################################
 ##
-#F cf_AllFrattFreeSolvGroups( n, middle )
+#F  cf_AllFrattFreeSolvGroups( n, middle )
 ##
 ## Modified version of FrattFreeSolvGroups
 ##
@@ -255,7 +256,7 @@ end;
 
 ############################################################################# 
 ## 
-#F CountAllCFGroupsUpTo( arg ) 
+#F  CountAllCFGroupsUpTo( arg ) 
 ## 
 InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg ) 
     local cl, free, ext, t, pr, ffOrd, lv, nonAb, p, A, nSize, facNSize,
@@ -376,5 +377,3 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
     cf_atGrps := [];
     return numbers; 
 end ); 
- 
- 
