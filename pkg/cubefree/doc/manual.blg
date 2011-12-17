@@ -1,9 +1,9 @@
-This is BibTeX, Version 0.99c (Web2C 7.4.5)
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: manual.aux
 The style file: alpha.bst
 Database file #1: ./manual.bib
 Database file #2: ../../../doc/manual.bib
-Repeated entry---line 971 of file ../../../doc/manual.bib
+Repeated entry---line 1003 of file ../../../doc/manual.bib
  : @manual{GAP4
  :             ,
 I'm skipping whatever remains of this entry

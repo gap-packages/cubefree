@@ -8,7 +8,7 @@
 #############################################################################
 
 ##
-## These functions determine the necessary Frattini extensions. 
+## These functions determine the  Frattini extensions. 
 ## Basically, already implemented methods of the GAP Package GrpConst are
 ## used.
 ##
@@ -69,9 +69,7 @@ InstallGlobalFunction(ConstructAllCFGroups, function ( size )
     Info(InfoCF,1,"Construct all groups of order ",size,".");   
 
     # check
-    if not (IsInt( size ) and size>0) then
-        Error("Argument has to be a positive cube-free integer.\n");
-    elif not IsCubeFreeInt( size ) then
+    if not IsPosInt( size ) or not IsCubeFreeInt( size ) then
         Error("Argument has to be a positive cube-free integer.\n"); 
     fi;
 
@@ -133,9 +131,7 @@ InstallGlobalFunction(ConstructAllCFSolvableGroups, function ( size )
     local cl, free, ext, t, primes, ffOrd, lv, p, groups; 
 
     # check
-    if not (IsInt( size ) and size>0) then
-        Error("Argument has to be a positive cube-free integer.\n");
-    elif not IsCubeFreeInt( size ) then
+    if not IsPosInt( size ) or not IsCubeFreeInt( size ) then
         Error("Argument has to be a positive cube-free integer.\n"); 
     fi;
 

@@ -15,23 +15,23 @@
 ## of the elements in G. This implementation is based on an algorithm of 
 ## Howlett and Glasby.
 ##
-InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function(G)
+InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
     local aMat, d, K, q, p, m, gen, k, a, Ga, el, v, H, HH, A, x, C, 
           i, t, n, min;
 
     Info(InfoCF,1,"Rewrite represenation using Howlett and Glasby");
 
     # check
-    if not IsMatrixGroup(G) then
+    if not IsMatrixGroup( G ) then
         Print("Argument has to be an absolutely irreducible matrix group\n");
         Print("over a finite field.\n");
         Error("");
-    elif not IsFinite(FieldOfMatrixGroup(G)) then
+    elif not IsFinite( FieldOfMatrixGroup( G ) ) then
         Print("Argument has to be an absolutely irreducible matrix group\n");
         Print("over a finite field.\n");
         Error("");
-    elif not MTX.IsAbsolutelyIrreducible(GModuleByMats(GeneratorsOfGroup(G),
-             FieldOfMatrixGroup(G))) then
+    elif not MTX.IsAbsolutelyIrreducible(GModuleByMats( GeneratorsOfGroup( G ),
+             FieldOfMatrixGroup( G ) ) ) then
         Print("Argument has to be an absolutely irreducible matrix group\n");
         Print("over a finite field.\n");
         Error("");
@@ -39,10 +39,10 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function(G)
 
     # auxiliary function computes M^(a^i) for M\in GL(d,K)
     # and an automorphism a: K \to K 
-    aMat := function(M,d,i,a)
+    aMat := function( M, d, i, a )
         local x,y,z,H,j;
 
-        H := MutableCopyMat(M);
+        H := MutableCopyMat( M );
         for j in [1..i] do
             for x in [1..d] do
                 for y in [1..d] do
@@ -71,32 +71,31 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function(G)
     min := Collected(FactorsInt(Size(Field(List(gen,x->TraceMat(x))))))[1][2];
 
     # check all possible subfields
-    for n in Filtered(DivisorsInt(m),x->x<m and x>=min) do
+    for n in Filtered( DivisorsInt( m ),x -> x<m and x>=min ) do
      
-        k := GF(p^n);
+        k := GF( p^n );
         t := m/n;
-        a := x->x^(p^n);
+        a := x -> x^(p^n);
 
         Info(InfoCF,2,"    Test subfield ",k," of ", K);
 
         # find isomorphism between G and G^a
-        Ga := GModuleByMats(List(gen,x->aMat(x,d,1,a)),K);
-        C  := GModuleByMats(gen,K);
-        MTX.IsIrreducible(Ga);
-        #MTX.IsIrreducible(C);
-        C  := SMTX.Isomorphism(C,Ga);
+        Ga := GModuleByMats( List( gen, x -> aMat(x,d,1,a) ), K);
+        C  := GModuleByMats( gen, K );
+        MTX.IsIrreducible( Ga );
+        C  := SMTX.Isomorphism( C, Ga );
  
         # only if rewritting is possible over GF(p^n)
-        if IsMatrix(C) then
+        if IsMatrix( C ) then
               
             # normalize C
             for v in K do
-                H := MutableCopyMat(C);
-                if not v=Zero(K) then
+                H := MutableCopyMat( C );
+                if not v = Zero( K ) then
                     H  := v^-1*C;
                     HH := MutableCopyMat(H);
                     for i in [1..t-1] do
-                        HH := HH * aMat(H,d,i,a);
+                        HH := HH * aMat( H, d, i, a );
                     od;
                     if HH = HH^0 then
                         C := H;
@@ -106,9 +105,9 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function(G)
              od;
             
             # compute A
-            A:=0;
+            A := 0;
             while not A in GL(d,q) do
-                x := RandomMat(d,d,K);
+                x := RandomMat( d, d, K );
                 A := x;
                 for i in [1..t-1] do
                     A := x + C * aMat(A,d,1,a);

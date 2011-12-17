@@ -9,9 +9,9 @@ F 2.1. ConstructAllCFSolvableGroups
 F 2.1. ConstructAllCFNilpotentGroups
 F 2.1. ConstructAllCFSimpleGroups
 F 2.1. ConstructAllCFFrattiniFreeGroups
-F 2.1. CountAllCFGroupsUpTo
 F 2.1. NumberCFGroups
 F 2.1. NumberCFSolvableGroups
+F 2.1. CountAllCFGroupsUpTo
 F 2.1. IsCubeFreeInt
 F 2.1. IsSquareFreeInt
 F 2.1. IrreducibleSubgroupsOfGL

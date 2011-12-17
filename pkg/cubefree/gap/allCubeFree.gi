@@ -8,7 +8,7 @@
 ##
 ## Difference to NumberCFGroups:
 ##
-## Here are the functions of the modified algorithm where the automorphism 
+## These are the functions of the modified algorithm where the automorphism 
 ## groups AutGroupsGL2 and AutGroupsC are stored globally. This reduces
 ## runtime when constructing the solvable Frattini-free groups.
 ## Further, the number of the Frattini-free groups are stored for later 
@@ -131,7 +131,7 @@ cf_AllFrattFreeSolvGroups := function( n, middle )
     facN   := Collected(FactorsInt(n));
 
     # compute all socles s with n/|s| divides |Aut(s)|
-    SocOrders := Filtered(DivisorsInt(n),x->x>1);
+    SocOrders := Filtered(DivisorsInt(n), x -> x>1 );
     temp := [];
     for s in SocOrders do
         facS := Collected(FactorsInt(s));
@@ -273,7 +273,7 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
     else
         Error("Wrong input format: Either arg='size' or arg='size,bool'.\n");
     fi;
-    if not (IsInt(bound) and bound >0) then
+    if not IsPosInt(bound) then
         Error("First argument has to be a positiv integer.");
     fi;
     if not IsBool(smallGrp) then
@@ -293,10 +293,7 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
     fi;
 
     # to store all computed automorphism groups of GL(2,p) and GL(1,p)
-    cf_atGrps := [];
-    for i in [1..bound] do
-        cf_atGrps[i] := 0;
-    od;
+    cf_atGrps := ListWithIdenticalEntries( bound, 0 );
     
     #to store the number of computed groups
     numbers   := [1];
@@ -355,8 +352,8 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
                                 else
                                     tm := Size(Filtered(
                                        [1..NumberSmallGroups(lv)],
-                                       x->FrattinifactorSize(SmallGroup(lv,x))
-                                       =lv and IsSolvable(SmallGroup(lv,x))));
+                                        x->FrattinifactorSize(SmallGroup(lv,x))
+                                        =lv and IsSolvable(SmallGroup(lv,x))));
                                 fi;
                             else
                                 tm := Size(cf_AllFrattFreeSolvGroups(

@@ -1,16 +1,11 @@
 cubefree/readme
 cubefree/doc/manual.ind
-cubefree/doc/manual.pdf
-cubefree/doc/make_doc~
 cubefree/doc/manual.log
 cubefree/doc/manual.ilg
-cubefree/doc/head.tmp
 cubefree/doc/manual.toc
 cubefree/doc/manual.bbl
-cubefree/doc/manual.ps
+cubefree/doc/tthout
 cubefree/doc/make_doc
-cubefree/doc/body.tmp
-cubefree/doc/manual.dvi
 cubefree/doc/manual.blg
 cubefree/doc/manual.mst
 cubefree/doc/intro.log

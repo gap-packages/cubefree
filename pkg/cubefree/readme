@@ -1,7 +1,7 @@
 README file for the Cubefree Package by Heiko Dietrich.
 
-This package contains an implementation of an algorithm to construct up 
-to isomorphism all groups of a given cubefree order. The algorithm is
+This package contains an implementation of an algorithm to construct all 
+groups of a given cubefree order up to isomorphism. The algorithm is
 based on the ideas in [1] and [2] and it is fully described in [3].
 
 The algorithm needs a method to construct all irreducible subgroups of
@@ -30,10 +30,10 @@ The output is a list L whose i.th entry is the number of groups
 of order i up to isomorphism if i is cube-free and unbound, otherwise.
 
 (6) NumberCFGroups( n )
-... returns the number of all cubefree groups of order n.
+... returns the number of all groups of a given cubefree order n.
 
 (7) NumberCFSolvableGroups( n )
-... returns the number of all cubefree solvable groups of order n.
+... returns the number of all solvable groups of given cubefree order n.
 
 (8) IrreducibleSubgroupsOfGL( 2, q )
 ... computes all irreducible subgroups of GL(2,q) up to conjugacy where q=p^r

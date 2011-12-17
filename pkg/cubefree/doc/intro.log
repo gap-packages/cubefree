@@ -1,4 +1,5 @@
-This is TeX, Version 3.14159 (Web2C 7.4.5) (format=latex 2004.4.6)  23 SEP 2005 16:23
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=latex 2005.9.12)  6 MAY 2007 18:59
+entering extended mode
 **\nonstopmode\input intro.tex
 (./intro.tex
 ! Undefined control sequence.
@@ -184,7 +185,7 @@ Missing character: There is no , in font nullfont!
 Missing character: There is no a in font nullfont!
 ! Undefined control sequence.
 l.17 a {\GAP
-            } package for constructing groups of cube-free order; that is, g...
+            } package for constructing groups of cubefree order; that is, gr...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -225,7 +226,6 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -310,7 +310,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.20 T
-      he groups of square-free order are known for a long time, since Hoelder
+      he groups of squarefree order are known for a long time: Hoelder
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -331,7 +331,6 @@ Missing character: There is no u in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -361,12 +360,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no , in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
+Missing character: There is no : in font nullfont!
 Missing character: There is no H in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -378,7 +372,7 @@ Missing character: There is no [ in font nullfont!
 \citation{Hol93}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.21 \cite{Hol93}
                   investigated them at the end of the 19th century. Taunt
 The control sequence at the end of the top line
@@ -441,9 +435,9 @@ Missing character: There is no [ in font nullfont!
 \citation{Tau55}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.22 \cite{Tau55}
-                  has considered solvable groups of cube-free order, since he
+                  has considered solvable groups of cubefree order, since he
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -487,7 +481,6 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -557,7 +550,6 @@ Missing character: There is no C in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -605,7 +597,7 @@ Missing character: There is no [ in font nullfont!
 \citation{Di05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.24 ...al are investigated firstly in \cite{Di05}
                                                    and \cite{DiEi05}, and this
 The control sequence at the end of the top line
@@ -625,7 +617,7 @@ Missing character: There is no [ in font nullfont!
 \citation{DiEi05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.24 ...d firstly in \cite{Di05} and \cite{DiEi05}
                                                   , and this
 The control sequence at the end of the top line
@@ -741,7 +733,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.28 S
-      ome general approaches to construct groups of an arbitrary given order...
+      ome general approaches to construct groups of an arbitrarily given ord...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -796,6 +788,8 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no l in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no g in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -825,7 +819,7 @@ Missing character: There is no [ in font nullfont!
 \citation{BeEia}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.29 described in \cite{BeEia}
                               , \cite{BeEib}, and \cite{BeEiO}.
 The control sequence at the end of the top line
@@ -843,7 +837,7 @@ Missing character: There is no [ in font nullfont!
 \citation{BeEib}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.29 described in \cite{BeEia}, \cite{BeEib}
                                             , and \cite{BeEiO}.
 The control sequence at the end of the top line
@@ -864,7 +858,7 @@ Missing character: There is no [ in font nullfont!
 \citation{BeEiO}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.29 ...ite{BeEia}, \cite{BeEib}, and \cite{BeEiO}
                                                   .
 The control sequence at the end of the top line
@@ -995,7 +989,6 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -1063,7 +1056,7 @@ Missing character: There is no [ in font nullfont!
 \citation{Di05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.33 described completely in \cite{Di05}
                                          and \cite{DiEi05}. It is a refineme...
 The control sequence at the end of the top line
@@ -1083,7 +1076,7 @@ Missing character: There is no [ in font nullfont!
 \citation{DiEi05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.33 ...ompletely in \cite{Di05} and \cite{DiEi05}
                                                   . It is a refinement of
 The control sequence at the end of the top line
@@ -1168,7 +1161,7 @@ Missing character: There is no [ in font nullfont!
 \citation{GrpConst}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.34 ...age which are described in \cite{GrpConst}
                                                   .
 The control sequence at the end of the top line
@@ -1305,7 +1298,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 37.
 Missing character: There is no c in font nullfont!
 Missing character: There is no o in font nullfont!
-Missing character: There is no m in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -1425,12 +1417,23 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no d in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
 Missing character: There is no [ in font nullfont!
 \citation{FlOB05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
-l.39 ... subgroups we use the method \cite{FlOB05}
+                                                  \space undefined\on@line .
+l.39 ... use the method described in \cite{FlOB05}
                                                    for which this package
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1527,9 +1530,9 @@ Missing character: There is no [ in font nullfont!
 \citation{Irredsol}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.41 \cite{Irredsol}
-                     could be used for p<257.
+                     could be used for $p\le 251$.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1554,11 +1557,6 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no < in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no 5 in font nullfont!
-Missing character: There is no 7 in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 36--42
@@ -1591,6 +1589,16 @@ Overfull \hbox (5.43053pt too wide) in paragraph at lines 36--42
  []
 
 
+Overfull \hbox (15.58676pt too wide) in paragraph at lines 36--42
+\OML/cmm/m/it/10 p \OMS/cmsy/m/n/10 ^^T
+ []
+
+
+Overfull \hbox (15.00005pt too wide) in paragraph at lines 36--42
+\OT1/cmr/m/n/10 251$ 
+ []
+
+
 ! LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
@@ -1620,7 +1628,7 @@ Missing character: There is no [ in font nullfont!
 \citation{FlOB05}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.43 The algorithm of \cite{FlOB05}
                                     requires a method to rewrite a
 The control sequence at the end of the top line
@@ -1705,7 +1713,7 @@ Missing character: There is no [ in font nullfont!
 \citation{GlHo97}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .^^J
+                                                  \space undefined\on@line .
 l.44 ... and implement the method of \cite{GlHo97}
                                                    for this purpose.
 The control sequence at the end of the top line
@@ -1756,7 +1764,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.46 F
-      or the construction of groups of square-free order it is more practica...
+      or the construction of groups of squarefree order it is more practical to
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1795,7 +1803,6 @@ Missing character: There is no u in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -2090,11 +2097,11 @@ Missing character: There is no . in font nullfont!
 
  
 Here is how much of TeX's memory you used:
- 20 strings out of 95847
- 172 string characters out of 1195963
- 44507 words of memory out of 1000001
- 3049 multiletter control sequences out of 10000+50000
- 3948 words of font info for 15 fonts, out of 500000 for 1000
- 14 hyphenation exceptions out of 1000
- 22i,2n,27p,129b,94s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 21 strings out of 94500
+ 252 string characters out of 1172833
+ 48348 words of memory out of 3500000
+ 3288 multiletter control sequences out of 10000+50000
+ 3948 words of font info for 15 fonts, out of 500000 for 2000
+ 580 hyphenation exceptions out of 1000
+ 20i,2n,26p,136b,92s stack positions out of 1500i,500n,5000p,200000b,5000s
 No pages of output.

@@ -7,9 +7,9 @@
 \indexentry {ConstructAllCFNilpotentGroups@`ConstructAllCFNilpotentGroups'}{4}
 \indexentry {ConstructAllCFSimpleGroups@`ConstructAllCFSimpleGroups'}{4}
 \indexentry {ConstructAllCFFrattiniFreeGroups@`ConstructAllCFFrattiniFreeGroups'}{4}
-\indexentry {CountAllCFGroupsUpTo@`CountAllCFGroupsUpTo'}{4}
 \indexentry {NumberCFGroups@`NumberCFGroups'}{4}
-\indexentry {NumberCFSolvableGroups@`NumberCFSolvableGroups'}{5}
+\indexentry {NumberCFSolvableGroups@`NumberCFSolvableGroups'}{4}
+\indexentry {CountAllCFGroupsUpTo@`CountAllCFGroupsUpTo'}{5}
 \indexentry {IsCubeFreeInt@`IsCubeFreeInt'}{5}
 \indexentry {IsSquareFreeInt@`IsSquareFreeInt'}{5}
 \indexentry {IrreducibleSubgroupsOfGL@`IrreducibleSubgroupsOfGL'}{5}

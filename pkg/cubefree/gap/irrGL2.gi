@@ -12,6 +12,7 @@
 ## GL(2,q) up to conjugace where q=p^r is a prime power with p>=5.
 ## This algorithm was developed by Flannery and O'Brien.
 ##
+## Bottleneck is cf_NormSubD which is called from cf_GL2_Th42.
 
 ##############################################################################
 ##
@@ -117,10 +118,13 @@ end;
 ## (Theorem 4.2 of Flannery and O'Brien) 
 ##
 cf_GL2_Th42 := function( q )
-    local a, groups, alpha, fac, t, i, j, G2sk, G2nsk, Gstrich,
-          erz1, G, G1, G2, erz2, g, IsScalarGS, o, w, z, H, makeMat;
+    local a, groups, alpha, fac, t, i, j, G2sk, G2nsk, Gstrich, K, prEl,
+          erz1, G, G1, G2, erz2, g, IsScalarGS, o, w, z, H, makeMat, one;
 
     Info(InfoCF,3,"        Start cf_GL2_Th42.");
+    K    := GF( q );
+    prEl := PrimitiveElement( K );
+    one  := One( K );
 
     # local auxiliary functions#
     ###########################
@@ -139,7 +143,7 @@ cf_GL2_Th42 := function( q )
     ####
 
     o := function( q, i)
-        return(Z(q)^((q-1)/(2^(i+1))));
+        return(prEl^((q-1)/(2^(i+1))));
     end;
 
     ####
@@ -147,7 +151,7 @@ cf_GL2_Th42 := function( q )
     w := function(q,i)
     local a, elem;
 
-        elem := [[o(q,i),0],[0,o(q,i)^-1]] * One(GF(q));
+        elem := [[o(q,i),0],[0,o(q,i)^-1]] * one;
         return(elem);
     end;
 
@@ -156,7 +160,7 @@ cf_GL2_Th42 := function( q )
     z := function(q,i)
     local elem;
 
-        elem := [[o(q,i),0],[0,o(q,i)]] * One(GF(q));
+        elem := [[o(q,i),0],[0,o(q,i)]] * one;
         return(elem);
     end;
 
@@ -165,7 +169,7 @@ cf_GL2_Th42 := function( q )
     H := function(q,i,j,k)
         local a, group;
 
-        a:=[[0*Z(q),Z(q)^0],[Z(q)^0,0*Z(q)]];
+        a:=[[0*prEl,prEl^0],[prEl^0,0*prEl]];
         if k=1 then
             group := Group([a, z(q,i), w(q,j)]);
         elif k=2 then
@@ -179,7 +183,7 @@ cf_GL2_Th42 := function( q )
     ####
 
     makeMat:=function(q,x,y)
-       return [[x,0],[0,y]] * One(GF(q)); 
+       return [[x,0],[0,y]] * one; 
     end;
 
     #####
@@ -188,13 +192,13 @@ cf_GL2_Th42 := function( q )
     Gstrich := cf_NormSubD(q);
 
     groups := [];
-    a      := [[0*Z(q),Z(q)^0],[Z(q)^0,0*Z(q)]];
+    a      := [[0*prEl,prEl^0],[prEl^0,0*prEl]];
   
     if q mod 4 = 1 then
 
         fac  := Collected(FactorsInt(q-1));
         t    := fac[1][2];
-        alpha:= Z(q)^((q-1)/(2^(t)));
+        alpha:= prEl^((q-1)/(2^(t)));
 
         G2sk := [];
         for i in [0..t-1] do
@@ -213,9 +217,9 @@ cf_GL2_Th42 := function( q )
             od;
         od;
         for j in [1..t-1] do
-            Add(G2sk, Group(a*([[alpha,0],[0,1]]*One(GF(q))), w(q,j)));
+            Add(G2sk, Group(a*([[alpha,0],[0,1]]*one), w(q,j)));
         od;
-        Add(G2sk, Group([a, [[o(q,t-1),0],[0,1]]*One(GF(q)), w(q,t-1)]));  
+        Add(G2sk, Group([a, [[o(q,t-1),0],[0,1]]*one, w(q,t-1)]));  
     
         G2nsk:=[];
         Add(G2nsk, Group(a));
@@ -235,16 +239,16 @@ cf_GL2_Th42 := function( q )
             od;
         od;
         for j in [0..t-1] do
-            Add(G2nsk, Group(a*([[alpha,0],[0,1]]*One(GF(q))), w(q,j)));
+            Add(G2nsk, Group(a*([[alpha,0],[0,1]]*one), w(q,j)));
         od;
-        Add(G2nsk,Group([a,[[o(q,t-1),0],[0,1]]*One(GF(q)),w(q,t-1)])); 
+        Add(G2nsk,Group([a,[[o(q,t-1),0],[0,1]]*one,w(q,t-1)])); 
 
         for G1 in Gstrich do
 
             erz1 := GeneratorsOfGroup(G1);
 
             if Order(G1)=1 then
-                G := [[[1,0],[0,1]]*One(GF(q))];
+                G := [[[1,0],[0,1]]*one];
             else
                 G := erz1;
             fi;
@@ -266,11 +270,11 @@ cf_GL2_Th42 := function( q )
     # the case q mod 4 = 3
     else 
        
-        G2sk  := [Group(a,[[1,0],[0,-1]]*One(GF(q)))];
+        G2sk  := [Group(a,[[1,0],[0,-1]]*one)];
 
-        G2nsk := [ Group(a), Group(a, [[-1,0],[0,-1]]*One(GF(q))),
-                   Group(a*[[1,0],[0,-1]]*One(GF(q))),
-                   Group(a,[[1,0],[0,-1]]*One(GF(q))) ];
+        G2nsk := [ Group(a), Group(a, [[-1,0],[0,-1]]*one),
+                   Group(a*[[1,0],[0,-1]]*one),
+                   Group(a,[[1,0],[0,-1]]*one) ];
  
         for G1 in Gstrich do
 
@@ -306,19 +310,26 @@ end;
 ## (Theorem 4.3 of Flannery and O'Brien)
 ##
 cf_GL2_Th43 := function( q )
-    local b, c, temp, groups, lv, Zent, t, l, div, erz1, order, G,
-          gr, A, k, ord,fac, el,r;
+    local b, c, temp, groups, lv, Zent, t, l, div, erz1, order, G, p,
+          gr, A, k, ord,fac, el,r, K, one, prEl, prElq, i, m, mat;
 
     Info(InfoCF,3,"        Start cf_GL2_Th43.");
+    p     := Collected(FactorsInt(q))[1][1];
+    K     := GF(q^2);
+    one   := One( K );
+    prEl  := PrimitiveElement( K );
+    prElq := prEl^(q+1);
 
     groups := [];
-    Zent   := Group([[Z(q),0*Z(q)],[0*Z(q),Z(q)]]);
+    mat    := [[prElq,0*prElq],[0*prElq,prElq]];
+    Zent   := Group(mat);
+    SetSize(Zent,q-1);
 
     # generator of singer-cycle
-    b := [[0,1],[-(Z(q^2)^(q+1)),Z(q^2)+Z(q^2)^q]] * One(GF(q));
+    b := [[0,1],[-(prEl^(q+1)),prEl+prEl^q]] * one;
 
     # element c with <c,b> = normalizer of singer-cycle
-    c := [[1,0],[Z(q^2)+Z(q^2)^q,-(Z(q)^0)]] * One(GF(q));    
+    c := [[1,0],[prEl+prEl^q,-(prElq^0)]] * one;    
 
     t   := Collected(FactorsInt(q-1))[1][2];
     l   := (q-1) / (2^t);
@@ -341,11 +352,20 @@ cf_GL2_Th43 := function( q )
         el:= b^((q^2-1)/lv);
         A := Group(el);
         SetSize(A,lv);
-
+ 
         # compute  order=Size(Intersection(A,Zent));
         Info(InfoCF,4,"            Compute order of intersection.");
-        r := DivisorsInt(lv);
-        r := First(r,x->el^x in Zent);
+        r  := DivisorsInt(lv);
+        ## r := First(r, x-> el^x in Zent);
+        for i in r do
+            m := el^i;
+            if IsDiagonalMat(m) and m[1][1]=m[2][2] and 
+               not First([1..q-1],x->mat[1][1]^x=m[1][1]) = fail then
+                r := i;
+                break;    
+            fi;
+        od;       
+       
         order := lv/r;
         
         if order mod 2 = 0 then
@@ -367,36 +387,51 @@ end;
 ## (Theorem 4.5 of Flannery and O'Brien, q=p^r, p>=5)
 ##
 cf_GL2_Th45 := function( q )
-    local evenSc, s, w, a, b, c,  fac, list, vz, groups, p;
+    local evenSc, s, w, a, b, c,i,fac, list, vz, groups, p, L, K, one, 
+          prEl, prElq;
 
     Info(InfoCF,3,"        Start cf_GL2_Th45.");
 
     # set up
+    K      := GF( q^2 );
+    one    := One( K );
+    prEl   := PrimitiveElement( K );
+    prElq  := prEl^(q+1);
     groups := [];
     p      := Collected(FactorsInt(q))[1][1];
-    w      := Z(p^2)^((p^2-1)/4);
-    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]] * One(GF(p^2));
+    w      := prEl^((p^2-1)/4);
+    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]]*one;
     fac    := DivisorsInt(q-1);
     fac    := Filtered(fac,x-> x mod 2 =0);
-    evenSc := List(fac,x->[[Z(q)^((q-1)/x),0],[0,Z(q)^((q-1)/x)]]*One(GF(q)));
+    evenSc := List(fac,x->[[prElq^((q-1)/x),0],[0,prElq^((q-1)/x)]]*one);
 
     #The elements v_z
     if q mod 3 = 1 then
         fac := Filtered(fac,x-> ((q^3-1)/(3*x)) mod ((q^3-1)/(q-1))=0);
         vz  := [];
         for b in fac do
-            a := Z(q)^( ((q^3-1)/(3*b)) / ((q^3-1)/(q-1)));
-            Add(vz, [[a,0],[0,a]] * One(GF(q)));
+            a := prElq^( ((q^3-1)/(3*b)) / ((q^3-1)/(q-1)));
+            Add(vz, [[a,0],[0,a]] * one);
         od;
     fi;
 
     for a in evenSc do
-        Add(groups, Group([a, [[w,0],[0,-w]]*One(GF(q)), s]));
+        L := [a, [[w,0],[0,-w]]*one, s];
+        L := List(L, Immutable);
+        for i in L do
+            ConvertToMatrixRep(i,K);
+        od;  
+        Add(groups, GroupByGenerators( L ) );
     od;
 
     if q mod 3 = 1 then
         for b in vz do
-            Add(groups, Group([b*s, [[w,0],[0,-w]]*One(GF(q))]));
+            L := [b*s, [[w,0],[0,-w]]*one];
+            L := List(L, Immutable);
+            for i in L do
+                ConvertToMatrixRep(i,K);
+             od; 
+            Add(groups, GroupByGenerators( L ) );
         od;
     fi;
 
@@ -411,29 +446,33 @@ end;
 ##
 cf_GL2_Th46 := function( q )
     local El, s, w, a, fac, groups, p, alpha, th_x1,
-          th_x2, u, M1, M2, r, log, x;
+          th_x2, u, M1, M2, r, log, x, K, one, prEl, prElq;
 
     Info(InfoCF,3,"        Start cf_GL2_Th46.");
+    K      := GF( q^2 );
+    one    := One( K );
+    prEl   := PrimitiveElement( K );
+    prElq  := prEl^(q+1);
 
     # set up
     groups := [];
     p      := Collected(FactorsInt(q))[1][1];
     log    := Collected(FactorsInt(q))[1][2];
-    w      := Z(p^2)^((p^2-1)/4);
-    th_x2  := Indeterminate(GF(q^2),"th_x2":new);
-    th_x1  := Indeterminate(GF(p^2),"th_x1":new);
-    alpha  := RootsOfUPol(GF(p^2),th_x1^2-2)[1];    
-    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]] * One(GF(p^2));
-    u      := alpha^-1 * [[w+1,0],[0,-w+1]] * One(GF(p^2));
+    w      := prEl^((p^2-1)/4);
+    th_x2  := Indeterminate(K,"th_x2":new);
+    th_x1  := Indeterminate(K,"th_x1":new);
+    alpha  := RootsOfUPol(K,th_x1^2-2)[1];    
+    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]] * one;
+    u      := alpha^-1 * [[w+1,0],[0,-w+1]] * one;
 
     # The set of even order scalars and its square-roots in GL(2,q^2)
     fac := DivisorsInt(q-1);
     fac := Filtered(fac,x-> x mod 2 =0);
     El  := [];
     for x in fac do
-        M1 := [[Z(q)^((q-1)/x),0],[0,Z(q)^((q-1)/x)]] * One(GF(q));
-        r  := RootsOfUPol(GF(q^2),th_x2^2-Z(q)^((q-1)/x))[1];
-        M2 := [[r,0],[0,r]] * One(GF(q^2));
+        M1 := [[prElq^((q-1)/x),0],[0,prElq^((q-1)/x)]] * One(GF(q));
+        r  := RootsOfUPol(K,th_x2^2-prElq^((q-1)/x))[1];
+        M2 := [[r,0],[0,r]] * one;
         Add(El,[M1,M2]);
     od;
 
@@ -441,13 +480,13 @@ cf_GL2_Th46 := function( q )
         for a in El do
             Add(groups, Group(s, u, a[1]));
             if a[2] in GL(2,q) then
-                Add(groups, Group(s, a[2]*u, a[1]));
+                Add(groups, Group([s, a[2]*u, a[1]]));
             fi; 
         od;
     else
         for a in El do
             if a[2]*alpha in GL(2,q) then
-                Add(groups, Group(s, a[2]*u, a[1]));
+                Add(groups, Group([s, a[2]*u, a[1]]));
             fi; 
         od;
     fi;
@@ -463,28 +502,32 @@ end;
 ## (Theorem 4.8 of Flannery and O'Brien, q=p^r, p>5)
 ##
 cf_GL2_Th48 := function( q )
-    local El, w, s, v, a, fac, groups, p, th_x1, beta;
+    local El, w, s, v, a, fac, groups, p, th_x1, beta, K, one, prEl, prElq;
 
     Info(InfoCF,3,"        Start cf_GL2_Th48.");
+    K      := GF( q^2 );
+    one    := One( K );
+    prEl   := PrimitiveElement( K );
+    prElq  := prEl^(q+1);
 
     # set up
     groups := [];
     p      := Collected(FactorsInt(q))[1][1];
-    w      := Z(p^2)^((p^2-1)/4);
-    th_x1  := Indeterminate(GF(p^2),"th_x1":new);
-    beta   := RootsOfUPol(GF(p^2),th_x1^2-5)[1];    
-    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]] * One(GF(p^2));
+    w      := prEl^((p^2-1)/4);
+    th_x1  := Indeterminate(K,"th_x1":new);
+    beta   := RootsOfUPol(K,th_x1^2-5)[1];    
+    s      := 1/2 * [[w-1,w-1],[w+1,-w-1]] * one;
     v      := 1/2 * [[w,(1-beta)/2 - w*(1+beta)/2],
-                     [(-1+beta)/2-w*(1+beta)/2,-w]] * One(GF(p^2));
+                     [(-1+beta)/2-w*(1+beta)/2,-w]] * one;
 
     if (q mod 5 = 1) or (q mod 5 = 4) then
         fac := DivisorsInt(q-1);
         fac := Filtered(fac,x-> x mod 2 =0);
 
         # The set of even order scalars in GL(2,q)
-        El := List(fac,x->[[Z(q)^((q-1)/x),0],[0,Z(q)^((q-1)/x)]]*One(GF(q)));
+        El := List(fac,x->[[prElq^((q-1)/x),0],[0,prElq^((q-1)/x)]]*one);
          for a in El do
-            Add(groups, Group(s, v, a, [[w,0],[0,-w]]*One(GF(p^2))));
+            Add(groups, Group(s, v, a, [[w,0],[0,-w]]*one));
         od;
     fi;
 
@@ -658,7 +701,7 @@ InstallGlobalFunction(IrreducibleSubgroupsOfGL, function( n, q )
         fi;
         return(groups);
     else
-        Print("\n p>= 5 is needed.\n");
+        Error("A prime power of p>= 5 is needed.");
     fi;
 end);
 

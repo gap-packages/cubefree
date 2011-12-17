@@ -8,7 +8,7 @@
 #############################################################################
 
 ##
-## Here are the functions to construct all Frattini-free groups of
+## These are the functions to construct all Frattini-free groups of
 ## a given cube-free order up to isomorphism.
 ##
 
@@ -19,11 +19,14 @@
 ##  Theorem 4.1 of Flannery and O'Brien (cube-free case).
 ##
 cf_Th41 := function( p )
-    local b, div, groups, lv, gr;
+    local b, div, groups, lv, gr, K, prEl, prElp;
 
     Info(InfoCF,3,"      Start cf_Th41.");
 
     groups := [];
+    K      := GF(p^2);
+    prEl   := PrimitiveElement(K);
+    prElp  := prEl^(p+1);
 
     # compute all possible orders
     div := DivisorsInt(p^2-1);
@@ -31,7 +34,7 @@ cf_Th41 := function( p )
                            and (not (p-1) mod x = 0) and x>1);
 
     # generator of singer-cycle
-    b := [[0*Z(p),Z(p)^0],[-Z(p^2)^(p+1),Z(p^2)+Z(p^2)^p]];
+    b := [[0*prElp,prElp^0],[-prEl^(p+1),prEl+prEl^p]];
 
     # construct groups
     for lv in div do
@@ -59,7 +62,7 @@ end;
 cf_Th42Red := function( p )
     local a, temp, h001, h002, groups, Gstrich, Gnsk, w, z0, z1, C2, aMat,
           G1, G2, G, norm, erz1, erz2, reducible, b, M, C, D, d, nat, 
-          sub, K, k, g, act, i, IsScalarGS;
+          sub, K, k, g, act, i, IsScalarGS, ppos, makeMat;
 
     Info(InfoCF,3,"      Start cf_Th42Red.");
 
@@ -75,13 +78,25 @@ cf_Th42Red := function( p )
         return(1=1);
     end;
 
+    makeMat := function(v,p)
+    local mat,i;
+
+        mat    := [];
+        mat[1] := v{[1..2]};
+        mat[2] := v{[3..4]};
+        return mat*One(GF(p));
+    end;
+
    
     # the reducible groups 
     # if p<100 then the reducible subgroups are stored
     if p<100 then
 
-        reducible := List(cf_diagonalMatrices[p][1], x->Group(x));
-        norm      := List(cf_diagonalMatrices[p][2], x->Group(x));
+        ppos      := Position(Primes,p)-1;
+        reducible := List(cf_diagonalMatrices[ppos][1], x->
+                                          Group(List(x,y->makeMat(y,p))));
+        norm      := List(cf_diagonalMatrices[ppos][2], x->
+                                          Group(List(x,y->makeMat(y,p))));
         for i in [1..Size(reducible)] do
             reducible[i]!.red := true;
         od;
@@ -213,18 +228,23 @@ end;
 ##
 cf_Th43 := function(p)
     local b, c, temp, groups, lv, Zent, t, l, div, erz1, el, order, G,
-          gr, A, center, k, ord, r;
+          gr, A, center, k, ord, r, K, prEl, prElp, one, i, m, mat;
 
     Info(InfoCF,3,"      Start cf_Th43.");
-
+    K      := GF(p^2);
+    prEl   := PrimitiveElement( K );
+    prElp  := prEl^(p+1);
+    one    := One( K );
     groups := [];
-    Zent   := Group([[Z(p),0*Z(p)],[0*Z(p),Z(p)]]);
-
+    mat    := [[prElp,0*prElp],[0*prElp,prElp]];
+    Zent   := Group(mat);
+    SetSize(Zent,p-1);
+  
     # generator of singer-cycle
-    b      := [[0,1],[-(Z(p^2)^(p+1)),Z(p^2)+Z(p^2)^p]]*One(GF(p));
+    b      := [[0,1],[-(prEl^(p+1)),prEl+prEl^p]]*one;
 
     # element c with <c,b> = normalizer of singer-cycle
-    c      := [[1,0],[Z(p^2)+Z(p^2)^p,-(Z(p)^0)]]*One(GF(p));    
+    c      := [[1,0],[prEl+prEl^p,-(prElp^0)]]*one;    
 
     t      := Collected(FactorsInt(p-1))[1][2];
     l      := (p-1) / (2^t);
@@ -257,8 +277,18 @@ cf_Th43 := function(p)
         SetSize(A,lv);
 
         Info(InfoCF,4,"            Compute order of intersection.");
-        r := DivisorsInt(lv);
-        r := First(r,x->el^x in Zent);
+        #r := DivisorsInt(lv);
+        #r := First(r,x->el^x in Zent);
+        r  := DivisorsInt(lv);
+        for i in r do
+            m := el^i;
+            if IsDiagonalMat(m) and m[1][1]=m[2][2] and 
+               not First([1..p-1],x->mat[1][1]^x=m[1][1]) = fail then
+                r := i;
+                break;    
+            fi;
+        od;  
+           
         order := lv/r;
        
         if order mod 4 =2 then
@@ -329,6 +359,7 @@ cf_AutGroupsGL2 := function( p )
     return(list);
 end;
 
+
 ##############################################################################
 ##
 #F cf_AutGroupsC( p )
@@ -383,7 +414,7 @@ end;
 ##
 cf_FrattFreeSolvGroups := function( n )
     local facN, facS, SocOrders, temp, lv, groups, autGrps, s, ord, tempAutGr,
-          subDP, socExt, sd, i, all, facNS, possible;
+          subDP, socExt, sd, i, all, facNS, possible, pos, autPos;
    
     Info(InfoCF,1,"Compute solvable Frattini-free groups of order ",n,".");
 
@@ -391,13 +422,15 @@ cf_FrattFreeSolvGroups := function( n )
     facN   := Collected(FactorsInt(n));
 
     # to store all necessary automorphism groups
-    autGrps := [];
+    autPos := [];
     for lv in facN do
-        autGrps[lv[1]] := 0;
+        Add(autPos,lv[1]);
         if lv[2]=2 then
-            autGrps[lv[1]^2] := 0;
+            Add(autPos,lv[1]^2);
         fi;
     od;
+    autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
+    pos     := function(x) return Position( autPos, x); end;
 
     # compute all socles s with n/|s| divides |Aut(s)|
     SocOrders := Filtered(DivisorsInt(n),x->x>1);
@@ -458,16 +491,18 @@ cf_FrattFreeSolvGroups := function( n )
             for lv in facS do 
 
                 if lv[2]=1 then
-                    if autGrps[lv[1]]=0 then
-                        autGrps[lv[1]] := cf_AutGroupsC(lv[1]);
+                    if autGrps[pos(lv[1])]=0 then
+                        autGrps[pos(lv[1])] := cf_AutGroupsC(lv[1]);
                     fi;
-                    temp := Filtered(autGrps[lv[1]],x-> (n/s) mod Size(x) =0);
+                    temp := Filtered(autGrps[pos(lv[1])],
+                                      x-> (n/s) mod Size(x) =0);
                     Add(tempAutGr,temp);
                 else
-                    if autGrps[lv[1]^2]=0 then
-                        autGrps[lv[1]^2] := cf_AutGroupsGL2(lv[1]);
+                    if autGrps[pos(lv[1]^2)]=0 then
+                        autGrps[pos(lv[1]^2)] := cf_AutGroupsGL2(lv[1]);
                     fi;
-                    temp := Filtered(autGrps[lv[1]^2],x->(n/s) mod Size(x)=0);
+                    temp := Filtered(autGrps[pos(lv[1]^2)],
+                                       x->(n/s) mod Size(x)=0);
                     Add(tempAutGr,temp);
                 fi;
 
@@ -497,6 +532,7 @@ cf_FrattFreeSolvGroups := function( n )
     return(groups);
 end;
 
+
 ##############################################################################
 ##
 #F ConstructAllCFFrattiniFreeGroups( n )
@@ -508,10 +544,8 @@ InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
 
     Info(InfoCF,1,"Construct all Frattini-free groups of order ",n,".");
 
-     # check
-    if not (IsInt( n ) and n>0) then
-        Error("Argument has to be a positive cube-free integer.\n");
-    elif not IsCubeFreeInt( n ) then
+    # check
+    if not IsPosInt( n ) or not IsCubeFreeInt( n ) then
         Error("Argument has to be a positive cube-free integer.\n"); 
     fi;
 
@@ -520,7 +554,7 @@ InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
         return [TrivialGroup()]; 
     fi; 
  
-     # set up
+    # set up
     groups := [];
     cl     := Collected( Factors( n ) ); 
 

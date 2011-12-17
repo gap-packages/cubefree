@@ -17,7 +17,7 @@ This manual describes the {\Cubefree}  package,
 a {\GAP} package for constructing groups of cubefree order; that is, groups
 whose order is not divisible by any third power of a prime.
 
-The groups of squarefree order are known for a long time, since Hoelder
+The groups of squarefree order are known for a long time: Hoelder
 \cite{Hol93} investigated them at the end of the 19th century. Taunt
 \cite{Tau55} has considered solvable groups of cubefree order, since he
 examined solvable groups with abelian Sylow subgroups. Cubefree groups in
@@ -28,23 +28,25 @@ there.
 Some general approaches to construct groups of an arbitrarily given order are
 described in \cite{BeEia}, \cite{BeEib}, and \cite{BeEiO}.
 
-The main function of this package is a method to construct up to isomorphism
-all groups of a given cubefree order. The algorithm behind this function is
+The main function of this package is a function to construct 
+all groups of a given cubefree order up to isomorphism. The algorithm behind this function is
 described completely in \cite{Di05} and \cite{DiEi05}. It is a refinement of
 the methods of the {\GrpConst} package which are described in \cite{GrpConst}.
 
 This main function needs a method to construct up to conjugacy the solvable
-cubefree subgroups of GL$(2,p)$ coprime to $p$. These subgroups are
-constructed using the irreducible subgroups of GL$(2,p)$. To determine these
+cubefree subgroups of GL$(2,p)$ coprime to $p$. We split this construction
+into the construction of reducible and irreducible subgroups of GL$(2,p)$. To determine the
 irreducible subgroups we use the method described in \cite{FlOB05} for which this package
 also contains an implementation. Alternatively, the {\Irredsol} package
-\cite{Irredsol} could be used for $p\le 251$.
+\cite{Irredsol} could be used for primes $p\le 251$.
 
-The algorithm of \cite{FlOB05} requires a method to rewrite a
+The algorithm of \cite{FlOB05} requires a method to rewrite a matrix
 representation. We use and implement the method of \cite{GlHo97} for this purpose.
 
-For the construction of groups of squarefree order it is more practical to
-use the efficient function <AllSmallGroups> of the {\GrpConst} package.
+One can modify the construction algorithm for cubefree groups to a very
+efficient algorithm to construct groups of squarefree order. This is already
+done in the  {\GrpConst} package. Thus for the construction of groups of squarefree order it is more practical to
+use <AllSmallGroups> of the {\GrpConst} package. 
 
 A more detailed describtion of the implemented methods can be found in Chapter 2.
 
