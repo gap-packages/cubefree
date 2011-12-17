@@ -1,0 +1,11 @@
+\chapcontents {1}{Introduction}{3}
+\seccontents {1.1}{Overview and Background} {3}
+\chapcontents {2}{Functionality of the Cubefree package}{4}
+\seccontents {2.1}{New methods} {4}
+\seccontents {2.2}{Comments on the implementation} {5}
+\seccontents {2.3}{Accuracy check} {6}
+\chapcontents {3}{Installing and loading the Cubefree package}{7}
+\seccontents {3.1}{Installing the Cubefree package} {7}
+\seccontents {3.2}{Loading the Cubefree package} {7}
+\chapcontents {}{Bibliography}{8}
+\chapcontents {}{Index}{9}

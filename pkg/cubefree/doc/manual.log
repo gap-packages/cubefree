@@ -1,0 +1,72 @@
+This is TeX, Version 3.14159 (Web2C 7.4.5) (format=tex 2004.4.29)  24 OCT 2005 18:44
+**\nonstopmode\input manual.tex
+(./manual.tex (../../../doc/gapmacro.tex
+(/usr/share/texmf/tex/plain/amsfonts/amssym.tex
+(/usr/share/texmf/tex/plain/amsfonts/amssym.def
+\msafam=\fam8
+\msbfam=\fam9
+\eufmfam=\fam10
+))
+Running TeX
+\pagewidth=\dimen16
+\pageheight=\dimen17
+\colwidth=\dimen18
+\partialpage=\box16
+\origvsize=\dimen19
+\manindent=\dimen20
+\smallmanindent=\dimen21
+\msbfam=\fam11
+\labelout=\write0
+\indexout=\write1
+\secindout=\write2
+\tocout=\write3
+\citeout=\write4
+\ans=\write5
+\labelin=\read0
+\indexin=\read1
+\tocin=\read2
+\citein=\read3
+\secno=\count26
+\subsecno=\count27
+\exno=\count28
+\indentno=\count29
+\chapnum=\count30
+\ortoks=\toks12
+) (../../../doc/ref/manual.lab) [1]
+\makelabel{Cubefree:Contents}{{\setbox 0=\hbox {1}\vrule width 0pt height\ht 0}
+}
+Chapter `Contents' .
+(./manual.toc) [2.1
+\chapcontents {\tocstrut }{Contents}{2}
+] (./manual.lab)
+\openout3 = `manual.toc'.
+
+\openout0 = `manual.lab'.
+
+\openout1 = `manual.idx'.
+
+\openout2 = `manual.six'.
+
+\openout4 = `manual.aux'.
+
+ (./intro.tex
+Chapter `Introduction' .
+) (./Cubefree.tex [3.1]
+Chapter `Functionality of the Cubefree package' .
+[4.2] [5.2]) (./install.tex [6.2]
+Chapter `Installing and loading the Cubefree package' .
+) [7.3]
+Chapter `Bibliography' .
+(./manual.bbl) [8.4]
+Chapter `Index' .
+(./manual.ind) [9.5]
+##
+## Citations for BibTeX written on manual.aux.
+## Index entries for makeindex written on manual.idx.
+## Section index entries written on manual.six.
+## Label definitions written on manual.lab.
+## Table of contents written on manual.toc.
+## Labels have changed, run again. (Or they were multiply defined.)
+##
+ )
+Output written on manual.dvi (9 pages, 18516 bytes).

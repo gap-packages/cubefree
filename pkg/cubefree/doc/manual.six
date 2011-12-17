@@ -1,0 +1,26 @@
+C intro.tex 1. Introduction
+I 1.0. Cubefree
+S 1.1. Overview and Background
+C Cubefree.tex 2. Functionality of the Cubefree package
+I 2.0. Functionality of the Cubefree package
+S 2.1. New methods
+F 2.1. ConstructAllCFGroups
+F 2.1. ConstructAllCFSolvableGroups
+F 2.1. ConstructAllCFNilpotentGroups
+F 2.1. ConstructAllCFSimpleGroups
+F 2.1. ConstructAllCFFrattiniFreeGroups
+F 2.1. CountAllCFGroupsUpTo
+F 2.1. NumberCFGroups
+F 2.1. NumberCFSolvableGroups
+F 2.1. IsCubeFreeInt
+F 2.1. IsSquareFreeInt
+F 2.1. IrreducibleSubgroupsOfGL
+F 2.1. RewriteAbsolutelyIrreducibleMatrixGroup
+S 2.2. Comments on the implementation
+S 2.3. Accuracy check
+C install.tex 3. Installing and loading the Cubefree package
+I 3.0. Installing and loading the Cubefree package
+S 3.1. Installing the Cubefree package
+I 3.1. Installing the Cubefree package
+S 3.2. Loading the Cubefree package
+I 3.2. Loading the Cubefree package

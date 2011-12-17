@@ -1,0 +1,50 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%W  install.tex            GAP documentation                Heiko Dietrich
+%%
+%Y  2005
+%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Chapter{Installing and loading the Cubefree package}
+
+\atindex{Installing and loading the Cubefree package}{@installing %
+                        and loading the {\Cubefree} package}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Installing the Cubefree package}\null
+
+\atindex{Installing the Cubefree package}{@installing the {\Cubefree} package}
+The installation of the {\Cubefree} package follows standard {\GAP} rules.
+So the standard method is to unpack the package into the `pkg'
+directory  of your {\GAP} distribution.  This will create an `cubefree'
+subdirectory.
+
+For other non-standard options please see Chapter~"ref:Installing a
+GAP Package" in the {\GAP} Reference Manual.
+
+%To create the documentation, go into the `doc' directory and type
+%`make_doc'.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Loading the Cubefree package}\null
+
+\atindex{Loading the Cubefree package}{@loading the {\Cubefree} package}
+To use the {\Cubefree} Package you have to request it explicitly. This  is
+done by calling `LoadPackage' like this:
+
+\beginexample
+gap> LoadPackage("Cubefree");
+Loading Cubefree 1.0 ...
+
+   ------------------------------------------------
+   -- Construction Algorithm for Cubefree Groups --
+   ----- Heiko Dietrich, H.Dietrich@tu-bs.de ------
+true
+\endexample
+
+The `LoadPackage' command is described in Section~"ref:LoadPackage"
+in the {\GAP} Reference Manual.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%E
