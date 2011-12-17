@@ -1,13 +1,13 @@
-This is TeX, Version 3.14159 (Web2C 7.4.5) (format=tex 2004.4.29)  24 OCT 2005 18:44
-**\nonstopmode\input manual.tex
-(./manual.tex (../../../doc/gapmacro.tex
-(/usr/share/texmf/tex/plain/amsfonts/amssym.tex
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdftex 2004.9.20)  13 FEB 2006 15:02
+**manual
+(./manual.tex{/var/lib/texmf/pdftex/config/pdftex.cfg}
+(../../../doc/gapmacro.tex (/usr/share/texmf/tex/plain/amsfonts/amssym.tex
 (/usr/share/texmf/tex/plain/amsfonts/amssym.def
 \msafam=\fam8
 \msbfam=\fam9
 \eufmfam=\fam10
 ))
-Running TeX
+Running PDFTeX
 \pagewidth=\dimen16
 \pageheight=\dimen17
 \colwidth=\dimen18
@@ -32,7 +32,7 @@ Running TeX
 \indentno=\count29
 \chapnum=\count30
 \ortoks=\toks12
-) (../../../doc/ref/manual.lab) [1]
+) (../../../doc/ref/manual.lab) [1{/var/lib/texmf/dvips/config/pdftex.map}]
 \makelabel{Cubefree:Contents}{{\setbox 0=\hbox {1}\vrule width 0pt height\ht 0}
 }
 Chapter `Contents' .
@@ -68,5 +68,16 @@ Chapter `Index' .
 ## Table of contents written on manual.toc.
 ## Labels have changed, run again. (Or they were multiply defined.)
 ##
- )
-Output written on manual.dvi (9 pages, 18516 bytes).
+ ){/usr/share/texmf/dvips/tetex/f7b6d320.enc}</usr/share/texmf/fonts/type1/blue
+sky/cm/cmsl10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb>{/usr/share
+/texmf/dvips/tetex/09fbbfac.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmtt10
+.pfb></usr/share/texmf/fonts/type1/bluesky/symbols/msam7.pfb></usr/share/texmf/
+fonts/type1/bluesky/cm/cmr8.pfb>{/usr/share/texmf/dvips/tetex/bbad153f.enc}</us
+r/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb>{/usr/share/texmf/dvips/tetex/7
+4afc74c.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb>{/usr/share/tex
+mf/dvips/tetex/aae443f0.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb
+></usr/share/texmf/fonts/type1/bluesky/cm/cmss10.pfb>{/usr/share/texmf/dvips/te
+tex/1b6d048e.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cminch.pfb></usr/shar
+e/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/bluesky
+/cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmssdc10.pfb>
+Output written on manual.pdf (9 pages, 117064 bytes).

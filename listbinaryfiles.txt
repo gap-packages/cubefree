@@ -1,6 +1,7 @@
 cubefree/readme
 cubefree/doc/manual.ind
 cubefree/doc/manual.pdf
+cubefree/doc/make_doc~
 cubefree/doc/manual.log
 cubefree/doc/manual.ilg
 cubefree/doc/head.tmp

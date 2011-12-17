@@ -1,0 +1,57 @@
+<html><head><title>[Cubefree] 1 Introduction</title></head>
+<body text="#000000" bgcolor="#ffffff">
+[<a href = "chapters.htm">Up</a>] [<a href ="CHAP002.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<h1>1 Introduction</h1><p>
+<P>
+<H3>Sections</H3>
+<oL>
+<li> <A HREF="CHAP001.htm#SECT001">Overview and Background</a>
+</ol><p>
+<p>
+<a name = "I0"></a>
+
+<p>
+<h2><a name="SECT001">1.1 Overview and Background</a></h2>
+<p><p>
+This manual describes the <font face="Gill Sans,Helvetica,Arial">Cubefree</font>  package,
+a <font face="Gill Sans,Helvetica,Arial">GAP</font> package for constructing groups of cubefree order; that is, groups
+whose order is not divisible by any third power of a prime.
+<p>
+The groups of squarefree order are known for a long time, since Hoelder
+<a href="biblio.htm#Hol93"><cite>Hol93</cite></a> investigated them at the end of the 19th century. Taunt
+<a href="biblio.htm#Tau55"><cite>Tau55</cite></a> has considered solvable groups of cubefree order, since he
+examined solvable groups with abelian Sylow subgroups. Cubefree groups in
+general are investigated firstly in <a href="biblio.htm#Di05"><cite>Di05</cite></a> and <a href="biblio.htm#DiEi05"><cite>DiEi05</cite></a>, and this
+package contains the implementation of the algorithms described
+there.
+<p>
+Some general approaches to construct groups of an arbitrarily given order are
+described in <a href="biblio.htm#BeEia"><cite>BeEia</cite></a>, <a href="biblio.htm#BeEib"><cite>BeEib</cite></a>, and <a href="biblio.htm#BeEiO"><cite>BeEiO</cite></a>.
+<p>
+The main function of this package is a method to construct up to isomorphism
+all groups of a given cubefree order. The algorithm behind this function is
+described completely in <a href="biblio.htm#Di05"><cite>Di05</cite></a> and <a href="biblio.htm#DiEi05"><cite>DiEi05</cite></a>. It is a refinement of
+the methods of the <font face="Gill Sans,Helvetica,Arial">GrpConst</font> package which are described in <a href="biblio.htm#GrpConst"><cite>GrpConst</cite></a>.
+<p>
+This main function needs a method to construct up to conjugacy the solvable
+cubefree subgroups of GL(2,<i>p</i>) coprime to <i>p</i>. These subgroups are
+constructed using the irreducible subgroups of GL(2,<i>p</i>). To determine these
+irreducible subgroups we use the method described in <a href="biblio.htm#FlOB05"><cite>FlOB05</cite></a> for which this package
+also contains an implementation. Alternatively, the <font face="Gill Sans,Helvetica,Arial">Irredsol</font> package
+<a href="biblio.htm#Irredsol"><cite>Irredsol</cite></a> could be used for <i>p</i> <= 251.
+<p>
+The algorithm of <a href="biblio.htm#FlOB05"><cite>FlOB05</cite></a> requires a method to rewrite a
+representation. We use and implement the method of <a href="biblio.htm#GlHo97"><cite>GlHo97</cite></a> for this purpose.
+<p>
+For the construction of groups of squarefree order it is more practical to
+use the efficient function <var>AllSmallGroups</var> of the <font face="Gill Sans,Helvetica,Arial">GrpConst</font> package.
+<p>
+A more detailed describtion of the implemented methods can be found in Chapter 2.
+<p>
+Chapter <a href="CHAP003.htm">Installing and Loading the Cubefree Package</a> explains
+how to install and load the <font face="Gill Sans,Helvetica,Arial">Cubefree</font> package.
+<p>
+[<a href = "chapters.htm">Up</a>] [<a href ="CHAP002.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
+<P>
+<address>Cubefree manual<br>Februar 2006
+</address></body></html>

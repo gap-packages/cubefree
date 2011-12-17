@@ -6,9 +6,9 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.0",
-Date := "09/12/2005",
-ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.0",
+Version := "1.01",
+Date := "11/02/2006",
+ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree/cubefree1.01",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -42,7 +42,7 @@ PackageWWWHome := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree
 PackageDoc := rec(
   BookName  := "Cubefree",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := " ",
+  HTMLStart := "htm/chapters.htm",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Constructing the groups of a given cubefree order",
@@ -55,7 +55,7 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.0 ... \n",
+BannerString := "Loading Cubefree 1.01 ... \n",
 Autoload := false,
 Keywords := ["constructing small groups of cubefree order"]
 
