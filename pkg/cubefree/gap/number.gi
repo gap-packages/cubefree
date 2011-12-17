@@ -2,7 +2,6 @@
 ##
 #W  number.gi           Cubefree                               Heiko Dietrich
 ##                                                              
-#H   @(#)$Id: $
 ##
 
 
@@ -12,17 +11,18 @@
 ##
 ## Counts the number of all cubefree solvable groups using the one-to-one
 ## correspondence. If the argument is [size,false] then the SmallGrps
-## library is not used. If the argument is 'size' or [size,true] then
-## it will be used.
+## library is not used for non-squarefree but cubefree orders. 
+## If the argument is 'size' or [size,true] then it will be used.
 ##
 InstallGlobalFunction(NumberCFSolvableGroups, function( arg ) 
-    local smallGrp, size, number, cl, i,j, FOrders, F;
+    local smallGrp, size, number, cl, i,j, FOrders, F, autPos, pos, autGrps,
+           tmp, t;
 
     # check
     if Size(arg)=1 then
         size     := arg[1];
         smallGrp := true;
-    elif Size(arg)=2 then
+    elif Size(arg) in [2,5] then
         size     := arg[1];
         smallGrp := arg[2];
     else
@@ -37,40 +37,73 @@ InstallGlobalFunction(NumberCFSolvableGroups, function( arg )
         Error("First argument has to be a cube-free integer.\n"); 
     fi;
 
-    Info(InfoCF,2,"    Count number of solvable groups of order ",size,".");
+    Info(InfoCF,1," Count number of solvable groups of order ",size,".");
 
     if size = 1 then
         return 1;
     fi;
 
-    # Squarefree groups are Frattini-free and solvable
-    if IsSquareFreeInt(size) then
-        return NumberSmallGroups(size);
+    cl := Collected(FactorsInt(size));
+    # to store the subgroups and normalizers of GL(2,p)
+    # if Length(arg)<5 then the function was called from NumberCFGroups
+    if Length(arg)<5 then
+        autPos := [];
+        for t in cl do
+            Add(autPos,t[1]);
+            if t[2]=2 then
+                Add(autPos,t[1]^2);
+            fi;
+        od;
+        autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
+        pos     := function(x) return Position( autPos, x); end;
+    else
+        autPos  := arg[3];
+        autGrps := arg[4];
+        pos     := arg[5];
     fi;
 
-    cl := Product(List(Collected(FactorsInt(size)),x->x[1]));
+    # Squarefree groups are solvable;
+    # groups of order p^2q an p^2 are solvable as well.
+    if cf_canUseSG(cl) then
+        return NumberSmallGroups(size);
+    fi;
+    if smallGrp and size<50001 then
+        i := 0;
+        for F in [1..NumberSmallGroups(size)] do
+            if IsSolvableGroup(SmallGroup(size,F)) then i := i+1; fi;
+        od; 
+        return i;
+    fi;
+
+    cl := Product(List(cl,x->x[1]));
    
     # Count all cube-free Frattini-free solvable groups F with
     # cl | |F| | size
     FOrders := Filtered(DivisorsInt(size),x-> x mod cl =0);
     number  := 0;
     for F in FOrders do
-        if smallGrp and F<50001 then
+        if cf_canUseSG(F) or (smallGrp and F<50001) then
 	    if IsOddInt(F) then
-                i := Size(Filtered([1..NumberSmallGroups(F)], x->
+                i := Length(Filtered([1..NumberSmallGroups(F)], x->
                       FrattinifactorSize(SmallGroup(F,x))= F));
 	    else
-                i := Size(Filtered([1..NumberSmallGroups(F)], x->
+                i := Length(Filtered([1..NumberSmallGroups(F)], x->
                       FrattinifactorSize(SmallGroup(F,x))= F and
 		      IsSolvable(SmallGroup(F,x)) ));
             fi;
-                number := number + i;
+            number := number + i;
         else
-            number := number + Size( cf_FrattFreeSolvGroups(F) );
+            tmp     := cf_FrattFreeSolvGroups(F,autPos, autGrps, pos);
+            autGrps := tmp[2];
+            number  := number + Length( tmp[1] );
         fi;;
     od;
     
-    return number;
+    if Length(arg)<5 then
+        return number;
+    else
+        return [number,autGrps];
+    fi;
 end);
 
 
@@ -86,7 +119,7 @@ end);
 ##
 InstallGlobalFunction(NumberCFGroups, function( arg ) 
     local nonAb, solvff, number, i, A, l, p, G, cl, FOrders, F, Fcl, psl, I,
-          size, smallGrp;
+          size, smallGrp,test, autPos,autGrps, pos, tmp, t;
 
     # check
     if Size(arg)=1 then 
@@ -113,12 +146,23 @@ InstallGlobalFunction(NumberCFGroups, function( arg )
         return 1;
     fi;
 
-    if (size <50001 and smallGrp) or IsSquareFreeInt(size) then
+    cl := Collected(FactorsInt(size));
+    autPos := [];
+    for t in cl do
+        Add(autPos,t[1]);
+        if t[2]=2 then
+            Add(autPos,t[1]^2);
+        fi;
+    od;
+    autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
+    pos     := function(x) return Position( autPos, x); end;
+
+    if (size <50001 and smallGrp) or cf_canUseSG(cl) then
         return NumberSmallGroups(size);
     fi;
 
     # determine possible non-abelian factors
-    cl     := List(Collected(FactorsInt(size)),x->x[1]);
+    cl     := List(cl,x->x[1]);
     cl     := Filtered(cl, x-> IsCubeFreeInt(x-1) and IsCubeFreeInt(x+1)
                                   and x>3);
     nonAb  := List( cl, x-> x*(x-1)*(x+1)/2);
@@ -127,7 +171,13 @@ InstallGlobalFunction(NumberCFGroups, function( arg )
     number := 0;
    
     for A in nonAb do
-        number := number + NumberCFSolvableGroups( size/A,smallGrp );
+        tmp     := NumberCFSolvableGroups(size/A, smallGrp,autPos,autGrps,pos);
+        if IsInt(tmp) then
+            number := number + tmp;
+        else
+            autGrps := tmp[2];
+            number  := number + tmp[1];
+       fi;
     od;
 
    return(number);

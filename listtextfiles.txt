@@ -2,7 +2,6 @@ cubefree/init.g
 cubefree/read.g
 cubefree/README
 cubefree/PackageInfo.g
-cubefree/COPYING
 cubefree/doc/manual.bib
 cubefree/doc/manual.tex
 cubefree/doc/install.tex
@@ -24,7 +23,18 @@ cubefree/htm/indxC.htm
 cubefree/htm/chapters.htm
 cubefree/htm/biblio.htm
 cubefree/htm/CHAP001.htm
+cubefree/htm/indxT.htm
 cubefree/htm/indxI.htm
+cubefree/tst/exampleMat.tst
+cubefree/tst/testQuick.g
+cubefree/tst/exampleSGlong.tst
+cubefree/tst/testMat.g
+cubefree/tst/testBig.g
+cubefree/tst/exampleSG.tst
+cubefree/tst/testSG.g
+cubefree/tst/testSGlong.g
+cubefree/tst/exampleBig.tst
+cubefree/tst/exampleQuick.tst
 cubefree/gap/frattExt.gi
 cubefree/gap/number.gi
 cubefree/gap/glasby.gi

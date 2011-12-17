@@ -2,13 +2,14 @@
 ##
 #W  frattFree.gd           Cubefree                            Heiko Dietrich
 ##                                                              
-#H   @(#)$Id: $
 ##
 
 ##############################################################################
 ##
 #F  ConstructAllCFFrattiniFreeGroups( n )
 ##
-## Returns all Frattini-free groups of order n up to isomorphism
+## The input <n> has to be a positive cubefree integer. The output is a 
+## complete and irredundant list of isomorphism type representatives of 
+## Frattini-free groups of this size.
 ##
 DeclareGlobalFunction("ConstructAllCFFrattiniFreeGroups");

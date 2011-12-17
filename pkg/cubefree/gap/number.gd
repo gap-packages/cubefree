@@ -2,18 +2,19 @@
 ##
 #W  number.gd           Cubefree                               Heiko Dietrich
 ##                                                              
-#H   @(#)$Id: $
 ##
 
 
 ##############################################################################
 ##
-#F  NumberCFSolvableGroups( arg )
+#F  NumberCFSolvableGroups( n,[bool] )
 ##
-## Counts the number of all cubefree solvable groups using the one-to-one
-## correspondence. If the argument is [size,false] then the SmallGrps
-## library is not used. If the argument is 'size' or [size,true] then
-## it will be used.
+## The input <n> has to be a positive cubefree integer and the output is the 
+## number of all cubefree solvable groups of order <n>. The {\SmallGroups} 
+## library  is used for squarefree orders, orders of the type $p^2$ and
+## $p^2q$, and cubefree orders less than 50000. Only if <bool> is set to 
+## false, then only  the squarefree orders and orders of the type $p^2$ and 
+## $p^2q$,are taken from the {\SmallGroups} library.
 ##
 DeclareGlobalFunction("NumberCFSolvableGroups");
 
@@ -22,8 +23,11 @@ DeclareGlobalFunction("NumberCFSolvableGroups");
 ##
 #F  NumberCFGroups( size )
 ##
-## Counts all groups of cube-free order n.  If the argument is [size,false]
-## then the SmallGrps library is not used. If the argument is 'size' or
-## [size,true] then the SmallGroups library will be used.
+## The input <n> has to be a positive cubefree integer and the output is the 
+## number of all cubefree groups of order <n>. The {\SmallGroups} 
+## library  is used for squarefree orders, orders of the type $p^2$ and
+## $p^2q$, and cubefree orders less than 50000. Only if <bool> is set to 
+## false, then only  the squarefree orders and orders of the type $p^2$ and 
+## $p^2q$,are taken from the {\SmallGroups} library.
 ##
 DeclareGlobalFunction("NumberCFGroups");

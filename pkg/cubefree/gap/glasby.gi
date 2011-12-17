@@ -2,7 +2,6 @@
 ##
 #W  glasby.gi           Cubefree                               Heiko Dietrich
 ##
-#H   @(#)$Id: $
 ##
 
 ##############################################################################
@@ -17,9 +16,7 @@
 ##
 InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
     local aMat, d, K, q, p, m, gen, k, a, Ga, el, v, H, HH, A, x, C, 
-          i, t, n, min;
-
-    Info(InfoCF,1,"Rewrite represenation using Howlett and Glasby");
+          i, t, n, min, size, solv;
 
     # check
     if not IsMatrixGroup( G ) then
@@ -61,6 +58,11 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
     m   := Collected(FactorsInt(q))[1][2];
     gen := GeneratorsOfGroup(G);
 
+    size := 0;
+    solv := 0;
+    if HasSize(G) then size := Size(G); fi;
+    if HasIsSolvableGroup(G) then solv := IsSolvableGroup(G); fi;
+
     # check if there are subfields of K
     if IsPrime(Size(K)) then
         return G;
@@ -77,7 +79,7 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
         t := m/n;
         a := x -> x^(p^n);
 
-        Info(InfoCF,2,"    Test subfield ",k," of ", K);
+        Info(InfoCF,4,"        Test subfield ",k," of ", K);
 
         # find isomorphism between G and G^a
         Ga := GModuleByMats( List( gen, x -> aMat(x,d,1,a) ), K);
@@ -113,7 +115,10 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
                     A := x + C * aMat(A,d,1,a);
                 od;
             od;
-            return(G^A);  
+            G := G^A;
+            if not size=0 then SetSize(G,size); fi;
+            if not solv=0 then SetIsSolvableGroup(G,solv); fi;
+            return(G);  
         fi;
     od;
 
