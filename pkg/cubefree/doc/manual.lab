@@ -1,0 +1,39 @@
+\makelabel{Cubefree:Introduction}{1}
+\makelabel{Cubefree:Overview}{1.1}
+\makelabel{Cubefree:Theoretical background}{1.2}
+\makelabel{Cubefree:Functionality of the Cubefree package}{2}
+\makelabel{Cubefree:New methods}{2.1}
+\makelabel{Cubefree:ConstructAllCFGroups}{2.1.1}
+\makelabel{Cubefree:ConstructAllCFSolvableGroups}{2.1.2}
+\makelabel{Cubefree:ConstructAllCFNilpotentGroups}{2.1.3}
+\makelabel{Cubefree:ConstructAllCFSimpleGroups}{2.1.4}
+\makelabel{Cubefree:ConstructAllCFFrattiniFreeGroups}{2.1.5}
+\makelabel{Cubefree:NumberCFGroups}{2.1.6}
+\makelabel{Cubefree:NumberCFSolvableGroups}{2.1.7}
+\makelabel{Cubefree:CountAllCFGroupsUpTo}{2.1.8}
+\makelabel{Cubefree:CubefreeOrderInfo}{2.1.9}
+\makelabel{Cubefree:CubefreeTestOrder}{2.1.10}
+\makelabel{Cubefree:IsCubeFreeInt}{2.1.11}
+\makelabel{Cubefree:IsSquareFreeInt}{2.1.12}
+\makelabel{Cubefree:IrreducibleSubgroupsOfGL}{2.1.13}
+\makelabel{Cubefree:RewriteAbsolutelyIrreducibleMatrixGroup}{2.1.14}
+\makelabel{Cubefree:Comments on the implementation}{2.2}
+\makelabel{Cubefree:Comments on the efficiency}{2.3}
+\makelabel{Cubefree:An example session}{2.4}
+\makelabel{Cubefree:Accuracy check}{2.5}
+\makelabel{Cubefree:Installing and loading the Cubefree package}{3}
+\makelabel{Cubefree:Installing the Cubefree package}{3.1}
+\makelabel{Cubefree:Loading the Cubefree package}{3.2}
+\makelabel{Cubefree:Bibliography}{}
+\setcitlab {BeEia}{BE99a}
+\setcitlab {BeEib}{BE99b}
+\setcitlab {GrpConst}{BE99c}
+\setcitlab {BeEiO}{BEO02}
+\setcitlab {DiEi05}{DE05}
+\setcitlab {Di05}{Die05}
+\setcitlab {FlOB05}{FO05}
+\setcitlab {GlHo97}{GH97}
+\setcitlab {Hol93}{Hoe95}
+\setcitlab {Irredsol}{Hoe00}
+\setcitlab {Tau55}{Tau55}
+\makelabel{Cubefree:Index}{}

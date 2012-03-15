@@ -11,4 +11,3 @@
 \seccontents {3.1}{Installing the Cubefree package} {12}
 \seccontents {3.2}{Loading the Cubefree package} {12}
 \chapcontents {}{Bibliography}{13}
-\chapcontents {}{Index}{14}

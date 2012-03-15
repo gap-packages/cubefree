@@ -1,0 +1,26 @@
+\indexentry {Cubefree@{{\sf Cubefree}}}{3}
+\indexentry {Overview@Overview|indexit}{3}
+\indexentry {Theoretical background@Theoretical background|indexit}{3}
+\indexentry {Functionality of the Cubefree package@functionality of the {{\sf Cubefree}} package}{5}
+\indexentry {New methods@New methods|indexit}{5}
+\indexentry {ConstructAllCFGroups@`ConstructAllCFGroups'}{5}
+\indexentry {ConstructAllCFSolvableGroups@`ConstructAllCFSolvableGroups'}{5}
+\indexentry {ConstructAllCFNilpotentGroups@`ConstructAllCFNilpotentGroups'}{5}
+\indexentry {ConstructAllCFSimpleGroups@`ConstructAllCFSimpleGroups'}{5}
+\indexentry {ConstructAllCFFrattiniFreeGroups@`ConstructAllCFFrattiniFreeGroups'}{5}
+\indexentry {NumberCFGroups@`NumberCFGroups'}{5}
+\indexentry {NumberCFSolvableGroups@`NumberCFSolvableGroups'}{5}
+\indexentry {CountAllCFGroupsUpTo@`CountAllCFGroupsUpTo'}{6}
+\indexentry {CubefreeOrderInfo@`CubefreeOrderInfo'}{6}
+\indexentry {CubefreeTestOrder@`CubefreeTestOrder'}{6}
+\indexentry {IsCubeFreeInt@`IsCubeFreeInt'}{6}
+\indexentry {IsSquareFreeInt@`IsSquareFreeInt'}{6}
+\indexentry {IrreducibleSubgroupsOfGL@`IrreducibleSubgroupsOfGL'}{6}
+\indexentry {RewriteAbsolutelyIrreducibleMatrixGroup@`RewriteAbsolutelyIrreducibleMatrixGroup'}{6}
+\indexentry {Comments on the implementation@Comments on the implementation|indexit}{6}
+\indexentry {Comments on the efficiency@Comments on the efficiency|indexit}{7}
+\indexentry {An example session@An example session|indexit}{8}
+\indexentry {Accuracy check@Accuracy check|indexit}{10}
+\indexentry {Installing and loading the Cubefree package@installing and loading the {{\sf Cubefree}} package}{12}
+\indexentry {Installing the Cubefree package@installing the {{\sf Cubefree}} package}{12}
+\indexentry {Loading the Cubefree package@loading the {{\sf Cubefree}} package}{12}

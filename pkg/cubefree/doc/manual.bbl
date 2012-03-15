@@ -1,0 +1,60 @@
+\begin{thebibliography}{BEO02}
+
+\bibitem[BE99a]{BeEia}
+H.~U. Besche and B.~Eick.
+\newblock Construction of finite groups.
+\newblock {\em J. Symb. Comput.}, 27:387--404, 1999.
+
+\bibitem[BE99b]{BeEib}
+H.~U. Besche and B.~Eick.
+\newblock The groups of order at most 1000 except 512 and 768.
+\newblock {\em J. Symb. Comput.}, 27:405--413, 1999.
+
+\bibitem[BE99c]{GrpConst}
+H.~U. Besche and B.~Eick.
+\newblock {\em GrpConst}, 1999.
+\newblock A {GAP 4} package, see \cite{GAP4}.
+
+\bibitem[BEO02]{BeEiO}
+H.~U. Besche, B.~Eick, and E.~A. O'Brien.
+\newblock A {M}illennium {P}roject: {C}onstructing small groups.
+\newblock {\em Intern. J. Alg. and Comput.}, 12:623--644, 2002.
+
+\bibitem[DE05]{DiEi05}
+H.~Dietrich and B.~Eick.
+\newblock On the groups of cube-free order.
+\newblock {\em J. Algebra}, 292:122--137, 2005.
+
+\bibitem[Die05]{Di05}
+H.~Dietrich.
+\newblock On the groups of cube-free order.
+\newblock Diploma thesis, TU Braunschweig, 2005.
+
+\bibitem[FO05]{FlOB05}
+D.~L. Flannery and E.~A. O'Brien.
+\newblock Linear groups of small degree over finite fields.
+\newblock {\em Intern. J. Alg. Comput.}, 15:467--502, 2005.
+
+\bibitem[GH97]{GlHo97}
+S.~P. Glasby and R.~B. Howlett.
+\newblock Writing representations over minimal fields.
+\newblock {\em Comm. Alg.}, 25:1703--1711, 1997.
+
+\bibitem[Hoe95]{Hol93}
+O.~Hoelder.
+\newblock Die {G}ruppen mit quadratfreier {O}rdnung.
+\newblock {\em Nachr. Koenigl. Ges. Wiss. Goettingen Math.-Phys. K},
+  1:211--229, 1895.
+
+\bibitem[Hoe00]{Irredsol}
+B.~Hoefling.
+\newblock {\em Irredsol}, 2000.
+\newblock A {GAP 4} package, see \cite{GAP4}.
+
+\bibitem[Tau55]{Tau55}
+D.~R. Taunt.
+\newblock Remarks on the {I}somorphism {P}roblem in {T}heories of
+  {C}onstruction of finite {G}roups.
+\newblock {\em Proc. Cambridge Philos. Soc.}, 51:16--24, 1955.
+
+\end{thebibliography}
