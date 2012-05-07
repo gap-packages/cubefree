@@ -12,13 +12,6 @@
 ##
 CubefreePkgName := "cubefree";
 
-#############################################################################
-##
-#D Declare the package
-##
-DeclarePackage( CubefreePkgName, "1.06", function() return true; end );
-DeclarePackageDocumentation( CubefreePkgName, "doc" );
-
 ############################################################################
 ##
 #I InfoClass
@@ -38,10 +31,5 @@ ReadPackage(CubefreePkgName,"gap/number.gd");      #count cf groups
 ReadPackage(CubefreePkgName,"gap/allCubeFree.gd"); #count cf groups up to
 
 
-#############################################################################
-##
-#D require other packages
-##
-RequirePackage("grpconst");
 
 
