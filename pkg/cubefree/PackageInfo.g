@@ -10,9 +10,9 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.10",
-Date := "07/05/2012",
-ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/Cubefree/cubefree1.10",
+Version := "1.11",
+Date := "16/06/2012",
+ArchiveURL := "http://www.icm.tu-bs.de/ag_algebra/software/Cubefree/cubefree1.11",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -43,7 +43,7 @@ PackageInfoURL := "http://www.icm.tu-bs.de/ag_algebra/software/Cubefree/PackageI
 AbstractHTML := 
 "The <span class=\"pkgname\">Cubefree</span> package contains methods to construct up to isomorphism the groups of a given (reasonable) cubefree order. The main function ConstructAllCFGroups(n) constructs all groups of a given cubefree order n. The function NumberCFGroups(n) counts all groups of a cubefree order n. Furthermore, IrreducibleSubgroupsOfGL(2,q) constructs the irreducible subgroups of GL(2,q), q=p^r, p>=5 prime, up to conjugacy and RewriteAbsolutelyIrreducibleMatrixGroup(G) rewrites the absolutely irreducible matrix group G (over a finite field) over a minimal subfield.",
 
-PackageWWWHome := "http://www.icm.tu-bs.de/ag_algebra/software/dietrich/Cubefree",
+PackageWWWHome := "http://www.icm.tu-bs.de/ag_algebra/software/Cubefree",
                
 PackageDoc := rec(
   BookName  := "Cubefree",
@@ -61,7 +61,7 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.10 ... \n",
+BannerString := "Loading Cubefree 1.11 ... \n",
 Autoload := false,
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
