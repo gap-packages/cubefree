@@ -1,4 +1,5 @@
 cubefree/copying
+cubefree/cubefree1.12.tar.gz
 cubefree/doc/manual.log
 cubefree/doc/manual.bbl
 cubefree/doc/manual.dvi
