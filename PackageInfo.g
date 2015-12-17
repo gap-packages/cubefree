@@ -10,9 +10,9 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.13",
-Date := "10/12/2012",
-ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.13",
+Version := "1.14",
+Date := "17/12/2015",
+ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.14",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -63,6 +63,7 @@ Dependencies := rec(
 AvailabilityTest := ReturnTrue,
 BannerString := "Loading Cubefree 1.13 ... \n",
 Autoload := false,
+TestFile := "tst/autoTest.tst",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
 ));

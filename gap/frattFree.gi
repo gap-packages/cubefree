@@ -346,7 +346,12 @@ cf_AutGroupsC := function( p )
 
     # set up
     gl     := GL(1,p);
-    b      := GeneratorsOfGroup(gl)[1];
+    if p = 2 then
+       b := [[1,0],[0,1]]*One(GF(2));
+    else
+      #b      := GeneratorsOfGroup(gl)[1];
+       b      := MinimalGeneratingSet(gl)[1];
+    fi;
     divs   := DivisorsInt(p-1);
     divs   := Filtered(divs,x->IsCubeFreeInt(x));
     groups := [];
@@ -363,7 +368,8 @@ cf_AutGroupsC := function( p )
     # for technical reasons
     C    := CyclicGroup( p-1 );
     imag := Image( IsomorphismPermGroup( C ) );
-    e    := GeneratorsOfGroup( imag );
+   #e    := GeneratorsOfGroup( imag );
+    e    := MinimalGeneratingSet(imag);
     if e = [] then e := (); else e := e[1]; fi;
     inv  := GroupHomomorphismByImagesNC(imag, GL(1,p), [e], [b]);
     list := [];
@@ -376,10 +382,12 @@ cf_AutGroupsC := function( p )
         SetProjections(H,[inv]);
         SetSocleDimensions(H,[1]);
         Add(list,H);
-    od; 
+    od;
     return(list);
-end;  
- 
+end; 
+
+
+
 
 ##############################################################################
 ##
