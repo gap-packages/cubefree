@@ -27,6 +27,7 @@ cubefree/tst/exampleSGlong.tst
 cubefree/tst/exampleBig.tst
 cubefree/tst/testBig.g
 cubefree/tst/testSG.g
+cubefree/tst/autoTest.tst
 cubefree/tst/testSGlong.g
 cubefree/tst/exampleQuick.tst
 cubefree/tst/testQuick.g
