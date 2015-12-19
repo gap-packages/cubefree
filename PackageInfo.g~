@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
 Version := "1.15",
-Date := "19/12/2015",
+Date := "21/12/2015",
 ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.15",
 ArchiveFormats := ".tar.gz",
 
