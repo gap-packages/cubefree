@@ -21,6 +21,7 @@ ReadPackage( CubefreePkgName, "gap/frattFree.gi");
 ReadPackage( CubefreePkgName, "gap/frattExt.gi");
 ReadPackage( CubefreePkgName, "gap/allCubeFree.gi");
 ReadPackage( CubefreePkgName, "gap/number.gi");
+ReadPackage( CubefreePkgName, "gap/isom.gi");
 
 #############################################################################
 ##

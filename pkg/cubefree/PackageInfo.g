@@ -5,14 +5,14 @@
 ##
 ##  Based on Frank Luebeck's template for PackageInfo.g.
 ##  
-
+ 
 SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.15",
-Date := "19/12/2015",
-ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.15",
+Version := "1.16",
+Date := "06/09/2016",
+ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.16",
 ArchiveFormats := ".tar.gz",
 
 Persons := [
@@ -61,7 +61,7 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.15 ... \n",
+BannerString := "Loading Cubefree 1.16 ... \n",
 Autoload := false,
 TestFile := "tst/autoTest.tst",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]

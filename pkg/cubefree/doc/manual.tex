@@ -22,7 +22,6 @@
 %F  UseReferences . . . . . . . . . . . . . . . . . .  specify references
 %%
 \UseReferences{../../../doc/ref}
-\UseGapDocReferences{../../../doc/ext}
 \UseGapDocReferences{../../../doc/ref}
 \Package{Cubefree}
 \Package{GrpConst}
@@ -43,13 +42,13 @@
   \vfill
   \centerline{\secfont by}\vfill
   \centerline{\secfont Heiko Dietrich}\medskip
-  \centerline{Institut Computational Mathematics}
+  \centerline{School of Mathematical Sciences}
   \medskip
-  \centerline{TU Braunschweig}\medskip
-  \centerline{Pockelsstr. 14}
-  \centerline{D-38106 Braunschweig}
+  \centerline{Monash University}\medskip
+  \centerline{Clayton VIC 3800}
+  \centerline{Australia}
  \medskip
- \centerline{email: h.dietrich@tu-bs.de}
+ \centerline{email: heiko.dietrich@monash.edu}
   \vfill
   \centerline{\secfont{\Month} \Year}
 }
@@ -68,9 +67,11 @@
 %F  FrontMatter 
 %%
 \FrontMatter
-%
+%%% I've tried both options...
+%%%
 \immediate\write\citeout{\bs bibdata{./manual,../../../doc/manual}}
-%
+% \immediate\write\citeout{\bs bibdata{./manual,../../../doc/manualbib.xml}}
+% 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

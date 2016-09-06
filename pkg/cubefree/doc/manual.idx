@@ -8,8 +8,10 @@
 \indexentry {ConstructAllCFNilpotentGroups@`ConstructAllCFNilpotentGroups'}{5}
 \indexentry {ConstructAllCFSimpleGroups@`ConstructAllCFSimpleGroups'}{5}
 \indexentry {ConstructAllCFFrattiniFreeGroups@`ConstructAllCFFrattiniFreeGroups'}{5}
+\indexentry {IsomorphismCubefreeGroups@`IsomorphismCubefreeGroups'}{5}
+\indexentry {IsIsomorphicCubefreeGroups@`IsIsomorphicCubefreeGroups'}{5}
 \indexentry {NumberCFGroups@`NumberCFGroups'}{5}
-\indexentry {NumberCFSolvableGroups@`NumberCFSolvableGroups'}{5}
+\indexentry {NumberCFSolvableGroups@`NumberCFSolvableGroups'}{6}
 \indexentry {CountAllCFGroupsUpTo@`CountAllCFGroupsUpTo'}{6}
 \indexentry {CubefreeOrderInfo@`CubefreeOrderInfo'}{6}
 \indexentry {CubefreeTestOrder@`CubefreeTestOrder'}{6}
@@ -17,7 +19,7 @@
 \indexentry {IsSquareFreeInt@`IsSquareFreeInt'}{6}
 \indexentry {IrreducibleSubgroupsOfGL@`IrreducibleSubgroupsOfGL'}{6}
 \indexentry {RewriteAbsolutelyIrreducibleMatrixGroup@`RewriteAbsolutelyIrreducibleMatrixGroup'}{6}
-\indexentry {Comments on the implementation@Comments on the implementation|indexit}{6}
+\indexentry {Comments on the implementation@Comments on the implementation|indexit}{7}
 \indexentry {Comments on the efficiency@Comments on the efficiency|indexit}{7}
 \indexentry {An example session@An example session|indexit}{8}
 \indexentry {Accuracy check@Accuracy check|indexit}{10}

@@ -54,6 +54,16 @@ The input <var>order</var> has to be a positive cubefree integer. The output is 
 type representatives of Frattini-free groups of this size.
 <p>
 <a name = "SSEC001.6"></a>
+<li><code>IsomorphismCubefreeGroups( </code><var>G</var><code>, </code><var>H</var><code>) F</code>
+<p>
+Returns an isomorphism between two cubefree groups <var>G</var> and <var>H</var>, if exists, and fail otherwise. It is assumed that the input groups are permutation groups or pc groups. The algorithm is currently efficient only for solvable input groups due to the lack of a constructive recognition algorithm for the simple factors PSL.
+<p>
+<a name = "SSEC001.7"></a>
+<li><code>IsIsomorphicCubefreeGroups( </code><var>G</var><code>, </code><var>H</var><code>) F</code>
+<p>
+Returns true/false, depending on whether two cubefree groups <var>G</var> and <var>H</var> are isomorphic. It is assumed that the input groups are permutation groups or pc groups. 
+<p>
+<a name = "SSEC001.8"></a>
 <li><code>NumberCFGroups( </code><var>n</var><code>[, </code><var>bool</var><code> ] ) F</code>
 <p>
 The input <var>n</var> has to be a positive cubefree integer and the output is the number of all
@@ -62,7 +72,7 @@ orders, orders of the type <var>p<sup>2</sup></var> and <var>p<sup>2</sup>q</var
 50000. Only if <var>bool</var> is set to false, then only  the squarefree
 orders and orders of the type <var>p<sup>2</sup></var> and <var>p<sup>2</sup>q</var>,are taken from the <font face="Gill Sans,Helvetica,Arial">SmallGroups</font>  library.
 <p>
-<a name = "SSEC001.7"></a>
+<a name = "SSEC001.9"></a>
 <li><code>NumberCFSolvableGroups( </code><var>n</var><code>[, </code><var>bool</var><code> ] ) F</code>
 <p>
 The input <var>n</var> has to be a positive cubefree integer and the output is the number of all
@@ -71,7 +81,7 @@ orders, orders of the type <var>p<sup>2</sup></var> and <var>p<sup>2</sup>q</var
 50000. Only if <var>bool</var> is set to false, then only  the squarefree
 orders and orders of the type <var>p<sup>2</sup></var> and <var>p<sup>2</sup>q</var>,are taken from the <font face="Gill Sans,Helvetica,Arial">SmallGroups</font> library.
 <p>
-<a name = "SSEC001.8"></a>
+<a name = "SSEC001.10"></a>
 <li><code>CountAllCFGroupsUpTo( </code><var>n</var><code>[, </code><var>bool</var><code> ]) F</code>
 <p>
 The input is a positive integer <var>n</var> and the output is a list <var>L</var> of size <var>n</var> such that
@@ -83,7 +93,7 @@ orders and orders of the type <var>p<sup>2</sup></var> and <var>p<sup>2</sup>q</
 <font face="Gill Sans,Helvetica,Arial">SmallGroups</font> library. This function was implemented only for experimental
 purposes and its implementation could be improved.
 <p>
-<a name = "SSEC001.9"></a>
+<a name = "SSEC001.11"></a>
 <li><code>CubefreeOrderInfo( </code><var>n</var><code>[, </code><var>bool</var><code> ] ) F</code>
 <p>
 This function displays some (very vague)
@@ -98,7 +108,7 @@ subgroups for all pairs  <var>(a,b)</var> as above is the number of groups of or
 groups of order <var>n</var>. There is no additional information
 displayed if <var>bool</var> is set to false.
 <p>
-<a name = "SSEC001.10"></a>
+<a name = "SSEC001.12"></a>
 <li><code>CubefreeTestOrder( </code><var>n</var><code> ) F</code>
 <p>
 The input has to be a cubefree integer between 1 and 50000. This function
@@ -106,23 +116,23 @@ tests the functionality of <font face="Gill Sans,Helvetica,Arial">Cubefree</font
 of the <font face="Gill Sans,Helvetica,Arial">SmallGroups</font> library. It returns true if everything is okay,
 otherwise an error message will be displayed.
 <p>
-<a name = "SSEC001.11"></a>
+<a name = "SSEC001.13"></a>
 <li><code>IsCubeFreeInt( </code><var>n</var><code> ) P</code>
 <p>
 The output is <var>true</var> if <var>n</var> is a cubefree integer and <var>false</var> otherwise.
 <p>
-<a name = "SSEC001.12"></a>
+<a name = "SSEC001.14"></a>
 <li><code>IsSquareFreeInt( </code><var>n</var><code> ) P</code>
 <p>
 The output is <var>true</var> if <var>n</var> is a squarefree integer and <var>false</var> otherwise.
 <p>
-<a name = "SSEC001.13"></a>
+<a name = "SSEC001.15"></a>
 <li><code>IrreducibleSubgroupsOfGL( </code><var>n</var><code>, </code><var>q</var><code> ) O</code>
 <p>
 The current version of this function allows only <var>n</var>=2. The input <var>q</var> has to be a prime-power <var>q</var><var>=p<sup>r</sup></var> with <var>pgeq5</var> a prime. The output
 is a list of all irreducible subgroups of GL<var>(2,q)</var> up to conjugacy.
 <p>
-<a name = "SSEC001.14"></a>
+<a name = "SSEC001.16"></a>
 <li><code>RewriteAbsolutelyIrreducibleMatrixGroup( </code><var>G</var><code> ) F</code>
 <p>
 The input <var>G</var> has to be an absolutely irreducible matrix group over a finite
@@ -435,5 +445,5 @@ database of <font face="Gill Sans,Helvetica,Arial">IrredSol</font>. This may tak
 <p>
 [<a href = "chapters.htm">Up</a>] [<a href ="CHAP001.htm">Previous</a>] [<a href ="CHAP003.htm">Next</a>] [<a href = "theindex.htm">Index</a>]
 <P>
-<address>cubefree manual<br>October 2007
+<address>cubefree manual<br>September 2016
 </address></body></html>

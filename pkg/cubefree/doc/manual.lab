@@ -8,15 +8,17 @@
 \makelabel{Cubefree:ConstructAllCFNilpotentGroups}{2.1.3}
 \makelabel{Cubefree:ConstructAllCFSimpleGroups}{2.1.4}
 \makelabel{Cubefree:ConstructAllCFFrattiniFreeGroups}{2.1.5}
-\makelabel{Cubefree:NumberCFGroups}{2.1.6}
-\makelabel{Cubefree:NumberCFSolvableGroups}{2.1.7}
-\makelabel{Cubefree:CountAllCFGroupsUpTo}{2.1.8}
-\makelabel{Cubefree:CubefreeOrderInfo}{2.1.9}
-\makelabel{Cubefree:CubefreeTestOrder}{2.1.10}
-\makelabel{Cubefree:IsCubeFreeInt}{2.1.11}
-\makelabel{Cubefree:IsSquareFreeInt}{2.1.12}
-\makelabel{Cubefree:IrreducibleSubgroupsOfGL}{2.1.13}
-\makelabel{Cubefree:RewriteAbsolutelyIrreducibleMatrixGroup}{2.1.14}
+\makelabel{Cubefree:IsomorphismCubefreeGroups}{2.1.6}
+\makelabel{Cubefree:IsIsomorphicCubefreeGroups}{2.1.7}
+\makelabel{Cubefree:NumberCFGroups}{2.1.8}
+\makelabel{Cubefree:NumberCFSolvableGroups}{2.1.9}
+\makelabel{Cubefree:CountAllCFGroupsUpTo}{2.1.10}
+\makelabel{Cubefree:CubefreeOrderInfo}{2.1.11}
+\makelabel{Cubefree:CubefreeTestOrder}{2.1.12}
+\makelabel{Cubefree:IsCubeFreeInt}{2.1.13}
+\makelabel{Cubefree:IsSquareFreeInt}{2.1.14}
+\makelabel{Cubefree:IrreducibleSubgroupsOfGL}{2.1.15}
+\makelabel{Cubefree:RewriteAbsolutelyIrreducibleMatrixGroup}{2.1.16}
 \makelabel{Cubefree:Comments on the implementation}{2.2}
 \makelabel{Cubefree:Comments on the efficiency}{2.3}
 \makelabel{Cubefree:An example session}{2.4}
@@ -30,8 +32,10 @@
 \setcitlab {GrpConst}{BE99c}
 \setcitlab {BeEiO}{BEO02}
 \setcitlab {DiEi05}{DE05}
+\setcitlab {DiEi05add}{DE12}
 \setcitlab {Di05}{Die05}
 \setcitlab {FlOB05}{FO05}
+\setcitlab {GAP4}{GAP05}
 \setcitlab {GlHo97}{GH97}
 \setcitlab {Hol93}{Hoe95}
 \setcitlab {Irredsol}{Hoe00}

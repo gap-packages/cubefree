@@ -1,4 +1,3 @@
-cubefree/PackageInfo.g~
 cubefree/copying
 cubefree/doc/manual.log
 cubefree/doc/manual.bbl
@@ -15,3 +14,4 @@ cubefree/doc/manual.ps
 cubefree/doc/manual.six
 cubefree/doc/intro.log
 cubefree/doc/manual.idx
+cubefree/tst/autoTest.tst~

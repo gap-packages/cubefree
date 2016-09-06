@@ -3,7 +3,7 @@
 \seccontents {1.2}{Theoretical background} {3}
 \chapcontents {2}{Functionality of the Cubefree package}{5}
 \seccontents {2.1}{New methods} {5}
-\seccontents {2.2}{Comments on the implementation} {6}
+\seccontents {2.2}{Comments on the implementation} {7}
 \seccontents {2.3}{Comments on the efficiency} {7}
 \seccontents {2.4}{An example session} {8}
 \seccontents {2.5}{Accuracy check} {10}

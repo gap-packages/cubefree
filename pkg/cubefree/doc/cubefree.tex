@@ -47,6 +47,20 @@ exists either none or exactly one simple group of the given order.
 The input <order> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of Frattini-free groups of this size.
 
+
+
+\>IsomorphismCubefreeGroups( <G>, <H>) F
+
+Returns an isomorphism between two cubefree groups <G> and <H>, if exists, and fail otherwise. It is assumed that the input groups are permutation groups or pc groups. The algorithm is currently efficient only for solvable input groups due to the lack of a constructive recognition algorithm for the simple factors PSL.
+
+
+
+
+\>IsIsomorphicCubefreeGroups( <G>, <H>) F
+
+Returns true/false, depending on whether two cubefree groups <G> and <H> are isomorphic. It is assumed that the input groups are permutation groups or pc groups. 
+
+
 \>NumberCFGroups( <n>[, <bool> ] ) F
 
 The input <n> has to be a positive cubefree integer and the output is the number of all

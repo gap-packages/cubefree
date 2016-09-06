@@ -7,9 +7,11 @@ cubefree/gap/frattFree.gd
 cubefree/gap/glasby.gi
 cubefree/gap/prelim.gi
 cubefree/gap/frattExt.gi
+cubefree/gap/isom.gi
 cubefree/gap/frattExt.gd
 cubefree/gap/frattFree.gi
 cubefree/gap/banner.g
+cubefree/gap/isom.gd
 cubefree/gap/allCubeFree.gd
 cubefree/gap/irrGL2.gd
 cubefree/gap/glasby.gd
@@ -19,10 +21,12 @@ cubefree/gap/prelim.gd
 cubefree/gap/allCubeFree.gi
 cubefree/doc/manual.tex
 cubefree/doc/intro.tex
+cubefree/doc/manual.example-2.tst
 cubefree/doc/install.tex
 cubefree/doc/cubefree.tex
 cubefree/doc/gapmacro.tex
 cubefree/doc/manual.bib
+cubefree/doc/manual.example-3.tst
 cubefree/tst/exampleSGlong.tst
 cubefree/tst/exampleBig.tst
 cubefree/tst/testBig.g
