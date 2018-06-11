@@ -1,12 +1,23 @@
-
 ## record to store new functions...
 cf:=rec();
 
-## want to use NC version or not?
-cf.TEST:=true;
+## in case one uses isom.gi as standalone, need this:
+cf.IsCubeFreeInt :=   
+function ( n )
+    return ForAll( Collected( FactorsInt( n ) ), function ( x )
+            return x[2] < 3;
+        end );
+end;
 
 
+cf.resetRandomSource := function ( i )
+    Reset( GlobalMersenneTwister, 231897 * i );
+   ## the number 231897 has been determined with a random number generator
+    return;
+end;
 
+
+#######################################################################
 cf.getsinger := function(p)
 local K, prEl, prElp, one,b,c;
  
@@ -19,7 +30,7 @@ local K, prEl, prElp, one,b,c;
 end;
 
 
-
+#######################################################################
 cf.makeStdNilpotent := function(G)
 local ord, syl, a, b, S, id;
    ord  := Collected(FactorsInt(Order(G)));
@@ -39,25 +50,17 @@ local ord, syl, a, b, S, id;
 end;
 
 
-
-
+#######################################################################
 cf.IsomNilpotent := function(G,H)
-
-   Display("start alg for nilpotent groups");
-
    if not IsBound(G!.std) then G!.std := cf.makeStdNilpotent(G); fi;
    if not IsBound(H!.std) then H!.std := cf.makeStdNilpotent(H); fi;
    if not G!.std.id = H!.std.id then return fail; fi;
-   if cf.TEST then
-      return GroupHomomorphismByImages(G,H,G!.std.gens,H!.std.gens);
-   else
-      return GroupHomomorphismByImagesNC(G,H,G!.std.gens,H!.std.gens);
-   fi;
+   return GroupHomomorphismByImagesNC(G,H,G!.std.gens,H!.std.gens);
 end;
 
 
 
-
+#######################################################################
 cf.IsIsomNilpotent := function(G,H)
    if not IsBound(G!.std) then G!.std := cf.makeStdNilpotent(G); fi;
    if not IsBound(H!.std) then H!.std := cf.makeStdNilpotent(H); fi;
@@ -65,9 +68,7 @@ cf.IsIsomNilpotent := function(G,H)
 end;
 
 
-
-
-
+#######################################################################
 #
 # U,V are cubefree subgroups of GL(2,p), of order not divisible by p
 # returns conjugating matrix t such that U^t=V, if exists
@@ -77,7 +78,7 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
       HU,HV,nsU,nsV, nsUe, nsVe, i,j, t1,  mU, mV, oU, oV, ind, stds,stdc,
       cobStd,ns, fU, fV, get2part,o,s,w,isscalarmat, cs, ab, ims, S;
 
-   if U=V then return U.1^0; fi;
+   if U=V then return Identity(U); fi;
 
    get2part := function(x)
    local o,c;
@@ -266,31 +267,27 @@ end;
 
 
 
+#######################################################################
+#
+# test function...
+#
+cf.testisconj:=function(p)
+local clgl, U, o, V, t, tt,a,b,bb;
 
-cf.testisconj:=function(p,nr)
-local clgl, U, o, V, t, tt,a,b;
-
-  #Display("compute classes...");
-   clgl := List(ConjugacyClassesSubgroups(GL(2,p)),Representative);
-   clgl := Filtered(clgl,x-> not Order(x) mod p =0 and IsCubeFreeInt(Order(x)));
-   #Display("done...");
-   for U in clgl do 
-      for o in [1..nr] do 
-         repeat V:=Group(List([1..10],x->Random(U))); until Size(V)=Size(U);  
-         t:=Random(GL(2,p)); 
-         V:=V^t; 
-         tt:=cf.isconjugate(U,V); 
-         if not U^tt=V then Error("argg..."); fi; 
-      od; 
-    od;
-    #Display("now test noncj");
+    Display("compute classes...");
+    clgl := List(ConjugacyClassesSubgroups(GL(2,p)),Representative);
+    clgl := Filtered(clgl,x-> not Order(x) mod p =0 and not Order(x)=1 
+                             and cf.IsCubeFreeInt(Order(x)));
+    Display("done... prepare copies");
+    Display("now test noncj");
     for a in [1..Size(clgl)] do
        for b in [1..Size(clgl)] do
           Print("test ",[a,b],"\n");
-          tt := cf.isconjugate(clgl[a],clgl[b]);
+          bb := clgl[b]^Random(GL(2,p));
+          tt := cf.isconjugate(clgl[a],bb);
           if not a=b and not tt=false then  Error("should not be conj..."); fi;
           if a=b and tt=false then Error("should be conj!"); fi;
-          if a=b and not clgl[a]^tt =clgl[b] then Error("mhmm.."); fi;
+          if a=b and not clgl[a]^tt =bb then Error("mhmm.."); fi;
        od;
     od;
     return true;
@@ -299,7 +296,7 @@ end;
 
 
 
-
+#######################################################################
 cf.getSocleAct := function(U,C)
 local soc, ord, c, e, K, hom, cact, eact;
  
@@ -319,166 +316,30 @@ end;
 
 
 
-
-
-cf.makegroupdirectly:=function(A,nr,emb,proj,type,S)
-local gen, V, act, M, tmp, new, i, gM,j,k,g,els, SS, auts, ab, ims, a;
-
-   gen := List(GeneratorsOfGroup(S),g->List(proj,x->List(Image(x,g),x->List(x,Int))  ));
-   ab  := Flat(List(type,x->List([1..x[2]],i->x[1])));
-   M   := AbelianGroup(ab);
-   gM  := GeneratorsOfGroup(M);
-   tmp := List(type,x->x[2]);
-   for i in [2..Length(tmp)] do tmp[i]:=tmp[i-1]+tmp[i]; od;
-   new := [gM{[1..tmp[1]]}];
-   for i in [2..Size(tmp)] do Add(new, gM{[tmp[i-1]+1..tmp[i]]}); od;
-   ims := [];
-   for g in gen do
-      tmp:=[];
-      for j in [1..Size(new)] do
-         els := new[j];
-         act := g[j];
-         for a in act do Add(tmp,Product(List([1..Size(els)],x->els[x]^a[x]))); od;
-      od;
-      Add(ims,Flat(tmp));
-   od;
-   if cf.TEST then
-      auts := Group(List(ims,x->GroupHomomorphismByImages(M,M,gM,x)));
-   else
-      auts := Group(List(ims,x->GroupHomomorphismByImagesNC(M,M,gM,x)));
-   fi;
-   SS   := SemidirectProduct(auts,M);
-   return SS;
-end;
-
-
-
-
-
-
-cf.makeIsomdirectly:=function(A,nr,emb,proj,type,G,H,conj,phiG,phiH,aa,bb)
-local gen, V, act, M, tmp, new, i, gM,j,k,g,els, SS, autsH,autsG,conjaut,g1,g2,i1,i2,iso,toGG,toH,S,ims,GG,HH,a, ab;
-
-   S   := Image(phiG);
-   gen := List(GeneratorsOfGroup(S),g->List(proj,x->List(Image(x,g),x->List(x,Int))  ));
-   ab  := Flat(List(type,x->List([1..x[2]],i->x[1])));
-   M   := AbelianGroup(ab);
-   gM  := GeneratorsOfGroup(M);
-   tmp := List(type,x->x[2]);
-   for i in [2..Length(tmp)] do tmp[i]:=tmp[i-1]+tmp[i]; od;
-   new := [gM{[1..tmp[1]]}];
-   for i in [2..Size(tmp)] do Add(new, gM{[tmp[i-1]+1..tmp[i]]}); od;
-   ims := [];
-   for g in gen do
-      tmp:=[];
-      for j in [1..Size(new)] do
-         els := new[j];
-         act := g[j];
-         for a in act do Add(tmp,Product(List([1..Size(els)],x->els[x]^a[x]))); od;
-      od;
-      Add(ims,Flat(tmp));
-   od;
-   autsG := Group(List(ims,x->GroupHomomorphismByImages(M,M,gM,x)));
-   GG   := SemidirectProduct(autsG,M);
-
-   S   := Image(phiH);
-   gen := List(GeneratorsOfGroup(S),g->List(proj,x->List(Image(x,g),x->List(x,Int))  ));
-   ims := [];
-   for g in gen do
-      tmp:=[];
-      for j in [1..Size(new)] do
-         els := new[j];
-         act := g[j];
-         for a in act do Add(tmp,Product(List([1..Size(els)],x->els[x]^a[x]))); od;
-      od;
-      Add(ims,Flat(tmp));
-   od;
-   autsH := Group(List(ims,x->GroupHomomorphismByImages(M,M,gM,x)));
-   HH   := SemidirectProduct(autsH,M);
-
-   gen := List([conj],g->List(proj,x->List(Image(x,g),x->List(x,Int))  ));
-   ims := [];
-   for g in gen do
-      tmp:=[];
-      for j in [1..Size(new)] do
-         els := new[j];
-         act := g[j];
-         for a in act do Add(tmp,Product(List([1..Size(els)],x->els[x]^a[x]))); od;
-      od;
-      Add(ims,Flat(tmp));
-   od;
-   conjaut := GroupHomomorphismByImages(M,M,gM,Flat(tmp));
-  
-   if not autsG^conjaut = autsH then Error("conj aut doesn't work..."); fi;
-   
-   
-#######
-   toGG := GroupHomomorphismByImages(G,GG,aa,
-             Concatenation(List(gM,x->Image(Embedding(GG,2),x)), 
-                           List(GeneratorsOfGroup(autsG),a->Image(Embedding(GG,1),a))));
-   toH := GroupHomomorphismByImages(H,HH,bb,
-             Concatenation(List(gM,x->Image(Embedding(HH,2),x)), 
-                           List(GeneratorsOfGroup(autsH),a->Image(Embedding(HH,1),a))));
-   if toGG=fail or toH=fail then
-      Error("GG or HH wrong");
-   fi;
-   toH := InverseGeneralMapping(toH);
-
-
-  g1 := GeneratorsOfGroup(autsG);
-  g2 := GeneratorsOfGroup(M);
-  i1 := List(g1, x-> Image(Embedding(HH,1),x^conjaut));
-  i2 := List(g2, x->Image(Embedding(HH,2),Image(conjaut,x)));
-  g1 := List(g1, x->Image(Embedding(GG,1),x));
-  g2 := List(g2,x-> Image(Embedding(GG,2),x));
-  iso := GroupHomomorphismByImages(GG,HH,Flat(Concatenation(g1,g2)),Flat(Concatenation(i1,i2)));
-  if iso = fail then Error("iso on mat groups fail!"); fi;
-
-
-#   Print("start with aa\n",aa,"\n");
-#   Print("old gens bb\n",bb,"\n");
-#   Print("need these ims\n",List(aa,x->x^(toGG*iso*toH)),"\n");
-
-
-
-end;
-
-
-
-
-
-
-
-
-
+#######################################################################
 cf.IsomSolvableFrattFree := function(G,H)
-local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conjm,
+local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conjm, eqIm,
       emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm;
 
-   Display("start algorithm for solvable frattfree case");
-
+   
    socG := Socle(G);
    socH := Socle(H); 
    if not Size(socG)=Size(socH) then return fail; fi;
 
-   if socG = G then
-      #Display("grp is nilpotent");
-      return cf.IsomNilpotent(G,H);
-   fi;
+   if socG = G then return cf.IsomNilpotent(G,H); fi;
 
-   CG   := ComplementClassesRepresentativesSolvableNC(G,socG);
-   CH   := ComplementClassesRepresentativesSolvableNC(H,socH);
-   if CG = [] then return cf.IsomNilpotent(socG,socH); fi;
-   CG   := CG[1];
-   CH   := CH[1];
-
-
-
+   CG   := ComplementClassesRepresentativesSolvableNC(G,socG)[1];
+   CH   := ComplementClassesRepresentativesSolvableNC(H,socH)[1];
+   
    actG := cf.getSocleAct(G,GeneratorsOfGroup(CG));
    actH := cf.getSocleAct(H,GeneratorsOfGroup(CH));
-   if not List(actG.onC,x->Size(Group(x))) = List(actH.onC,x->Size(Group(x))) then return fail; fi;
-   if not Size(actG.onE)=Size(actH.onE) then return fail; fi;
-
+   if not List(actG.onC,x->Size(Group(x))) = List(actH.onC,x->Size(Group(x))) then 
+      return fail; 
+   fi;
+   if not List(actG.onE,x->Size(Group(x))) = List(actH.onE,x->Size(Group(x))) then 
+      return fail; 
+   fi;
+ 
    ord  := Collected(FactorsInt(Size(socG)));
    type := Filtered(ord,x->x[2]=1); 
    sc   := Size(type);
@@ -487,159 +348,113 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
    Af   := List(type,x-> GL(x[2],x[1]));
 
   #overgroup Aut(B)\times\Aut(C) in which we embedd CH and CG
-  A    := DirectProduct(Af);
-  nr   := Size(type);
-  emb  := List([1..nr],x->Embedding(A,x));
-  proj := List([1..nr],x->Projection(A,x));
+   A    := DirectProduct(Af);
+   nr   := Size(type);
+   emb  := List([1..nr],x->Embedding(A,x));
+   proj := List([1..nr],x->Projection(A,x));
 
-  phiG := GroupHomomorphismByImagesNC(CG,A,GeneratorsOfGroup(CG),
+   phiG := GroupHomomorphismByImagesNC(CG,A,GeneratorsOfGroup(CG),
                 List([1..Size(GeneratorsOfGroup(CG))], i->
                     Product(Concatenation(
                         List([1..sc], x->Image(emb[x],actG.onC[x][i])),
                         List([1..se], x->Image(emb[x+sc],actG.onE[x][i]))))));
-  phiH := GroupHomomorphismByImagesNC(CH,A,GeneratorsOfGroup(CH),
+
+   phiH := GroupHomomorphismByImagesNC(CH,A,GeneratorsOfGroup(CH),
                 List([1..Size(GeneratorsOfGroup(CH))], i->
                     Product(Concatenation(
                         List([1..sc], x->Image(emb[x],actH.onC[x][i])),
                         List([1..se], x->Image(emb[x+sc],actH.onE[x][i]))))));
 
-   if se = 0 or Image(phiG)=Image(phiH) then
-      if se=0 then 
-         #Display("no el-ab socle bit..."); 
-      else 
-         #Display("images already good..."); 
-      fi;
-      if  not Image(phiG) = Image(phiH) then
-         return fail;
-      else
-         if cf.TEST then
-            psi := GroupHomomorphismByImages(G,H,
-                     Concatenation( [ Flat(List(actG.groups[1],y->List(y,r->r))),
-                                   Flat(List(actG.groups[2],y->List(y,r->r))),
-                                   GeneratorsOfGroup(CG)]),
-                     Concatenation( [Flat(List(actH.groups[1],y->List(y,r->r))),
-                                  Flat(List(actH.groups[2],y->List(y,r->r))),
-                                  List(GeneratorsOfGroup(CG),
-                                       g->PreImagesRepresentative(phiH,Image(phiG,g)))]));
-         else
-            psi := GroupHomomorphismByImagesNC(G,H,
-                     Concatenation( [ Flat(List(actG.groups[1],y->List(y,r->r))),
-                                   Flat(List(actG.groups[2],y->List(y,r->r))),
-                                   GeneratorsOfGroup(CG)]),
-                     Concatenation( [Flat(List(actH.groups[1],y->List(y,r->r))),
-                                  Flat(List(actH.groups[2],y->List(y,r->r))),
-                                  List(GeneratorsOfGroup(CG),
-                                       g->PreImagesRepresentative(phiH,Image(phiG,g)))]));
-         fi;
-         return psi;
-      fi;
-   fi;
+   eqIm := Image(phiG)=Image(phiH);
+   if se = 0 and not eqIm then return fail; fi;
 
-## now the tricky bit
-   ttt := Runtime();
-  #Display("start conj elt");
+   if eqIm then  
+      psi := GroupHomomorphismByImagesNC(G,H,
+             Concatenation([Flat(actG.groups[1]),Flat(actG.groups[2]),GeneratorsOfGroup(CG)]),
+             Concatenation([Flat(actH.groups[1]),Flat(actH.groups[2]),
+                            List(GeneratorsOfGroup(CG),
+                                 g->PreImagesRepresentative(phiH,Image(phiG,g)))]));
+      return psi;
+   fi;
+ 
    conj := [];
    for i in [1..Size(actG.onE)] do
       U := Group(actG.onE[i]);
       V := Group(actH.onE[i]);
       m := cf.isconjugate(U,V);
       if m = false or m=fail then return fail; fi;
-      if not U^m = V then Error("should be conj!"); fi;
+     #if not U^m = V then Error("should be conj!"); fi;
       Add(conj,m);
    od;
    conj:=Product(List([1..se],x-> Image(emb[sc+x],conj[x])));
-  #Display("start norm");
+
+
    norm := []; 
    for i in [1..sc] do Add(norm,Group(GeneratorsOfGroup(Af[i]))); od;
    for i in [1..Size(actG.onE)] do
       norm[sc+i] := Normaliser(Af[sc+i],Group(actH.onE[i]));
    od; 
-  #Display("done, now compute action rep");
-   norm   := Concatenation(List([1..Size(norm)],x->List(GeneratorsOfGroup(norm[x]),g->Image(emb[x],g))));
+   norm := Concatenation(List([1..Size(norm)],
+            x -> List(GeneratorsOfGroup(norm[x]),g->Image(emb[x],g))));
    norm := Subgroup(A,norm);
    norm := RepresentativeAction(norm,Image(phiG)^conj,Image(phiH));   
+    
    if norm=fail then return fail; fi;
    conj := conj*norm;
-  #Display("all good!");
-   ttt := Runtime()-ttt;
-   Print("runtime for finding conj elt: ",ttt,"\n");
 
 
-
-#Display("do stuff directly in A");
-#conj := RepresentativeAction(A,Image(phiG),Image(phiH));
-#Display("done...");
-#conj := List([sc+1..nr],x->Image(proj[x],conj));
-
-  #for i in conj do Display(i); od;
-
- ##first adjust image in E -- actually not sure why transposed mat, but this is what worked...
+ ##first adjust image in E 
+ ##this is v --> v*m, here use v as part of pcgs so do vector*matrix manually via exponents
    conjm := List([sc+1..nr],x->Image(proj[x],conj));
-   mm    := List(conjm,m->TransposedMat(List(m, x-> List(x, Int))));
+   mm    := List(conjm,m->List(m, x-> List(x, Int)));
    old   := List(actH.groups[2],x->List(x,t->t));   
    new   := [];
    for i in [1..Size(mm)] do
-      Add(new, [old[i][1]^mm[i][1][1]*old[i][2]^mm[i][2][1], 
-                old[i][1]^mm[i][1][2]*old[i][2]^mm[i][2][2]]);
-     #Add(new, [old[i][1]^mm[i][1][1]*old[i][2]^mm[i][1][2], 
-     #          old[i][1]^mm[i][2][1]*old[i][2]^mm[i][2][2]]);
+      Add(new, [old[i][1]^mm[i][1][1]*old[i][2]^mm[i][1][2], 
+                old[i][1]^mm[i][2][1]*old[i][2]^mm[i][2][2]]);
    od;
-#Print("old,new,actwith\n",old,"\n",new,"\n",mm,"\n");
-
-   
 
    cg  := GeneratorsOfGroup(CG);
-
-## test whether conj gives the same group
    ims := List(cg,x->Image(phiG,x)^conj);
-   if not Image(phiH) = Subgroup(A,ims) then
-      return fail;
-   fi;
+   aa  := Concatenation( [Flat(actG.groups[1]),Flat(actG.groups[2]),cg]);  
+   bb  := Concatenation( [Flat(actH.groups[1]),Flat(new),
+                         List(ims,x->PreImagesRepresentative(phiH,x))
+                         ]);
 
-   
-   aa := Concatenation( [ Flat(List(actG.groups[1],y->List(y,r->r))),
-                                   Flat(List(actG.groups[2],y->List(y,r->r))),
-                                   cg]);
-  
-   bb := Concatenation( [Flat(List(actH.groups[1],y->List(y,r->r))),
-                                  Flat(new),
-                                  List(ims,x->PreImagesRepresentative(phiH,x))]);
-
-   if cf.TEST then 
-      return GroupHomomorphismByImages(G,H,aa,bb);  
-   else
-      return GroupHomomorphismByImagesNC(G,H,aa,bb); 
-   fi;
-end;
+   return GroupHomomorphismByImagesNC(G,H,aa,bb); 
+end; 
 
 
 
 
-
-
+#######################################################################
 cf.IsIsomSolvableFrattFree := function(G,H)
-local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conjm,
-      emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm;
+local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conjm, 
+emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm;
 
-   Display("start solvable frattfree case");
+
    socG := Socle(G);
    socH := Socle(H); 
    if not Size(socG)=Size(socH) then return false; fi;
 
    if socG = G then
-      #Display("grp is nilpotent");
       return cf.IsIsomNilpotent(G,H);
    fi;
 
-   Display("get complements");
+ 
    CG   := ComplementClassesRepresentativesSolvableNC(G,socG)[1];
    CH   := ComplementClassesRepresentativesSolvableNC(H,socH)[1];
 
+ 
    if not Size(socG)=Size(socH) then return false; fi;
    actG := cf.getSocleAct(G,GeneratorsOfGroup(CG));
    actH := cf.getSocleAct(H,GeneratorsOfGroup(CH));
-   if not List(actG.onC,x->Size(Group(x))) = List(actH.onC,x->Size(Group(x))) then return false; fi;
-   if not Size(actG.onE)=Size(actH.onE) then return false; fi;
+   if not List(actG.onC,x->Size(Group(x))) = List(actH.onC,x->Size(Group(x))) then 
+      return false; 
+   fi;
+   if not List(actG.onE,x->Size(Group(x))) = List(actH.onE,x->Size(Group(x))) then 
+      return false; 
+   fi;
 
    ord  := Collected(FactorsInt(Size(socG)));
    type := Filtered(ord,x->x[2]=1); 
@@ -649,74 +464,61 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
    Af   := List(type,x-> GL(x[2],x[1]));
 
   #overgroup Aut(B)\times\Aut(C) in which we embedd CH and CG
-  A    := DirectProduct(Af);
-  nr   := Size(type);
-  emb  := List([1..nr],x->Embedding(A,x));
-  proj := List([1..nr],x->Projection(A,x));
+   A    := DirectProduct(Af);
+   nr   := Size(type);
+   emb  := List([1..nr],x->Embedding(A,x));
+   proj := List([1..nr],x->Projection(A,x));
 
-  phiG := GroupHomomorphismByImagesNC(CG,A,GeneratorsOfGroup(CG),
-                List([1..Size(GeneratorsOfGroup(CG))], i->
-                    Product(Concatenation(
-                        List([1..sc], x->Image(emb[x],actG.onC[x][i])),
-                        List([1..se], x->Image(emb[x+sc],actG.onE[x][i]))))));
-  phiH := GroupHomomorphismByImagesNC(CH,A,GeneratorsOfGroup(CH),
-                List([1..Size(GeneratorsOfGroup(CH))], i->
-                    Product(Concatenation(
-                        List([1..sc], x->Image(emb[x],actH.onC[x][i])),
-                        List([1..se], x->Image(emb[x+sc],actH.onE[x][i]))))));
+   phiG := GroupHomomorphismByImagesNC(CG,A,GeneratorsOfGroup(CG),
+                 List([1..Size(GeneratorsOfGroup(CG))], i->
+                     Product(Concatenation(
+                         List([1..sc], x->Image(emb[x],actG.onC[x][i])),
+                         List([1..se], x->Image(emb[x+sc],actG.onE[x][i]))))));
+   phiH := GroupHomomorphismByImagesNC(CH,A,GeneratorsOfGroup(CH),
+                 List([1..Size(GeneratorsOfGroup(CH))], i->
+                     Product(Concatenation(
+                         List([1..sc], x->Image(emb[x],actH.onC[x][i])),
+                         List([1..se], x->Image(emb[x+sc],actH.onE[x][i]))))));
 
    if se = 0 or Image(phiG)=Image(phiH) then
-      if se=0 then 
-         #Display("no el-ab socle bit..."); 
-      else 
-         #Display("images already good..."); 
-      fi;
       if  not Image(phiG) = Image(phiH) then
          return false;
       else
          return true;
       fi;
    fi;
-## now the tricky bit
-   ttt := Runtime();
+
+ 
    conj := [];
    for i in [1..Size(actG.onE)] do
       U := Group(actG.onE[i]);
       V := Group(actH.onE[i]);
       m := cf.isconjugate(U,V);
       if m = false or m=fail then return false; fi;
-      if not U^m = V then Error("should be conj!"); fi;
       Add(conj,m);
    od;
    conj:=Product(List([1..se],x-> Image(emb[sc+x],conj[x])));
+
    norm := []; 
    for i in [1..sc] do Add(norm,Group(GeneratorsOfGroup(Af[i]))); od;
    for i in [1..Size(actG.onE)] do
       norm[sc+i] := Normaliser(Af[sc+i],Group(actH.onE[i]));
    od; 
-   norm   := Concatenation(List([1..Size(norm)],x->List(GeneratorsOfGroup(norm[x]),g->Image(emb[x],g))));
+   norm := Concatenation(List([1..Size(norm)],
+             x->List(GeneratorsOfGroup(norm[x]),g->Image(emb[x],g))));
    norm := Subgroup(A,norm);
    norm := RepresentativeAction(norm,Image(phiG)^conj,Image(phiH));   
-   if norm=fail then return false; fi;
-   conj := conj*norm;
-   ttt := Runtime()-ttt;
-   Print("runtime for finding conj elt: ",ttt,"\n");
 
-## test whether conj gives the same group
-   ims := List(cg,x->Image(phiG,x)^conj);
-   if not Image(phiH) = Subgroup(A,ims) then
-      return false;
-   fi;
-   return true;
+   if norm=fail then return false; else return true; fi;
 
 end;
 
 
 
-
-
-
-
+#######################################################################
+#
+# get random pc series (refined, consistent) for pc group G 
+#
 cf.getrandomcopy := function(G)
 local pcgs,H,ns,N,el,hom,Q,i,rel,els;
 
@@ -725,7 +527,7 @@ local pcgs,H,ns,N,el,hom,Q,i,rel,els;
    H    := G;
    rel  := [];
    repeat
-      ns  := Filtered(NormalSubgroups(H),x->
+      ns  := Filtered(MaximalSubgroupClassReps(H),x-> IsNormal(H,x) and 
               Size(x)<Size(H) and IsPrimeInt(Size(H)/Size(x)));
       N   := Random(ns);
       hom := NaturalHomomorphismByNormalSubgroup(H,N);
@@ -736,26 +538,6 @@ local pcgs,H,ns,N,el,hom,Q,i,rel,els;
       H   := N; 
    until Size(H)=1;
    pcgs := PcgsByPcSequence(FamilyObj(els[1]),els);
-
-## test to see what's going wrong...
-   if not Group(els) = G then Error("sth wrong with pcgs"); fi;
-   Q := List([1..Size(els)],x->Subgroup(G,els{[x..Size(els)]}));
-   for i in [2..Size(Q)] do
-      if not IsNormal(Q[i-1],Q[i]) 
-         or not IsCyclic(Q[i-1]/Q[i])
-         or not Size(Q[i-1]/Q[i]) = rel[i-1] then
-         Error("sth wrong");
-      fi;
-   od;
-   if not IsCyclic(Q[Size(Q)]) or not Size(Q[Size(Q)]) = rel[Size(Q)] then
-      Error("sth wrong");
-   fi;
-   if not Product(RelativeOrders(pcgs))=Size(G) then
-      Print("order of els ",List(els,Order),"\n");
-      Print("official rel ords ",RelativeOrders(pcgs),"\n");
-      Print("rel ords wrong -- will get error...");
-   fi;
-
    return GroupByPcgs(pcgs);
 end;
 
@@ -767,15 +549,66 @@ end;
 
 
 
+
+
+
+################################################################################
+##
+## given: cubefree groups G, H with cyclic subgroups PG\cong PH\cong C_p of their Frattini subgroups
+##        homG: G--> QG \cong G/PG    and  homH: H--> QH \cong H/PH
+##        iso: QG --> QH and isomorpshism
+## return: an isomorphism G --> H       
+##
+## SylowSystem: pairwise permutable sylow subgroups
+##
+cf.IsomSolvableCyclic := function(G,H,PG,PH,homG,homH,QG,QH,iso)
+local ordp, p, H1, S1, N2,H2,H2im,homH2,gen,im,
+      tmp, newiso,a,GG,SS;
+    
+
+   newiso := iso;
+   ordp   := List(Collected(FactorsInt(Order(G))),x->x[1]);
+   p      := Size(PG);
+   if not IsPrime(p) then Error("need cyclic Frattini subgroups"); fi;
+   SS     := SylowSystem(G);
+   S1     := Filtered(SS,x->PrimePGroup(x)=p)[1];
+   H1     := Subgroup(G,Union(List(Filtered(SS,x->not PrimePGroup(x)=p),MinimalGeneratingSet)));
+   H2im   := Image(newiso,Image(homG,H1)); 
+   N2     := PreImage(homH,H2im); 
+   H2     := HallSubgroup(N2,Filtered(ordp,x-> not x=p));
+
+   homH2 := GroupHomomorphismByImagesNC(H2,H2im,GeneratorsOfGroup(H2),
+             List(GeneratorsOfGroup(H2),x->Image(homH,x)));
+
+   gen := List(GeneratorsOfGroup(H1),x->x);
+   im  := List(gen,x->PreImagesRepresentative(homH2,Image(newiso,Image(homG,x))));
+
+   Add(gen,MinimalGeneratingSet(S1)[1]);
+   Add(im, PreImagesRepresentative(homH,Image(newiso,Image(homG,gen[Size(gen)]))));
+ 
+   newiso  := GroupHomomorphismByImagesNC(G,H,gen,im);
+   return newiso;
+    
+end;   
+
+ 
+
+
+###################################################################### 
+RANDOMAUTS := false;
+
+if RANDOMAUTS then Display("USE RANDOM AUTS IN CYCLIC LIFT..."); fi;
+
 cf.IsomSolvable := function(GG,HH)
 local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG, 
-      new, cnt, tup, t;
-
+      new, cnt, tup, t, tmp,tmpiso, iii, genQG, pos, 
+      mypf, g, tmpH, tmpG,gg, pcgs,pcgslift,pcgsliftall, pcgsliftone,
+      genQH,ordp,frat,lift,homLiftNot,i,j,homLiftAll,im,
+      S1,S2,H2,H1,N2,p,gen,newiso,H2im,homH2,newiso2,
+      GGs, HHs, homGG, homHH, subGG, subHH, n,AAA;
    
-   Display("start algorithm for solvable case");
-
    if not IsPcGroup(GG) then
-      Display("make isom pc group");
+
       isoG := IsomorphismPcGroup(GG);
       G    := Image(isoG);
    else
@@ -784,7 +617,7 @@ local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG,
       G    := GG;
    fi; 
    if not IsPcGroup(HH) then
-      Display("make isom pc group");
+
       isoH := IsomorphismPcGroup(HH);
       H    := Image(isoH);
    else
@@ -792,63 +625,72 @@ local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG,
                                               GeneratorsOfGroup(HH));
       H    := HH;
    fi; 
+ 
 
-   Display("start fratt");
    PG := FrattiniSubgroup(G);
    PH := FrattiniSubgroup(H);
    if not Size(PG)=Size(PH) then return fail; fi;
-   Display("done");
 
    if Size(PG)=1 then 
    
       iso := cf.IsomSolvableFrattFree(G,H);
       if iso= fail then return fail; fi;
-      Display("combine isos");
+
       PG := (isoG*iso)*InverseGeneralMapping(isoH);
-      Display("done");
+
       return PG;
    fi;
 
-   Display("Frattini subgroups not trivial, take quotient");
-   homG := NaturalHomomorphismByNormalSubgroup(G,PG);
-   homH := NaturalHomomorphismByNormalSubgroup(H,PH);
-   QG   := Image(homG); 
-   QH   := Image(homH);
-   
-   iso := IsomorphismCubefreeGroups(QG,QH);
+
+   ordp := List(Collected(FactorsInt(Order(PG))),x->x[1]);
+   GGs   := [G];
+   HHs   := [H];
+   homGG := [];
+   homHH := [];
+   subGG := [];
+   subHH := [];
+   for i in [1..Size(ordp)] do
+     Add(subGG,SylowSubgroup(PG,ordp[i]));;
+     Add(subHH,SylowSubgroup(PH,ordp[i]));
+     Add(homGG, NaturalHomomorphismByNormalSubgroup(GGs[i],subGG[i]));
+     Add(homHH, NaturalHomomorphismByNormalSubgroup(HHs[i],subHH[i]));
+     Add(GGs, Image(homGG[i]));
+     Add(HHs, Image(homHH[i]));
+     PG := FrattiniSubgroup(Image(homGG[i]));
+     PH := FrattiniSubgroup(Image(homHH[i]));
+   od;
+
+
+   n    := Size(GGs);
+   iso  := IsomorphismCubefreeGroups(GGs[n],HHs[n]);
    if iso = fail then return fail; fi;
-  
-   Display("now lift this thing...");
-  
-
- ##genG := MinimalGeneratingSet(G);
-   genG := List(MinimalGeneratingSet(QG),x->PreImagesRepresentative(homG,x));
-
  
+   for i in [n,n-1..2] do
 
-   imH  := List(genG, x-> 
-               PreImagesRepresentative(homH,Image(iso,Image(homG,x))));
- ##check if works without modifications
-   iso  := GroupHomomorphismByImages(G,H,genG,imH);
-   if not iso=fail then
-      Display("worked without mods!");
-      return isoG*iso*InverseGeneralMapping(isoH);
-   fi;
-   Error("mhm... lift didn't work this time?!?");
- 
-end;
+     ## for testing purposes
+     if RANDOMAUTS then
+        AAA := AutomorphismGroup(HHs[i]);
+        iso := iso*Random(AAA);
+     fi;
+     
+     ## iso between QG=G/PG and QH=H/PH, and PG,PH cyclic
+     iso := cf.IsomSolvableCyclic(GGs[i-1],HHs[i-1],subGG[i-1],subHH[i-1],
+                                     homGG[i-1],homHH[i-1],GGs[i],HHs[i],iso);
+     if iso=fail then Error("sth wrong here..."); fi;
+   od;
 
+ return isoG*iso*InverseGeneralMapping(isoH);
 
+end;   
 
-
-
-
+    
+############################################################################
 
 cf.IsIsomSolvable := function(GG,HH)
 local PG, PH, G, H, isoG, isoH,iso;
    
    if not IsPcGroup(GG) then
-      Display("make isom pc group");
+
       isoG := IsomorphismPcGroup(GG);
       G    := Image(isoG);
    else
@@ -857,7 +699,7 @@ local PG, PH, G, H, isoG, isoH,iso;
       G    := GG;
    fi; 
    if not IsPcGroup(GG) then
-      Display("make isom pc group");
+
       isoH := IsomorphismPcGroup(HH);
       H    := Image(isoH);
    else
@@ -885,7 +727,7 @@ end;
 ## G and H are cubefree groups;
 ## returns an isomorphism from G to H, and fail if such an iso doesn't exist
 ##
-InstallGlobalFunction( IsomorphismCubefreeGroups, function(G,H)
+InstallGlobalFunction( IsomorphismCubefreeGroupsNC, function(G,H)
 local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
 
    if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
@@ -893,7 +735,7 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
    fi;
   
    if not Order(G)=Order(H) then return fail; fi;
-   if not IsCubeFreeInt(Order(G)) or not IsCubeFreeInt(Order(H)) then
+   if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
       Error("input must be two cubefree groups");
    fi;
    if not IsAbelian(G) = IsAbelian(H) then return fail; fi;
@@ -904,8 +746,8 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
    if IsSolvableGroup(G) and IsSolvableGroup(H) then
       return cf.IsomSolvable(G,H);
    fi;
+ 
 
-   Display("get PSL");
    Gpsl := DerivedSeries(G);
    Gpsl := Gpsl[Length(Gpsl)];
    Hpsl := DerivedSeries(H);
@@ -914,10 +756,75 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
    idpslH := Reversed(Collected(FactorsInt(Size(Hpsl))))[1][1];
    if not idpslG=idpslH then return fail; fi;
 
-   Display("get isom between PSL");
-   Display("WARNING: need to use efficient iso....");
+Display("get isom between PSL");
+Display("WARNING: need to use efficient iso....");
    phiA := IsomorphismGroups(Gpsl,Hpsl);
-   Display("done, now get PSL complement");
+Display("done, now get PSL complement");
+
+  #now both groups are PSL(2,idpslG) \times solvable-cubefree
+
+   Gsolv   := Centraliser(G,Gpsl);
+   Hsolv   := Centraliser(H,Hpsl);
+
+   isoSolv := cf.IsomSolvable(Gsolv,Hsolv);
+   if isoSolv = fail then return fail; fi;
+
+   genG := Concatenation(GeneratorsOfGroup(Gpsl),GeneratorsOfGroup(Gsolv));
+   genH := Concatenation(List(GeneratorsOfGroup(Gpsl),x->Image(phiA,x)),
+                 List(GeneratorsOfGroup(Gsolv),x->Image(isoSolv,x)));
+
+
+   return GroupHomomorphismByImagesNC(G,H,genG,genH);
+end); 
+ 
+
+
+##############################################################################
+##
+#F  IsomorphismCubefreeGroups(G,H)
+##
+## G and H are cubefree groups;
+## returns an isomorphism from G to H, and fail if such an iso doesn't exist
+##
+InstallGlobalFunction( IsomorphismCubefreeGroups, function(G,H)
+local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv, iso;
+
+   if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
+      Error("input must be pc group of perm group");
+   fi;
+  
+   if not Order(G)=Order(H) then return fail; fi;
+   if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
+      Error("input must be two cubefree groups");
+   fi;
+   if not IsAbelian(G) = IsAbelian(H) then return fail; fi;
+   if IsAbelian(G) and IsAbelian(H) then
+      iso := cf.IsomNilpotent(G,H);
+      if iso=fail then return fail; fi;
+      genG := GeneratorsOfGroup(G);
+      return GroupHomomorphismByImages(G,H,genG,List(genG,x->Image(iso,x)));
+   fi; 
+   if not IsSolvableGroup(G) = IsSolvableGroup(H) then return fail; fi;
+   if IsSolvableGroup(G) and IsSolvableGroup(H) then
+      iso := cf.IsomSolvable(G,H);
+      if iso=fail then return fail; fi; 
+      genG := GeneratorsOfGroup(G);
+      return GroupHomomorphismByImages(G,H,genG,List(genG,x->Image(iso,x)));
+   fi;
+
+
+   Gpsl := DerivedSeries(G);
+   Gpsl := Gpsl[Length(Gpsl)];
+   Hpsl := DerivedSeries(H);
+   Hpsl := Hpsl[Length(Hpsl)];
+   idpslG := Reversed(Collected(FactorsInt(Size(Gpsl))))[1][1];
+   idpslH := Reversed(Collected(FactorsInt(Size(Hpsl))))[1][1];
+   if not idpslG=idpslH then return fail; fi;
+
+Display("get isom between PSL");
+Display("WARNING: need to use efficient iso....");
+   phiA := IsomorphismGroups(Gpsl,Hpsl);
+Display("done, now get PSL complement");
 
   #now both groups are PSL(2,idpslG) \times solvable-cubefree
 
@@ -927,28 +834,28 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
    isoSolv := cf.IsomSolvable(Gsolv,Hsolv);
    if isoSolv = fail then return fail; fi;
 
-   Display("now I'm here");
-
    genG := Concatenation(GeneratorsOfGroup(Gpsl),GeneratorsOfGroup(Gsolv));
    genH := Concatenation(List(GeneratorsOfGroup(Gpsl),x->Image(phiA,x)),
                  List(GeneratorsOfGroup(Gsolv),x->Image(isoSolv,x)));
-   Display("now return end result");
-   Display("WARNING: iso between psl not efficient... atm use NC");
- 
-  #if cf.TEST then
-  #  return GroupHomomorphismByImages(G,H,genG,genH);
-  #else
-      return GroupHomomorphismByImagesNC(G,H,genG,genH);
-  #fi;
 
+Display("WARNING: iso between psl not efficient... ");
+ 
+  return GroupHomomorphismByImages(G,H,genG,genH);
+ 
 end); 
 
 
 
 
-
-
-IsIsomorphicCubefreeGroups := function(G,H)
+###############################################################################
+##############################################################################
+##
+#F  IsIsomorphismCubefreeGroups(G,H)
+## 
+## G and H are cubefree groups;
+## returns true iff G and H are isomorphic
+##
+InstallGlobalFunction( IsIsomorphismCubefreeGroups, function(G,H)
 local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
 
    if G = H then return true; fi;
@@ -957,7 +864,7 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
   #fi;
   
    if not Order(G)=Order(H) then return false; fi;
-   if not IsCubeFreeInt(Order(G)) or not IsCubeFreeInt(Order(H)) then
+   if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
       Error("input must be two cubefree groups");
    fi;
    if not IsAbelian(G) = IsAbelian(H) then return false; fi;
@@ -973,7 +880,6 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
       return cf.IsIsomSolvable(G,H);
    fi; 
 
-   Display("get PSL");
    Gpsl := DerivedSeries(G);
    Gpsl := Gpsl[Length(Gpsl)];
    Hpsl := DerivedSeries(H);
@@ -987,29 +893,32 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
    Hsolv   := Centraliser(H,Hpsl);
    if not IsPcGroup(Gsolv) then Gsolv := Image(IsomorphismPcGroup(Gsolv)); fi;
    if not IsPcGroup(Hsolv) then Hsolv := Image(IsomorphismPcGroup(Hsolv)); fi;
-   Display("done... now call solvable code");
    return cf.IsIsomSolvable(Gsolv,Hsolv);
-end; 
+end); 
 
 
 
+
+ 
+
+
+
+############################################################################################################
+############################################################################################################
+############################################################################################################
 
 
 
 cf.testisom := function(G)
 local H,K,t,iso;
-   Display("get copy of group...");
-  #H := Image(IsomorphismPermGroup(G));
-  #repeat H := Group(List([1..30],x->Random(H))); until Size(H)=Size(G);
-  #H := Image(IsomorphismPcGroup(H));
    H := cf.getrandomcopy(G);
-   K := cf.getrandomcopy(H);
-   Display("done");
+   K := cf.getrandomcopy(G);
    t := Runtime();
    iso := IsomorphismCubefreeGroups(K,H);
    t := Runtime()-t;
    if iso=fail or iso = false then 
        Display("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
+       Error("ups");
    fi;
   #Print("got ",iso,"\n");
    if iso=true then return "todo"; fi;
@@ -1018,92 +927,107 @@ end;
 
 
 
-cf.testaut := function(G)
-local F, A, a, AF, hom,gen;
 
-   if Size(FrattiniSubgroup(G))=1 then return true; fi;
-   hom := NaturalHomomorphismByNormalSubgroup(G,FrattiniSubgroup(G));
-   F   := Image(hom);
-   Print("size G,F ",List([G,F],Size),"\n");
-   Display("get aut groups");
-   A  := AutomorphismGroup(G);
-   AF := AutomorphismGroup(F);
-   Display("done");
-   gen := List(GeneratorsOfGroup(A), a->
-               GroupHomomorphismByImages(F,F,
-                 MinimalGeneratingSet(F), 
-                 List(MinimalGeneratingSet(F),e->
-                     Image(hom,Image(a,PreImagesRepresentative(hom,e))))));
-   Display("got gens, now check");
-   if not Size(Group(gen))=Size(AF) then Error("mhm"); fi;
-   return true;
-end;
-
-
-cf.testcentral := function(G)
-local F, A, a, AF, hom,gen;
-
-   hom := NaturalHomomorphismByNormalSubgroup(G,FrattiniSubgroup(G));
-   F   := Image(hom);
-   if IsAbelian(F) then
-      if not IsAbelian(G) then Error("not ab"); fi;
-      if not ForAll(GeneratorsOfGroup(FrattiniSubgroup(G)),x->x in Center(G)) then Error("upsi"); fi;
-   fi;
-   return true;
-end;
-
-
-
-cf.testgroups := function(G)
-local F,hom,L,S,t,Y;
-
-   F   := FrattiniSubgroup(G);
-   hom := NaturalHomomorphismByNormalSubgroup(G,F);
-   L   := Image(hom);
-   S   := Socle(L);
-   Y   := Subgroup(G, Concatenation(GeneratorsOfGroup(F),
-                 List(GeneratorsOfGroup(S),x->PreImagesRepresentative(hom,x))));
-   if not Size(S) mod Size(F) = 0 then return "nothing"; fi;
-   t   := Filtered(FactorsInt(Size(S)),x-> not Size(F) mod x = 0);
-   t   := Concatenation(List(PrimeDivisors(Size(F)),x->x^2),t);
-   if IsomorphismGroups(AbelianGroup(t),Y) = fail then 
-      Error("not of this form..");
-   fi;  
-   return true;
-end;
-
-## for n in Filtered([44100..50000],IsCubeFreeInt) do for i in [1..NumberSmallGroups(n)] do Print("<><><><><><><><><<<<<><>< start ",n,"\n"); G:=SmallGroup(n,i); if IsSolvable(G) and not Size(FrattiniSubgroup(G))=1 then testgroups(G); fi; od; od;
-
-
-cf.testgl2 := function(p)
-local grps, q, ab,nonab,G,S;
-
-   grps  := cf_AutGroupsGL2(p);
-   grps  := Filtered(grps,x->Size(x)>1);
-   ab    := Filtered(grps,IsAbelian);
-   nonab := Filtered(grps, x->not IsAbelian(x));
-
-   for G in ab do
-      for q in PrimeDivisors(Size(G)) do
-         S := SylowSubgroup(G,q);
-         if not IsCharacteristicSubgroup(G,S) then
-            Print("size / prime ",[Size(G),q]);
-            Error("ab not char!");
-         fi;
-      od;
+cf.testmtimes := function(from, to,m)
+local cfi, n, j, k, G;
+cfi:=Filtered([from..to],cf.IsCubeFreeInt);;
+for n in cfi do
+   Print("START GROUP ORDER ",n,"\n");
+   for j in [1..NumberSmallGroups(n)] do
+       for k in [1..m] do
+          G:=SmallGroup(n,j); 
+          if IsSolvable(G) then cf.testisom(G); fi;
+       od;
    od;
-   for G in nonab do
-      for q in PrimeDivisors(Size(G)) do
-         S := SylowSubgroup(G,q);
-         if Size(S)=q and not IsCharacteristicSubgroup(G,S) then
-            Print("size / prime ",[Size(G),q]);
-            Display("NONab not char!");
-         
-         fi;
-      od;
-   od;
-   return true;
+od;
 end;
 
-G := PcGroupCode(6881188796437515087738221448294468417208650874579305659374726796228752260125245833015590139, 5336100);
 
+
+## RandomIsomorphismTest with codes, just return runtime and size
+cf.randomtest:= function(G,H)
+  local t,cr,a;
+  cr := List([G,H], x-> rec(order:=Order(x), code:=CodePcGroup(x)));;
+  t:=Runtime();
+  a:=RandomIsomorphismTest(cr,10);
+  return [Runtime()-t,Size(a)];
+end;
+
+## extract RandomIsomorphismTest, don't reconstruct groups from code
+cf.randomtest := function(G,H)
+    local  list,n,codes, conds, code, found, i, j, k, l, rem, c;
+    list:= [rec(),rec()];
+    list[1].order:=Order(G);
+    list[2].order:=Order(H);
+    list[1].code := CodePcGroup(G);
+    list[2].code := CodePcGroup(H);
+    list[1].group:=G;
+    list[2].group:=H;
+    n := 10;
+    codes := List( list, function ( x )
+            return [ x.code ];
+        end );
+    conds := List( list, function ( x )
+            return 0;
+        end );
+    rem := Length( list );
+    c := 0;
+    while Minimum( conds ) <= n and rem > 1  do
+        for i  in [ 1 .. Length( list ) ]  do
+            if Length( codes[i] ) > 0  then
+	      #Display("start spec");
+                code := RandomSpecialPcgsCoded( list[i].group );
+	#Display("done...");
+                if code in codes[i]  then
+                    conds[i] := conds[i] + 1;
+                fi;
+                found := false;
+                j := 1;
+                while not found and j <= Length( list )  do
+                    if j <> i  then
+                        if code in codes[j]  then
+                            found := true;
+                        else
+                            j := j + 1;
+                        fi;
+                    else
+                        j := j + 1;
+                    fi;
+                od;
+                if found  then
+                    k := Minimum( i, j );
+                    l := Maximum( i, j );
+                    codes[k] := Union( codes[k], codes[l] );
+                    codes[l] := [  ];
+                    conds[k] := 0;
+                    conds[l] := n + 1;
+                    rem := rem - 1;
+                else
+                    AddSet( codes[i], code );
+                fi;
+            fi;
+        od;
+#Display("now here...");
+        c := c + 1;
+        if c mod 10 = 0  then
+            Info( InfoRandIso, 3, "     ", c, " loops, ", rem, " groups ",
+             conds{Filtered( [ 1 .. Length( list ) ], function ( x )
+                     return Length( codes[x] ) > 0;
+                 end )}, " doubles ",
+             List( codes{Filtered( [ 1 .. Length( list ) ], function ( x )
+                       return Length( codes[x] ) > 0;
+                   end )}, Length ), " presentations" );
+        fi;
+    od;
+    for i  in [ 1 .. Length( list ) ]  do
+        Unbind( list[i].group );
+    od;
+    return list{Filtered( [ 1 .. Length( codes ) ], function ( x )
+             return Length( codes[x] ) > 0;
+         end )};
+end;
+
+
+
+
+############################################################################################################
