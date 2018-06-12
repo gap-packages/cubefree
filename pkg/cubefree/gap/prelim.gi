@@ -287,7 +287,7 @@ local divn, m, auts, i, j, k, l, erg, gr, C, gen, D, a, sub, gnl,gnr,
         Error("Input wrong");
     fi;
 
-    if n = 1 then return Group([ Tuple( [Z(q)^0,Z(q)^0  ] ) ] ); fi;
+    if n = 1 then return Group([ DirectProductElement( [Z(q)^0,Z(q)^0  ] ) ] ); fi;
 
     # Construct C_n x C_n 
     C    := FromTheLeftCollector(2);
@@ -315,7 +315,7 @@ local divn, m, auts, i, j, k, l, erg, gr, C, gen, D, a, sub, gnl,gnr,
     for gr in erg do
         gens  := GeneratorsOfGroup(gr);
         gens  := List(gens, x-> 
-                 Tuple( [ c^(Exponents(x)[1]),c^(Exponents(x)[2]) ]));
+                 DirectProductElement( [ c^(Exponents(x)[1]),c^(Exponents(x)[2]) ]));
         tmpgr := Group(gens);
         SetSize(tmpgr,Size(gr));
         Add(tmp,tmpgr);
@@ -326,7 +326,7 @@ local divn, m, auts, i, j, k, l, erg, gr, C, gen, D, a, sub, gnl,gnr,
     if testAll then
         Display("test cf_symmSDProducts");
         for gr in erg do
-            if not ForAll(gr, x-> Tuple([x[2]  ,x[1]] ) in gr) then
+            if not ForAll(gr, x-> DirectProductElement([x[2]  ,x[1]] ) in gr) then
                 Error(" not symm ");
             fi;
             if not Group(List(gr,x->x[1]))=D then
@@ -335,7 +335,7 @@ local divn, m, auts, i, j, k, l, erg, gr, C, gen, D, a, sub, gnl,gnr,
         od;
 
         sub := SubdirectProducts(D,D);
-        sub := Filtered(sub, gr -> ForAll(gr, x-> Tuple([x[2]  ,x[1]] ) in gr));
+        sub := Filtered(sub, gr -> ForAll(gr, x-> DirectProductElement([x[2]  ,x[1]] ) in gr));
         if not Difference(sub,erg)=[] or not Difference(erg,sub)=[] or
            not IsDuplicateFreeList(erg) then
             Error("sth wrong");

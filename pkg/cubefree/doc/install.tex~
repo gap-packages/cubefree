@@ -28,10 +28,12 @@ To use the {\Cubefree} Package you have to request it explicitly. This  is
 done by calling `LoadPackage' like this:
 
 \beginexample
-gap> LoadPackage("cubefree");
-Loading Cubefree 1.17 ...
+gap> LoadPackage("Cubefree");
+Loading Cubefree 1.16 ...
+
+   - Construction Algorithm for Cubefree Groups, 1.16 -
+   ---- Heiko Dietrich, heiko.dietrich@monash.edu -----
 true
-gap>
 \endexample
 
 
