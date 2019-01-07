@@ -37,7 +37,7 @@ Status := "accepted",
 CommunicatedBy := "David Joyner (Annapolis)",
 AcceptDate := "10/2007",
 
-README_URL := "http://users.monash.edu.au/~heikod/cubefree/README",
+README_URL := "http://users.monash.edu.au/~heikod/cubefree/README.md",
 PackageInfoURL := "http://users.monash.edu.au/~heikod/cubefree/PackageInfo.g",
 
 AbstractHTML := 
