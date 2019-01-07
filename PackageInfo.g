@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.17",
+Version := "1.17dev",
 Date := "11/06/2018", # this is in dd/mm/yyyy format
 
 Persons := [
