@@ -11,9 +11,7 @@ SetPackageInfo( rec(
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
 Version := "1.17",
-Date := "11/06/2018",
-ArchiveURL := "http://users.monash.edu.au/~heikod/cubefree/cubefree1.17",
-ArchiveFormats := ".tar.gz",
+Date := "11/06/2018", # this is in dd/mm/yyyy format
 
 Persons := [
 
@@ -37,14 +35,22 @@ Status := "accepted",
 CommunicatedBy := "David Joyner (Annapolis)",
 AcceptDate := "10/2007",
 
-README_URL := "http://users.monash.edu.au/~heikod/cubefree/README.md",
-PackageInfoURL := "http://users.monash.edu.au/~heikod/cubefree/PackageInfo.g",
-
+PackageWWWHome  := "https://gap-packages.github.io/cubefree/",
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/gap-packages/cubefree",
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/cubefree-", ~.Version ),
+ArchiveFormats := ".tar.gz",
+                                 
 AbstractHTML := 
 "The <span class=\"pkgname\">Cubefree</span> package contains methods to construct up to isomorphism the groups of a given (reasonable) cubefree order. The main function ConstructAllCFGroups(n) constructs all groups of a given cubefree order n. The function NumberCFGroups(n) counts all groups of a cubefree order n. Furthermore, IrreducibleSubgroupsOfGL(2,q) constructs the irreducible subgroups of GL(2,q), q=p^r, p>=5 prime, up to conjugacy and RewriteAbsolutelyIrreducibleMatrixGroup(G) rewrites the absolutely irreducible matrix group G (over a finite field) over a minimal subfield.",
 
-PackageWWWHome := "http://users.monash.edu.au/~heikod/cubefree.html",
-               
 PackageDoc := rec(
   BookName  := "Cubefree",
   ArchiveURLSubset := ["doc", "htm"],
@@ -61,7 +67,7 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "Loading Cubefree 1.17 ... \n",
+BannerString := Concatenation("Loading Cubefree ", ~.Version, " ... \n"),
 Autoload := false,
 TestFile := "tst/autoTest.tst",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
