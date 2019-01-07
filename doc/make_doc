@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+echo "TeXing documentation"
+# TeX the manual
+pdftex manual
+# ... and build its bibliography (uncomment if there is a `manual.bib')
+bibtex manual
+# TeX the manual again to incorporate the ToC ... and build the index
+pdftex manual
+pdftex manual
+../../../doc/manualindex manual
+# Finally TeX the manual again to get cross-references right
+pdftex manual
+
+# The HTML version of the manual
+rm -rf ../htm
+mkdir ../htm
+echo "Creating HTML documentation"
+../../../etc/convert.pl -i -u -c -n Cubefree . ../htm

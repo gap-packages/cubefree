@@ -7,7 +7,7 @@
 %%
 %F  gapmacro . . . . . . . . . . . . . . . . . read the GAP macro package
 %%
-\input gapmacro
+\input ../../../doc/gapmacro
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,8 +21,8 @@
 %%
 %F  UseReferences . . . . . . . . . . . . . . . . . .  specify references
 %%
+\UseReferences{../../../doc/ext}
 \UseReferences{../../../doc/ref}
-\UseGapDocReferences{../../../doc/ref}
 \Package{Cubefree}
 \Package{GrpConst}
 \Package{IrredSol}
@@ -67,10 +67,7 @@
 %F  FrontMatter 
 %%
 \FrontMatter
-%%% I've tried both options...
-%%%
-\immediate\write\citeout{\bs bibdata{./manual,../../../doc/manual}}
-% \immediate\write\citeout{\bs bibdata{./manual,../../../doc/manualbib.xml}}
+\immediate\write\citeout{\bs bibdata{./manual,../../../doc/mrabbrev}}
 % 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
