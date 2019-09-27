@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/gap-packages/cubefree.svg?branch=master)](https://travis-ci.org/gap-packages/cubefree)
+[![Code Coverage](https://codecov.io/github/gap-packages/cubefree/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/cubefree)
+
 # The GAP 4 package Cubefree
 
 
