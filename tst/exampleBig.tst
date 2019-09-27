@@ -1,4 +1,3 @@
-
 gap> L := [1..2^28-1];;
 gap> repeat 
 > n:=Random(L); 
@@ -11,25 +10,3 @@ gap> L  := List(L, x->rec(order:=n, code:=CodePcGroup(x)));;
 gap> L2 := RandomIsomorphismTest(L,5);;
 gap> Length(L)=Length(L2);
 true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

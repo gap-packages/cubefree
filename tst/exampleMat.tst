@@ -9,7 +9,7 @@ gap> for p in Filtered(Primes,x-> x>3 and x<20) do
 > Error("Something wrong at ",p);
 > fi;
 > od;
-gap> Print("Primes between 5 and 19 are ok. Now consider 25 and 49.\n");
+# Primes between 5 and 19 are ok. Now consider 25 and 49
 gap> ind := AllIrreducibleSolvableMatrixGroups(Degree,2,FieldOfMatrixGroup,GF(25));;
 gap> ind := List(ind,IdIrreducibleSolvableMatrixGroup);; 
 gap> new := Filtered(IrreducibleSubgroupsOfGL(2,25),IsSolvable);;
@@ -27,23 +27,3 @@ gap> new := Collected(List(new,Size));;
 gap> Difference(new,ind)= [] and Difference(ind,new)=[];
 true
 gap> STOP_TEST( "exampleMat.tst", 100000);   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
