@@ -3,25 +3,4 @@ gap> L := Filtered([1..1000],IsCubeFreeInt);;
 gap> for i in L do
 > if not CubefreeTestOrder(i)=true then Error("sth wrong at",i); fi;
 > od;
-gap> STOP_TEST( "exampleSGlong.tst", 100000);   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+gap> STOP_TEST( "autoTest.tst", 100000);   
