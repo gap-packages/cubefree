@@ -7,5 +7,5 @@ fi;
 Print("Test IrreducibleSubgroupsOfGL and compare with IrredSol\n");
 Print("This may take a while...\n");
 dirs := DirectoriesPackageLibrary( "cubefree", "tst" );
-ReadTest( Filename( dirs, "exampleMat.tst" ) );
+Test( Filename( dirs, "exampleMat.tst" ) );
 

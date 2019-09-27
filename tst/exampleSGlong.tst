@@ -7,24 +7,3 @@ gap> for i in L do
 > fi;
 > od;
 gap> STOP_TEST( "exampleSGlong.tst", 100000);   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
