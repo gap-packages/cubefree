@@ -5,8 +5,7 @@ env:
     - GAP_TESTFILE=tst/testtravis.g
 
 addons:
-  apt:
-    packages:
+  apt_packages:
     - libgmp-dev
     - libreadline-dev
     - zlib1g-dev
@@ -17,6 +16,10 @@ matrix:
     - env: GAPBRANCH=stable-4.11
     - env: GAPBRANCH=stable-4.10
     - env: GAPBRANCH=stable-4.9
+
+branches:
+  only:
+    - master
 
 before_script:
   - git clone https://github.com/gap-system/pkg-ci-scripts.git scripts
