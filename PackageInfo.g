@@ -68,7 +68,6 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := Concatenation("Loading Cubefree ", ~.Version, " ... \n"),
 Autoload := false,
 TestFile := "tst/autoTest.tst",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
