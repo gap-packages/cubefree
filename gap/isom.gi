@@ -729,7 +729,7 @@ end;
 ## returns an isomorphism from G to H, and fail if such an iso doesn't exist
 ##
 InstallGlobalFunction( IsomorphismCubefreeGroupsNC, function(G,H)
-local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
+local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv;
 
    if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
       Error("input must be pc group of perm group");
@@ -748,21 +748,24 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
       return cf.IsomSolvable(G,H);
    fi;
  
-
+   if DerivedLength(G) <> DerivedLength(H) then
+     return fail;
+   fi;
    Gpsl := DerivedSeries(G);
    Gpsl := Gpsl[Length(Gpsl)];
    Hpsl := DerivedSeries(H);
    Hpsl := Hpsl[Length(Hpsl)];
-   idpslG := Reversed(Collected(FactorsInt(Size(Gpsl))))[1][1];
-   idpslH := Reversed(Collected(FactorsInt(Size(Hpsl))))[1][1];
-   if not idpslG=idpslH then return fail; fi;
+   if Size(Gpsl) <> Size(Hpsl) then
+     return fail;
+   fi;
 
 Display("get isom between PSL");
 Display("WARNING: need to use efficient iso....");
    phiA := IsomorphismGroups(Gpsl,Hpsl);
 Display("done, now get PSL complement");
 
-  #now both groups are PSL(2,idpslG) \times solvable-cubefree
+   # now both groups are PSL(2,p) \times solvable-cubefree, where p is
+   # the largest prime divisor of the order of Gpsl resp. Hpsl
 
    Gsolv   := Centraliser(G,Gpsl);
    Hsolv   := Centraliser(H,Hpsl);
@@ -788,7 +791,7 @@ end);
 ## returns an isomorphism from G to H, and fail if such an iso doesn't exist
 ##
 InstallGlobalFunction( IsomorphismCubefreeGroups, function(G,H)
-local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv, iso;
+local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv, iso;
 
    if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
       Error("input must be pc group of perm group");
@@ -813,21 +816,24 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv, iso;
       return GroupHomomorphismByImages(G,H,genG,List(genG,x->Image(iso,x)));
    fi;
 
-
+   if DerivedLength(G) <> DerivedLength(H) then
+     return fail;
+   fi;
    Gpsl := DerivedSeries(G);
    Gpsl := Gpsl[Length(Gpsl)];
    Hpsl := DerivedSeries(H);
    Hpsl := Hpsl[Length(Hpsl)];
-   idpslG := Reversed(Collected(FactorsInt(Size(Gpsl))))[1][1];
-   idpslH := Reversed(Collected(FactorsInt(Size(Hpsl))))[1][1];
-   if not idpslG=idpslH then return fail; fi;
+   if Size(Gpsl) <> Size(Hpsl) then
+     return fail;
+   fi;
 
 Display("get isom between PSL");
 Display("WARNING: need to use efficient iso....");
    phiA := IsomorphismGroups(Gpsl,Hpsl);
 Display("done, now get PSL complement");
 
-  #now both groups are PSL(2,idpslG) \times solvable-cubefree
+   # now both groups are PSL(2,p) \times solvable-cubefree, where p is
+   # the largest prime divisor of the order of Gpsl resp. Hpsl
 
    Gsolv   := Centraliser(G,Gpsl);
    Hsolv   := Centraliser(H,Hpsl);
@@ -857,7 +863,7 @@ end);
 ## returns true iff G and H are isomorphic
 ##
 InstallGlobalFunction( IsIsomorphismCubefreeGroups, function(G,H)
-local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
+local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv, len;
 
    if G = H then return true; fi;
   #if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
@@ -881,14 +887,18 @@ local Gpsl, Hpsl, idpslG, idpslH,Gsolv, Hsolv, genG, genH, phiA, isoSolv;
       return cf.IsIsomSolvable(G,H);
    fi; 
 
+   if DerivedLength(G) <> DerivedLength(H) then
+     return false;
+   fi;
    Gpsl := DerivedSeries(G);
    Gpsl := Gpsl[Length(Gpsl)];
    Hpsl := DerivedSeries(H);
    Hpsl := Hpsl[Length(Hpsl)];
-   idpslG := Reversed(Collected(FactorsInt(Size(Gpsl))))[1][1];
-   idpslH := Reversed(Collected(FactorsInt(Size(Hpsl))))[1][1];
-   if not idpslG=idpslH then return false; fi;
-  #now both groups are PSL(2,idpslG) \times solvable-cubefree
+   if Size(Gpsl) <> Size(Hpsl) then
+     return false;
+   fi;
+   # now both groups are PSL(2,p) \times solvable-cubefree, where p is
+   # the largest prime divisor of the order of Gpsl resp. Hpsl
 
    Gsolv   := Centraliser(G,Gpsl);
    Hsolv   := Centraliser(H,Hpsl);
