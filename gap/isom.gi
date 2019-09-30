@@ -33,15 +33,17 @@ end;
 #######################################################################
 cf.makeStdNilpotent := function(G)
 local ord, syl, a, b, S, id;
-   if IsTrivial(G) then return rec(id:=[1,1], gens:=[One(G),One(G)]); fi;
+   if IsTrivial(G) then
+      return rec(id:=[1,1], gens:=[One(G),One(G)]);
+   fi;
    ord  := Collected(FactorsInt(Order(G)));
    syl  := List(ord,p->SylowSubgroup(G,p[1]));
    a    := One(G);
    b    := One(G);
    for S in syl do
       id := MinimalGeneratingSet(S);
-      if Size(id)=1 then 
-         a := a * id[1]; 
+      if Size(id)=1 then
+         a := a * id[1];
       else
          a := a * id[1];
          b := b * id[2];
@@ -55,7 +57,9 @@ end;
 cf.IsomNilpotent := function(G,H)
    if not IsBound(G!.std) then G!.std := cf.makeStdNilpotent(G); fi;
    if not IsBound(H!.std) then H!.std := cf.makeStdNilpotent(H); fi;
-   if not G!.std.id = H!.std.id then return fail; fi;
+   if G!.std.id <> H!.std.id then
+      return fail;
+   fi;
    return GroupHomomorphismByImagesNC(G,H,G!.std.gens,H!.std.gens);
 end;
 
@@ -65,7 +69,7 @@ end;
 cf.IsIsomNilpotent := function(G,H)
    if not IsBound(G!.std) then G!.std := cf.makeStdNilpotent(G); fi;
    if not IsBound(H!.std) then H!.std := cf.makeStdNilpotent(H); fi;
-   if not G!.std.id = H!.std.id then return false; else return true; fi;
+   return G!.std.id = H!.std.id;
 end;
 
 
@@ -79,13 +83,17 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
       HU,HV,nsU,nsV, nsUe, nsVe, i,j, t1,  mU, mV, oU, oV, ind, stds,stdc,
       cobStd,ns, fU, fV, get2part,o,s,w,isscalarmat, cs, ab, ims, S;
 
-   if U=V then return Identity(U); fi;
+   if U=V then
+      return Identity(U);
+   fi;
 
    get2part := function(x)
    local o,c;
       o := Order(x);
       c := Collected(FactorsInt(o));
-      if IsOddInt(o) then return [x,1]; fi;
+      if IsOddInt(o) then
+         return [x,1];
+      fi;
       return [x^(o/(c[1][1]^c[1][2])),(c[1][1]^c[1][2])];
    end;
 
@@ -93,12 +101,18 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                       x[i][i])))=1;
 
    p  := Size(FieldOfMatrixGroup(U));
-   if p=2 then return RepresentativeAction(GL(2,p),U,V); fi;
+   if p=2 then
+      return RepresentativeAction(GL(2,p),U,V);
+   fi;
 
    iU := IsIrreducible(U);
    iV := IsIrreducible(V);
-   if not iU = iV then return false; fi;
-   if not Order(U)=Order(V) then return false; fi;
+   if iU <> iV then
+      return false;
+   fi;
+   if Order(U) <> Order(V) then
+      return false;
+   fi;
 
  ##both can be diagonalised
    if not iU then
@@ -110,14 +124,19 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
       UU := U^eU;
       VV := V^eV;
       m  := One(GF(p))*[[0,1],[1,0]];
-      if UU=VV then return eU*eV^-1; elif UU=VV^m then 
-         return eU*m*eV^-1; 
-      else return false; 
+      if UU=VV then
+         return eU*eV^-1;
+      elif UU=VV^m then
+         return eU*m*eV^-1;
+      else
+        return false;
       fi;
 
  ##both not reducible
    else
-      if not IsAbelian(U) = IsAbelian(V) then return false; fi;
+      if IsAbelian(U) <> IsAbelian(V) then
+         return false;
+      fi;
      #if abelian then cyclic (D+OB Thm 5.1)
       if IsAbelian(U) then
         #Display("case irreducible and abelian");
@@ -139,19 +158,23 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
             r   := Filtered(PrimeDivisors(Order(U)),x->x>2);
             HU  := HallSubgroup(U,r);
             HV  := HallSubgroup(V,r);          
-            if not Size(HU)=Size(HV) then return false; fi;
+            if Size(HU) <> Size(HV) then
+               return false;
+            fi;
             fU  := List(RightCosets(U,HU),x->get2part(Representative(x)));
             fV  := List(RightCosets(V,HV),x->get2part(Representative(x)));
             ind := Size(fU);
             m   := Maximum(List(fU,x->x[2]));
-            if not m = Maximum(List(fV,x->x[2])) then return false; fi;
+            if m <> Maximum(List(fV,x->x[2])) then
+               return false;
+            fi;
             fU  := Filtered(fU,x->x[2]=m);
             fV  := Filtered(fV,x->x[2]=m);
             HU  := GeneratorsOfGroup(HU);
             HV  := GeneratorsOfGroup(HV);
 
           ##determine module structure of hall subgroup
-            if ForAll(HU,isscalarmat) then 
+            if ForAll(HU,isscalarmat) then
                nsU := 1; nsUe := First(HU,x->not x=x^0);
             else
                t1 := List(HU,x->[x,Length(Eigenspaces(GF(p),x))]);
@@ -163,7 +186,7 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                   nsU := 2; nsUe := t1[1];
                else Error("shouldn't happen..nsU"); fi;
             fi;       
-            if ForAll(HV,isscalarmat) then 
+            if ForAll(HV,isscalarmat) then
                nsV := 1; nsVe := First(HV,x->not x=x^0);
             else
                t1 := List(HV,x->[x,Length(Eigenspaces(GF(p),x))]);
@@ -175,8 +198,9 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                   nsV := 2; nsVe := t1[1];
                else Error("shouldn't happen..nsU"); fi;
             fi;       
-            if not nsU = nsV then return false; fi;
-   
+            if not nsU = nsV then
+               return false;
+            fi;
         
            #Print("nsU is ",nsU,"\n");
 
@@ -189,13 +213,20 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                    UU := Group(nsUe)^eU;
                    VV := Group(nsVe)^eV;
                    m  := One(GF(p))*[[0,1],[1,0]];
-                   if not UU=VV then eV:=eV*m; fi;
+                   if not UU=VV then
+                      eV:=eV*m;
+                   fi;
                    UU := U^eU;
                    VV := V^eV;
-                   if UU=VV then return eU*eV^-1; fi;
+                   if UU=VV then
+                      return eU*eV^-1;
+                   fi;
                 
-                   if ind = 2 or fU[1][2]=2 then s := One(GF(p)); 
-                   else s := -One(GF(p)); fi;
+                   if ind = 2 or fU[1][2]=2 then
+                      s := One(GF(p));
+                   else
+                      s := -One(GF(p));
+                   fi;
 
                    fU := List(fU,x->x[1]^eU);
                    fV := List(fV,x->x[1]^eV);
@@ -208,11 +239,13 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                    eV := eV*mV;
                    UU := U^eU;
                    VV := V^eV;
-                   if UU=VV then 
-                      return eU*eV^-1; 
-                   elif UU=VV^m then 
-                      return eU*m*eV^-1; 
-                   else Error("ups"); fi;
+                   if UU=VV then
+                      return eU*eV^-1;
+                   elif UU=VV^m then
+                      return eU*m*eV^-1;
+                   else
+                      Error("ups");
+                   fi;
                #fi;
 
               
@@ -232,7 +265,7 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                cU := CharacteristicPolynomial(gU);
                cV := CharacteristicPolynomial(gV); 
                cs := CharacteristicPolynomial(stds);
-               if not IsIrreducible(cU) or not IsIrreducible(cV) then 
+               if not IsIrreducible(cU) or not IsIrreducible(cV) then
                   Display("shouldn't happen"); 
                fi;
 
@@ -249,7 +282,9 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                VV   := V^cobV;
                ns   := ns^cobStd;
                m    := RepresentativeAction(ns,UU,VV);
-               if m = fail then Error("shouldn't happen...");fi;
+               if m = fail then
+                  Error("shouldn't happen...");
+               fi;
                return cobU*m*cobV^-1;
 
  
@@ -325,9 +360,13 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
    
    socG := Socle(G);
    socH := Socle(H); 
-   if not Size(socG)=Size(socH) then return fail; fi;
+   if Size(socG) <> Size(socH) then
+      return fail;
+   fi;
 
-   if socG = G then return cf.IsomNilpotent(G,H); fi;
+   if socG = G then
+      return cf.IsomNilpotent(G,H);
+   fi;
 
    CG   := ComplementClassesRepresentativesSolvableNC(G,socG)[1];
    CH   := ComplementClassesRepresentativesSolvableNC(H,socH)[1];
@@ -367,7 +406,9 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
                         List([1..se], x->Image(emb[x+sc],actH.onE[x][i]))))));
 
    eqIm := Image(phiG)=Image(phiH);
-   if se = 0 and not eqIm then return fail; fi;
+   if se = 0 and not eqIm then
+      return fail;
+   fi;
 
    if eqIm then  
       psi := GroupHomomorphismByImagesNC(G,H,
@@ -383,7 +424,9 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
       U := Group(actG.onE[i]);
       V := Group(actH.onE[i]);
       m := cf.isconjugate(U,V);
-      if m = false or m=fail then return fail; fi;
+      if m = false or m=fail then
+         return fail;
+      fi;
      #if not U^m = V then Error("should be conj!"); fi;
       Add(conj,m);
    od;
@@ -400,7 +443,9 @@ local socG, socH, CG, CH, actG, actH, ord, type, sc, se, Af, A, aa,bb,GG,HH,conj
    norm := Subgroup(A,norm);
    norm := RepresentativeAction(norm,Image(phiG)^conj,Image(phiH));   
     
-   if norm=fail then return fail; fi;
+   if norm=fail then
+      return fail;
+   fi;
    conj := conj*norm;
 
 
@@ -436,7 +481,9 @@ emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm
 
    socG := Socle(G);
    socH := Socle(H); 
-   if not Size(socG)=Size(socH) then return false; fi;
+   if Size(socG) <> Size(socH) then
+      return false;
+   fi;
 
    if socG = G then
       return cf.IsIsomNilpotent(G,H);
@@ -447,7 +494,6 @@ emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm
    CH   := ComplementClassesRepresentativesSolvableNC(H,socH)[1];
 
  
-   if not Size(socG)=Size(socH) then return false; fi;
    actG := cf.getSocleAct(G,GeneratorsOfGroup(CG));
    actH := cf.getSocleAct(H,GeneratorsOfGroup(CH));
    if not List(actG.onC,x->Size(Group(x))) = List(actH.onC,x->Size(Group(x))) then 
@@ -495,7 +541,9 @@ emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm
       U := Group(actG.onE[i]);
       V := Group(actH.onE[i]);
       m := cf.isconjugate(U,V);
-      if m = false or m=fail then return false; fi;
+      if m = false or m=fail then
+         return false;
+      fi;
       Add(conj,m);
    od;
    conj:=Product(List([1..se],x-> Image(emb[sc+x],conj[x])));
@@ -510,7 +558,7 @@ emb, proj, nr, phiG, phiH, psi, i, m, conj, U, V, mm, old, new,cg,ims, ttt, norm
    norm := Subgroup(A,norm);
    norm := RepresentativeAction(norm,Image(phiG)^conj,Image(phiH));   
 
-   if norm=fail then return false; else return true; fi;
+   return norm <> fail;
 
 end;
 
@@ -630,12 +678,16 @@ local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG,
 
    PG := FrattiniSubgroup(G);
    PH := FrattiniSubgroup(H);
-   if not Size(PG)=Size(PH) then return fail; fi;
+   if Size(PG) <> Size(PH) then
+      return fail;
+   fi;
 
-   if Size(PG)=1 then 
+   if Size(PG)=1 then
    
       iso := cf.IsomSolvableFrattFree(G,H);
-      if iso= fail then return fail; fi;
+      if iso= fail then
+         return fail;
+      fi;
 
       PG := (isoG*iso)*InverseGeneralMapping(isoH);
 
@@ -664,7 +716,9 @@ local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG,
 
    n    := Size(GGs);
    iso  := IsomorphismCubefreeGroups(GGs[n],HHs[n]);
-   if iso = fail then return fail; fi;
+   if iso = fail then
+      return fail;
+   fi;
  
    for i in [n,n-1..2] do
 
@@ -711,7 +765,9 @@ local PG, PH, G, H, isoG, isoH,iso;
 
    PG := FrattiniSubgroup(G);
    PH := FrattiniSubgroup(H);
-   if not Size(PG)=Size(PH) then return false; fi;
+   if Size(PG) <> Size(PH) then
+      return false;
+   fi;
 
    return cf.IsIsomSolvableFrattFree(G/PG,H/PH);
    
@@ -735,15 +791,21 @@ local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv;
       Error("input must be pc group of perm group");
    fi;
   
-   if not Order(G)=Order(H) then return fail; fi;
+   if Order(G) <> Order(H) then
+      return fail;
+   fi;
    if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
       Error("input must be two cubefree groups");
    fi;
-   if not IsAbelian(G) = IsAbelian(H) then return fail; fi;
+   if IsAbelian(G) <> IsAbelian(H) then
+      return fail;
+   fi;
    if IsAbelian(G) and IsAbelian(H) then
       return cf.IsomNilpotent(G,H);
    fi; 
-   if not IsSolvableGroup(G) = IsSolvableGroup(H) then return fail; fi;
+   if IsSolvableGroup(G) <> IsSolvableGroup(H) then
+      return fail;
+   fi;
    if IsSolvableGroup(G) and IsSolvableGroup(H) then
       return cf.IsomSolvable(G,H);
    fi;
@@ -771,7 +833,9 @@ Display("done, now get PSL complement");
    Hsolv   := Centraliser(H,Hpsl);
 
    isoSolv := cf.IsomSolvable(Gsolv,Hsolv);
-   if isoSolv = fail then return fail; fi;
+   if isoSolv = fail then
+      return fail;
+   fi;
 
    genG := Concatenation(GeneratorsOfGroup(Gpsl),GeneratorsOfGroup(Gsolv));
    genH := Concatenation(List(GeneratorsOfGroup(Gpsl),x->Image(phiA,x)),
@@ -797,21 +861,31 @@ local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv, iso;
       Error("input must be pc group of perm group");
    fi;
   
-   if not Order(G)=Order(H) then return fail; fi;
+   if Order(G) <> Order(H) then
+      return fail;
+   fi;
    if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
       Error("input must be two cubefree groups");
    fi;
-   if not IsAbelian(G) = IsAbelian(H) then return fail; fi;
+   if IsAbelian(G) <> IsAbelian(H) then
+      return fail;
+   fi;
    if IsAbelian(G) and IsAbelian(H) then
       iso := cf.IsomNilpotent(G,H);
-      if iso=fail then return fail; fi;
+      if iso=fail then
+         return fail;
+      fi;
       genG := GeneratorsOfGroup(G);
       return GroupHomomorphismByImages(G,H,genG,List(genG,x->Image(iso,x)));
    fi; 
-   if not IsSolvableGroup(G) = IsSolvableGroup(H) then return fail; fi;
+   if IsSolvableGroup(G) <> IsSolvableGroup(H) then
+      return fail;
+   fi;
    if IsSolvableGroup(G) and IsSolvableGroup(H) then
       iso := cf.IsomSolvable(G,H);
-      if iso=fail then return fail; fi; 
+      if iso=fail then
+         return fail;
+      fi;
       genG := GeneratorsOfGroup(G);
       return GroupHomomorphismByImages(G,H,genG,List(genG,x->Image(iso,x)));
    fi;
@@ -839,7 +913,9 @@ Display("done, now get PSL complement");
    Hsolv   := Centraliser(H,Hpsl);
    Display("done... now call solvable code");
    isoSolv := cf.IsomSolvable(Gsolv,Hsolv);
-   if isoSolv = fail then return fail; fi;
+   if isoSolv = fail then
+      return fail;
+   fi;
 
    genG := Concatenation(GeneratorsOfGroup(Gpsl),GeneratorsOfGroup(Gsolv));
    genH := Concatenation(List(GeneratorsOfGroup(Gpsl),x->Image(phiA,x)),
@@ -865,22 +941,30 @@ end);
 InstallGlobalFunction( IsIsomorphismCubefreeGroups, function(G,H)
 local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv, len;
 
-   if G = H then return true; fi;
+   if G = H then
+      return true;
+   fi;
   #if not ForAll([G,H],x-> IsPcGroup(x) or IsPermGroup(x)) then
   #   Error("input must be pc group of perm group");
   #fi;
   
-   if not Order(G)=Order(H) then return false; fi;
+   if Order(G) <> Order(H) then
+      return false;
+   fi;
    if not cf.IsCubeFreeInt(Order(G)) or not cf.IsCubeFreeInt(Order(H)) then
       Error("input must be two cubefree groups");
    fi;
-   if not IsAbelian(G) = IsAbelian(H) then return false; fi;
+   if IsAbelian(G) <> IsAbelian(H) then
+      return false;
+   fi;
    if IsAbelian(G) and IsAbelian(H) then
       if not IsPcGroup(G) then G := Image(IsomorphismPcGroup(G)); fi;
       if not IsPcGroup(H) then H := Image(IsomorphismPcGroup(H)); fi;
       return cf.IsIsomNilpotent(G,H);
    fi; 
-   if not IsSolvableGroup(G) = IsSolvableGroup(H) then return false; fi;
+   if IsSolvableGroup(G) <> IsSolvableGroup(H) then
+      return false;
+   fi;
    if IsSolvableGroup(G) and IsSolvableGroup(H) then
       if not IsPcGroup(G) then G := Image(IsomorphismPcGroup(G)); fi;
       if not IsPcGroup(H) then H := Image(IsomorphismPcGroup(H)); fi;
@@ -927,12 +1011,14 @@ local H,K,t,iso;
    t := Runtime();
    iso := IsomorphismCubefreeGroups(K,H);
    t := Runtime()-t;
-   if iso=fail or iso = false then 
+   if iso=fail or iso = false then
        Display("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
        Error("ups");
    fi;
   #Print("got ",iso,"\n");
-   if iso=true then return "todo"; fi;
+   if iso=true then
+      return "todo";
+   fi;
    return t;
 end;
 
