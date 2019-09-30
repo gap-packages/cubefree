@@ -93,4 +93,5 @@ gap> Length(ConstructAllCFNilpotentGroups(n));
 16
 
 #
+gap> SetInfoLevel(InfoCF,0);
 gap> STOP_TEST( "manual.tst", 1);
