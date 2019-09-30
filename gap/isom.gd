@@ -29,10 +29,10 @@ DeclareGlobalFunction("IsomorphismCubefreeGroupsNC");
 
 ############################################################################# 
 ## 
-#F  IsIsomorphismCubefreeGroupsNC(G,H)
+#F  IsIsomorphicCubefreeGroups(G,H)
 ## 
 ## G and H are two cubefree groups;
 ## returns true iff G and H are isomorphic
 ##
-DeclareGlobalFunction("IsIsomorphismCubefreeGroups");
+DeclareGlobalFunction("IsIsomorphicCubefreeGroups");
 
