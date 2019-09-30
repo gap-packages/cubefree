@@ -33,6 +33,7 @@ end;
 #######################################################################
 cf.makeStdNilpotent := function(G)
 local ord, syl, a, b, S, id;
+   if IsTrivial(G) then return rec(id:=[1,1], gens:=[One(G),One(G)]); fi;
    ord  := Collected(FactorsInt(Order(G)));
    syl  := List(ord,p->SylowSubgroup(G,p[1]));
    a    := One(G);
