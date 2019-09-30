@@ -268,13 +268,13 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
         bound    := arg[1];
         smallGrp := arg[2];
     else
-        Error("Wrong input format: Either arg='size' or arg='size,bool'.\n");
+        Error("Wrong input format: Either arg='size' or arg='size,bool'.");
     fi;
     if not IsPosInt(bound) then
         Error("First argument has to be a positiv integer.");
     fi;
     if not IsBool(smallGrp) then
-        Error("Second argument has to be Boolean.\n");
+        Error("Second argument has to be Boolean.");
     fi;
 
     Info(InfoCF,1,"Count all cubefree groups up to ",bound,".");

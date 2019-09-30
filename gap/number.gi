@@ -26,15 +26,15 @@ InstallGlobalFunction(NumberCFSolvableGroups, function( arg )
         size     := arg[1];
         smallGrp := arg[2];
     else
-        Error("Wrong input format: Either arg='size' or arg='size,bool'.\n");
+        Error("Wrong input format: Either arg='size' or arg='size,bool'.");
     fi;
     if not IsBool(smallGrp) then
-        Error("Second argument has to be Boolean.\n");
+        Error("Second argument has to be Boolean.");
     fi;
     if not (IsInt( size ) and size>0) then
-        Error("First argument has to be a positive  integer.\n");
+        Error("First argument has to be a positive  integer.");
     elif not IsCubeFreeInt( size ) then
-        Error("First argument has to be a cube-free integer.\n"); 
+        Error("First argument has to be a cube-free integer."); 
     fi;
 
     Info(InfoCF,1," Count number of solvable groups of order ",size,".");
@@ -129,15 +129,15 @@ InstallGlobalFunction(NumberCFGroups, function( arg )
         size     := arg[1];
         smallGrp := arg[2];
     else
-        Error("Wrong input format: Either arg='size' or arg='size,bool'.\n");
+        Error("Wrong input format: Either arg='size' or arg='size,bool'.");
     fi;
     if not IsBool(smallGrp) then
-        Error("Second argument has to be Boolean.\n");
+        Error("Second argument has to be Boolean.");
     fi;
     if not (IsInt( size ) and size>0) then
-        Error("First argument has to be a positive integer.\n");
+        Error("First argument has to be a positive integer.");
     elif not IsCubeFreeInt( size ) then
-        Error("First argument has to be a cube-free integer.\n"); 
+        Error("First argument has to be a cube-free integer."); 
     fi;
   
     Info(InfoCF,1,"Count number of groups of order ",size,".");

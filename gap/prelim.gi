@@ -40,7 +40,7 @@ InstallGlobalFunction( ConstructAllCFSimpleGroups, function ( size )
  
     # check
     if not IsPosInt( size ) or  not IsCubeFreeInt( size )  then
-        Error("Argument has to be a positive cube-free integer.\n");
+        Error("Argument has to be a positive cube-free integer.");
     fi;
 
     if size = 1 then 
@@ -68,7 +68,7 @@ InstallGlobalFunction(ConstructAllCFNilpotentGroups, function ( size )
  
     # check
     if not IsPosInt( size ) or  not IsCubeFreeInt( size )  then
-        Error("Argument has to be a positive cube-free integer.\n");
+        Error("Argument has to be a positive cube-free integer.");
     fi;
    
     if size = 1 then 

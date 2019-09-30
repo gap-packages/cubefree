@@ -586,7 +586,7 @@ InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
 
     # check
     if not IsPosInt( n ) or not IsCubeFreeInt( n ) then
-        Error("Argument has to be a positive cube-free integer.\n"); 
+        Error("Argument has to be a positive cube-free integer."); 
     fi;
 
     # catch the case of n = 1 

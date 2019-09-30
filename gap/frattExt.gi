@@ -66,7 +66,7 @@ InstallGlobalFunction(ConstructAllCFGroups, function ( size )
 
     # check
     if not IsPosInt( size ) or not IsCubeFreeInt( size ) then
-        Error("Argument has to be a positive cube-free integer.\n"); 
+        Error("Argument has to be a positive cube-free integer."); 
     fi;
 
     # catch the case of size = 1 
@@ -146,7 +146,7 @@ InstallGlobalFunction(ConstructAllCFSolvableGroups, function ( size )
 
     # check
     if not IsPosInt( size ) or not IsCubeFreeInt( size ) then
-        Error("Argument has to be a positive cube-free integer.\n"); 
+        Error("Argument has to be a positive cube-free integer."); 
     fi;
 
     Info(InfoCF,1,"Construct all solvable groups of order ",size,".");
