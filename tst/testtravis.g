@@ -1,4 +1,5 @@
 LoadPackage( "cubefree" );
+LoadPackage("irredsol" ); # for exampleMat.tst
 dirs := DirectoriesPackageLibrary( "cubefree", "tst" );
 
 failures := 0;
