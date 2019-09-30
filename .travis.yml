@@ -1,9 +1,5 @@
 language: c
 
-env:
-  global:
-    - GAP_TESTFILE=tst/testtravis.g
-
 addons:
   apt_packages:
     - libgmp-dev

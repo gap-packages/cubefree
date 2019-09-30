@@ -69,7 +69,7 @@ Dependencies := rec(
 
 AvailabilityTest := ReturnTrue,
 Autoload := false,
-TestFile := "tst/autoTest.tst",
+TestFile := "tst/testall.g",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
 ));
