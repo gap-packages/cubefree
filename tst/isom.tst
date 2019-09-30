@@ -20,7 +20,7 @@ gap> testOrder := function(n)
 >   end);
 >   Assert(0, ForAll(allSG, g -> Number(allCF, h -> IsomorphismCubefreeGroupsNC(g, h) <> fail) = 1));
 >   Assert(0, ForAll(allSG, g -> Number(allCF, h -> IsomorphismCubefreeGroups(g, h) <> fail) = 1));
->   Assert(0, ForAll(allSG, g -> Number(allCF, h -> IsIsomorphismCubefreeGroups(g, h)) = 1));
+>   Assert(0, ForAll(allSG, g -> Number(allCF, h -> IsIsomorphicCubefreeGroups(g, h)) = 1));
 > end;;
 
 # test some small cases, corner cases

@@ -933,12 +933,12 @@ end);
 ###############################################################################
 ##############################################################################
 ##
-#F  IsIsomorphismCubefreeGroups(G,H)
+#F  IsIsomorphicCubefreeGroups(G,H)
 ## 
 ## G and H are cubefree groups;
 ## returns true iff G and H are isomorphic
 ##
-InstallGlobalFunction( IsIsomorphismCubefreeGroups, function(G,H)
+InstallGlobalFunction( IsIsomorphicCubefreeGroups, function(G,H)
 local Gpsl, Hpsl, Gsolv, Hsolv, genG, genH, phiA, isoSolv, len;
 
    if G = H then
