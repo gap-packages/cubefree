@@ -73,5 +73,3 @@ TestFile := "tst/autoTest.tst",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
 ));
-
-
