@@ -17,8 +17,8 @@ gap> ConstructAllCFGroups(0);
 Error, Argument has to be a positive cube-free integer.
 gap> ConstructAllCFGroups(1);
 [ <pc group of size 1 with 0 generators> ]
-gap> ConstructAllCFGroups(2);
-[ <pc group of size 2 with 1 generators> ]
+gap> List(ConstructAllCFGroups(2), IdGroup);
+[ [ 2, 1 ] ]
 gap> ConstructAllCFGroups(4);
 [ <pc group of size 4 with 2 generators>, 
   <pc group of size 4 with 2 generators> ]
@@ -30,8 +30,8 @@ gap> ConstructAllCFSolvableGroups(0);
 Error, Argument has to be a positive cube-free integer.
 gap> ConstructAllCFSolvableGroups(1);
 [ <pc group of size 1 with 0 generators> ]
-gap> ConstructAllCFSolvableGroups(2);
-[ <pc group of size 2 with 1 generators> ]
+gap> List(ConstructAllCFSolvableGroups(2), IdGroup);
+[ [ 2, 1 ] ]
 gap> ConstructAllCFSolvableGroups(4);
 [ <pc group of size 4 with 2 generators>, 
   <pc group of size 4 with 2 generators> ]
@@ -43,8 +43,8 @@ gap> ConstructAllCFSimpleGroups(0);
 Error, Argument has to be a positive cube-free integer.
 gap> ConstructAllCFSimpleGroups(1);
 [  ]
-gap> ConstructAllCFSimpleGroups(2);
-[ <pc group of size 2 with 1 generators> ]
+gap> List(ConstructAllCFSimpleGroups(2), IdGroup);
+[ [ 2, 1 ] ]
 gap> ConstructAllCFSimpleGroups(4);
 [  ]
 gap> ConstructAllCFSimpleGroups(8);
@@ -55,11 +55,10 @@ gap> ConstructAllCFNilpotentGroups(0);
 Error, Argument has to be a positive cube-free integer.
 gap> ConstructAllCFNilpotentGroups(1);
 [ <pc group of size 1 with 0 generators> ]
-gap> ConstructAllCFNilpotentGroups(2);
-[ <pc group of size 2 with 1 generators> ]
-gap> ConstructAllCFNilpotentGroups(4);
-[ <pc group of size 4 with 1 generators>, 
-  <pc group of size 4 with 2 generators> ]
+gap> List(ConstructAllCFNilpotentGroups(2), IdGroup);
+[ [ 2, 1 ] ]
+gap> List(ConstructAllCFNilpotentGroups(4), IdGroup);
+[ [ 4, 1 ], [ 4, 2 ] ]
 gap> ConstructAllCFNilpotentGroups(8);
 Error, Argument has to be a positive cube-free integer.
 
