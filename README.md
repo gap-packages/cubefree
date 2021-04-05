@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/gap-packages/cubefree.svg?branch=master)](https://travis-ci.com/gap-packages/cubefree)
+[![Build Status](https://github.com/gap-packages/cubefree/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/cubefree/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/cubefree/coverage.svg)](https://codecov.io/gh/gap-packages/cubefree)
 
 # The GAP 4 package Cubefree
