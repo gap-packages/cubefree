@@ -2,8 +2,6 @@
 ##
 #W  irrGL2.gi          Cubefree                                Heiko Dietrich
 ##
-#H   @(#)$Id: irrGL2.gi,v 1.3 2007/05/08 07:59:31 gap Exp $
-##
 
 ##
 ## IrreducibleSubgroupsOfGL( 2, q ) constructs all irreducible subgroups of 
