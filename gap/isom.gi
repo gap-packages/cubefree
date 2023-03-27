@@ -144,8 +144,8 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
          ex := Filtered([1..r],x-> Gcd(r,x)=1);
          gU := MinimalGeneratingSet(U)[1];
          gV := MinimalGeneratingSet(V)[1];
-         cm := CompanionMat(CharacteristicPolynomial(gU));
-         r  := First(ex,x->CompanionMat(CharacteristicPolynomial(gV^x))=cm);
+         cm := CharacteristicPolynomial(gU);
+         r  := First(ex,x->CharacteristicPolynomial(gV^x)=cm);
          gV := gV^r;
          e  := [1,0]*One(GF(p));
          cobU := [e*gU,e]^-1;
@@ -269,10 +269,10 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
                   Display("shouldn't happen"); 
                fi;
 
-               cm := CompanionMat(CharacteristicPolynomial(gU));
-               r  := First(ex,x->CompanionMat(CharacteristicPolynomial(gV^x))=cm);
+               cm := CharacteristicPolynomial(gU);
+               r  := First(ex,x->CharacteristicPolynomial(gV^x)=cm);
                gV := gV^r;
-               r  := First(ex,x->CompanionMat(CharacteristicPolynomial(stds^x))=cm);
+               r  := First(ex,x->CharacteristicPolynomial(stds^x)=cm);
                stds := stds^r;
                e  := [1,0]*One(GF(p));
                cobU := [e,e*gU]^-1;
