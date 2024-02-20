@@ -1,5 +1,6 @@
 name: Cubefree
 version: "1.19"
+license: "GPL-2.0-or-later"
 date: 2022-02-21
 description: |
     Constructing the Groups of a Given Cubefree Order
