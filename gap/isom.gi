@@ -36,16 +36,14 @@ local ord, syl, a, b, S, id;
    if IsTrivial(G) then
       return rec(id:=[1,1], gens:=[One(G),One(G)]);
    fi;
-   ord  := Collected(FactorsInt(Order(G)));
-   syl  := List(ord,p->SylowSubgroup(G,p[1]));
+   ord  := PrimeDivisors(Order(G));
+   syl  := List(ord,p->SylowSubgroup(G,p));
    a    := One(G);
    b    := One(G);
    for S in syl do
       id := MinimalGeneratingSet(S);
-      if Size(id)=1 then
-         a := a * id[1];
-      else
-         a := a * id[1];
+      a := a * id[1];
+      if Size(id)>1 then
          b := b * id[2];
       fi;
    od;
@@ -88,13 +86,13 @@ local p,iU,iV,eU,eV,UU,VV,m,r,ex,gU,gV,cm,cobV,cobU,e,el4U,el4V,cU,cV,
    fi;
 
    get2part := function(x)
-   local o,c;
+   local o,v;
       o := Order(x);
-      c := Collected(FactorsInt(o));
       if IsOddInt(o) then
          return [x,1];
       fi;
-      return [x^(o/(c[1][1]^c[1][2])),(c[1][1]^c[1][2])];
+      v := 2^PValuation(o,2);
+      return [x^(o/v),v];
    end;
 
    isscalarmat := x-> IsDiagonalMat(x) and Size(Collected(List([1..Size(x)],i->
@@ -616,7 +614,7 @@ local ordp, p, H1, S1, N2,H2,H2im,homH2,gen,im,
     
 
    newiso := iso;
-   ordp   := List(Collected(FactorsInt(Order(G))),x->x[1]);
+   ordp   := PrimeDivisors(Order(G));
    p      := Size(PG);
    if not IsPrime(p) then Error("need cyclic Frattini subgroups"); fi;
    SS     := SylowSystem(G);
@@ -695,7 +693,7 @@ local PG, PH, G, H, isoG, isoH,iso, homH, homG, QG, QH, genG, genH, imH, imG,
    fi;
 
 
-   ordp := List(Collected(FactorsInt(Order(PG))),x->x[1]);
+   ordp := PrimeDivisors(Order(PG));
    GGs   := [G];
    HHs   := [H];
    homGG := [];
