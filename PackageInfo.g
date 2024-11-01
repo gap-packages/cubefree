@@ -59,7 +59,7 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Constructing the groups of a given cubefree order",
-  Autoload  := true),
+),
 
 Dependencies := rec(
   GAP := ">=4.8",
@@ -68,7 +68,6 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-Autoload := false,
 TestFile := "tst/testall.g",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
