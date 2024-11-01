@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.19",
-Date := "21/02/2022", # dd/mm/yyyy format
+Version := "1.20",
+Date := "01/11/2024", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -59,7 +59,7 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Constructing the groups of a given cubefree order",
-  Autoload  := true),
+),
 
 Dependencies := rec(
   GAP := ">=4.8",
@@ -68,7 +68,6 @@ Dependencies := rec(
   ExternalConditions := [] ),
 
 AvailabilityTest := ReturnTrue,
-Autoload := false,
 TestFile := "tst/testall.g",
 Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
 
