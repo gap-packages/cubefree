@@ -721,7 +721,7 @@ InstallMethod(IrreducibleSubgroupsOfGL,
     fi;
 
     if not IsPrimePowerInt(q) then 
-	Error("q must be a prime power integer");
+        Error("q must be a prime power integer");
     fi;
 
     groups := [];
@@ -747,6 +747,6 @@ InstallMethod(IrreducibleSubgroupsOfGL,
         return(groups);
     else
         Display("A prime power of p>= 5 is needed.");
-	TryNextMethod();
+        TryNextMethod();
     fi;
 end);

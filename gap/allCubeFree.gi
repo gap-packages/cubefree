@@ -343,7 +343,7 @@ InstallGlobalFunction(CountAllCFGroupsUpTo, function( arg )
                             if IsSquareFreeInt(lv) or 
                                Length(Collected(FactorsInt(lv)))<3 or
                                (smallGrp and lv<50001) then
-			        if IsOddInt(lv) then
+                                if IsOddInt(lv) then
                                     tm := Size(Filtered(
                                        [1..NumberSmallGroups(lv)],
                                         x->FrattinifactorSize(SmallGroup(lv,x))

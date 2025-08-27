@@ -1072,9 +1072,9 @@ cf.randomtest := function(G,H)
     while Minimum( conds ) <= n and rem > 1  do
         for i  in [ 1 .. Length( list ) ]  do
             if Length( codes[i] ) > 0  then
-	      #Display("start spec");
+                #Display("start spec");
                 code := RandomSpecialPcgsCoded( list[i].group );
-	#Display("done...");
+                #Display("done...");
                 if code in codes[i]  then
                     conds[i] := conds[i] + 1;
                 fi;

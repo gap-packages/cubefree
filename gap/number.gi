@@ -83,13 +83,13 @@ InstallGlobalFunction(NumberCFSolvableGroups, function( arg )
     number  := 0;
     for F in FOrders do
         if cf_canUseSG(F) or (smallGrp and F<50001) then
-	    if IsOddInt(F) then
+            if IsOddInt(F) then
                 i := Length(Filtered([1..NumberSmallGroups(F)], x->
                       FrattinifactorSize(SmallGroup(F,x))= F));
-	    else
+            else
                 i := Length(Filtered([1..NumberSmallGroups(F)], x->
                       FrattinifactorSize(SmallGroup(F,x))= F and
-		      IsSolvable(SmallGroup(F,x)) ));
+                      IsSolvable(SmallGroup(F,x)) ));
             fi;
             number := number + i;
         else
