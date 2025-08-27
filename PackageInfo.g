@@ -62,8 +62,12 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">=4.8",
-  NeededOtherPackages := [["GrpConst","2.5"],["Polycyclic","2.11"]],
+  GAP := ">=4.9",
+  NeededOtherPackages := [
+    ["GrpConst","2.5"],
+    ["Polycyclic","2.11"],
+    ["smallgrp","1.3"],
+    ],
   SuggestedOtherPackages := [],
   ExternalConditions := [] ),
 
