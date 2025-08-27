@@ -34,9 +34,11 @@ InstallGlobalFunction( RewriteAbsolutelyIrreducibleMatrixGroup, function( G )
         H := MutableCopyMat( M );
         for x in [1..d] do
             for y in [1..d] do
+                z := H[x,y];
                 for j in [1..i] do
-                    H[x,y] := a(H[x,y]);
+                    z := a(z);
                 od;
+                H[x,y] := z;
             od;
         od;
         return H;
