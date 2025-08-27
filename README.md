@@ -91,7 +91,7 @@ more information.
 ## Test files
 
 There are several test files to call to check the results of the standard
-methods. The standard test file is `tst/testQuick.g`. Moreover, there are
+methods. The standard test file is `tst/testall.g`. Moreover, there are
 `tst/testSG.g`, `tst/testSGlong.g`, `tst/testBig.g` and `tst/testMat.g`. 
 Please see the documentation for more information.
 
