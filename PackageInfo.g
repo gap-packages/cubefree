@@ -1,74 +1,103 @@
 #############################################################################
 ##  
-#W  PackageInfo.g          GAP 4 package 'Cubefree'            Heiko Dietrich
-##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
 ##
-##  Based on Frank Luebeck's template for PackageInfo.g.
-##  
- 
+
 SetPackageInfo( rec(
 
-PackageName := "Cubefree",
-Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.20",
-Date := "01/11/2024", # dd/mm/yyyy format
-License := "GPL-2.0-or-later",
+PackageName := "GitHubPagesForGAP",
+
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
+  rec(
+    LastName      := "Horn",
+    FirstNames    := "Max",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
+  ),
 
- rec(
-      LastName      := "Dietrich",
-      FirstNames    := "Heiko",
-      IsAuthor      := true,
-      IsMaintainer  := true,
-      Email         := "heiko.dietrich@monash.edu",
-      WWWHome       := "http://users.monash.edu.au/~heikod/",
-      PostalAddress := Concatenation( [
-            "School of Mathematical Sciences",
-            "Monash University\n",
-            "VIC 3800\n Melbourne, Australia" ] ),
-      Place         := "Melbourne",
-      Institution   := "Monash University"),
+  rec(
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    #Email         := "author@example.com",
+  ),
 
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    #Email         := "janitor@example.com",
+  ),
 ],
 
-Status := "accepted",
-CommunicatedBy := "David Joyner (Annapolis)",
-AcceptDate := "10/2007",
+Status := "other",
 
-PackageWWWHome  := "https://gap-packages.github.io/cubefree/",
-README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-SourceRepository := rec(
-    Type := "git",
-    URL := "https://github.com/gap-packages/cubefree",
-),
-IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-ArchiveURL      := Concatenation( ~.SourceRepository.URL,
-                                 "/releases/download/v", ~.Version,
-                                 "/cubefree-", ~.Version ),
-ArchiveFormats := ".tar.gz",
-                                 
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
+GithubRepository := ~.PackageName,
+GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
+
+PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
+ArchiveURL     := Concatenation(~.GithubWWW,
+                    "/releases/download/v", ~.Version, "/",
+                    ~.GithubRepository, "-", ~.Version),
+
+ArchiveFormats := ".tar.gz .tar.bz2",
+
 AbstractHTML := 
-"The <span class=\"pkgname\">Cubefree</span> package contains methods to construct up to isomorphism the groups of a given (reasonable) cubefree order. The main function ConstructAllCFGroups(n) constructs all groups of a given cubefree order n. The function NumberCFGroups(n) counts all groups of a cubefree order n. Furthermore, IrreducibleSubgroupsOfGL(2,q) constructs the irreducible subgroups of GL(2,q), q=p^r, p>=5 prime, up to conjugacy and RewriteAbsolutelyIrreducibleMatrixGroup(G) rewrites the absolutely irreducible matrix group G (over a finite field) over a minimal subfield.",
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
 
 PackageDoc := rec(
-  BookName  := "Cubefree",
-  ArchiveURLSubset := ["doc", "htm"],
-  HTMLStart := "htm/chapters.htm",
+  BookName  := "GitHubPagesForGAP",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "Constructing the groups of a given cubefree order",
+  LongTitle := "A GitHub Pages generator for GAP packages",
 ),
 
+# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.8",
-  NeededOtherPackages := [["GrpConst","2.5"],["Polycyclic","2.11"]],
-  SuggestedOtherPackages := [],
-  ExternalConditions := [] ),
+  GAP := ">=4.8.1",
+  NeededOtherPackages := [
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+  ExternalConditions := []
+),
 
 AvailabilityTest := ReturnTrue,
-TestFile := "tst/testall.g",
-Keywords := ["cubefree","construction of groups","irreducible matrix subgroups of degree 2"]
+
+Keywords := ["GitHub Pages", "GAP"]
 
 ));
+
+

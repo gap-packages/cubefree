@@ -1,68 +1,76 @@
-name: Cubefree
-version: "1.20"
-license: "GPL-2.0-or-later"
-date: 2024-11-01
+name: GitHubPagesForGAP
+version: "0.2"
+license: "0BSD"
+date: 2017-02-04
 description: |
-    Constructing the Groups of a Given Cubefree Order
+    A GitHub Pages generator for GAP packages
 
 authors:
-    - name: Heiko Dietrich
-      url: http://users.monash.edu.au/~heikod/
+    - name: Max Horn
+      url: http://www.quendi.de/math
+    - name: A. U. Thor
 
 maintainers:
-    - name: Heiko Dietrich
-      url: http://users.monash.edu.au/~heikod/
+    - name: Max Horn
+      url: http://www.quendi.de/math
+    - name: Jan Itor
 
-GAP: ">=4.8"
+GAP: ">=4.8.1"
 
 needed-pkgs:
-    - name: "GrpConst"
-      version: "2.5"
-      url: "https://gap-packages.github.io/grpconst/"
-    - name: "Polycyclic"
-      version: "2.11"
-      url: "https://gap-packages.github.io/polycyclic/"
+    - name: "GAPDoc"
+      version: ">= 1.2"
+      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
+    - name: "IO"
+      version: ">= 4.1"
+      url: "https://gap-packages.github.io/io"
 
-www: https://gap-packages.github.io/cubefree/
+suggested-pkgs:
+    - name: "orb"
+      version: ">= 4.2"
+      url: "https://gap-packages.github.io/orb"
+
+www: https://gap-system.github.io/GitHubPagesForGAP/
 readme: README.md
-packageinfo: https://gap-packages.github.io/cubefree/PackageInfo.g
+packageinfo: https://gap-system.github.io/GitHubPagesForGAP/PackageInfo.g
+github: https://github.com/gap-system/GitHubPagesForGAP
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/cubefree/releases/download/v1.20/cubefree-1.20.tar.gz
+      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.gz
+    - name: .tar.bz2
+      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.bz2
 
 abstract: |
-    The <span class="pkgname">Cubefree</span> package contains methods to construct up to isomorphism the groups of a given (reasonable) cubefree order. The main function ConstructAllCFGroups(n) constructs all groups of a given cubefree order n. The function NumberCFGroups(n) counts all groups of a cubefree order n. Furthermore, IrreducibleSubgroupsOfGL(2,q) constructs the irreducible subgroups of GL(2,q), q=p^r, p>=5 prime, up to conjugacy and RewriteAbsolutelyIrreducibleMatrixGroup(G) rewrites the absolutely irreducible matrix group G (over a finite field) over a minimal subfield.
+    This is a pseudo package that contains no actual  <span class="pkgname">GAP</span> code. Instead, it is a template for other  GAP packages that allows to quickly setup GitHub Pages.
 
-status: accepted
-doc-html: htm/chapters.htm
+status: other
+doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 keywords: |
-    cubefree, construction of groups, irreducible matrix subgroups of degree 2.
+    GitHub Pages, GAP.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>Die24</span>]   <b class='BibAuthor'>Dietrich, H.</b>,
-     <i class='BibTitle'>Cubefree, Constructing the Groups of a Given Cubefree Order,
-             Version 1.20</i>
-     (<span class='BibYear'>2024</span>)<br />
+    [<span class='BibKey'>HTI17</span>]   <b class='BibAuthor'>Horn, M., Thor, A. U. and Itor, J.</b>,
+     <i class='BibTitle'>GitHubPagesForGAP, A GitHub Pages generator for GAP packages,
+             Version 0.2</i>
+     (<span class='BibYear'>2017</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://gap-packages.github.io/cubefree/">https://gap-packages.github.io/cubefree/</a></span>.
+    <span class='BibHowpublished'><a href="https://gap-system.github.io/GitHubPagesForGAP/">https://gap-system.github.io/GitHubPagesForGAP/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ Cubefree,
-      author =           {Dietrich, H.},
-      title =            {{Cubefree},   Constructing   the  Groups  of  a  Given
-                          Cubefree Order, {V}ersion 1.20},
-      month =            {Nov},
-      year =             {2024},
+    @misc{ GitHubPagesForGAP0.2,
+      author =           {Horn, M. and Thor, A. U. and Itor, J.},
+      title =            {{GitHubPagesForGAP}, A GitHub Pages generator for GAP packages, {V}ersion 0.2},
+      month =            {Feb},
+      year =             {2017},
       note =             {GAP package},
-      howpublished =     {\href       {https://gap-packages.github.io/cubefree/}
-                          {\texttt{https://gap\texttt{\symbol{45}}packages.github.io/}\discretionary
-                          {}{}{}\texttt{cubefree/}}},
-      keywords =         {cubefree;  construction  of groups; irreducible matrix
-                          subgroups of degree 2},
-      printedkey =       {Die24}
+      howpublished =     {\href                              {https://gap-system.github.io/GitHubPagesForGAP/}
+                          {\texttt{https://gap-system.github.io/}\discretionary
+                          {}{}{}\texttt{GitHubPagesForGAP/}}},
+      keywords =         {GitHub Pages; GAP},
+      printedkey =       {HTI17}
     }
 
