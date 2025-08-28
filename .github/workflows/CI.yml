@@ -58,6 +58,14 @@ jobs:
       - uses: gap-actions/build-pkg-docs@v1
         with:
           use-latex: 'true'
+          warnings-as-errors: 'false'
+          # Disable warnings as we we get errors triggered by the GAP
+          # reference manual and I have no idea what causes them or how to
+          # deal with them. E.g.:
+          #
+          #     Section: "ref:specialpcgs" already defined as: 45.13.0
+          #     Now being redefined as: 45.13.2
+
       - name: 'Upload documentation'
         uses: actions/upload-artifact@v4
         with:
