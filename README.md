@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/gap-packages/cubefree/actions/workflows/CI.yml/badge.svg)](https://github.com/gap-packages/cubefree/actions/workflows/CI.yml)
+[![CI](https://github.com/gap-packages/cubefree/actions/workflows/CI.yml/badge.svg)](https://github.com/gap-packages/cubefree/actions/workflows/CI.yml)
 [![Code Coverage](https://codecov.io/github/gap-packages/cubefree/coverage.svg)](https://codecov.io/gh/gap-packages/cubefree)
 
 # The GAP 4 package Cubefree
