@@ -1,0 +1,25 @@
+<!-- W  install.tex            GAP documentation                Heiko Dietrich -->
+<Chapter Label="Installing and loading the Cubefree package">
+<Heading>Installing and loading the Cubefree package</Heading>
+<Index>installing                         and loading the &Cubefree; package</Index>
+<Section Label="Installing the Cubefree package">
+<Heading>Installing the Cubefree package</Heading>
+<Index>installing the &Cubefree; package</Index>
+The installation of the &Cubefree; package follows standard &GAP; rules, see
+also 
+Chapter&nbsp;<Ref Sect="Installing a GAP Package" BookName="ref"/> in the &GAP; reference manual.
+So the standard method is to unpack the package into the <C>pkg</C>
+directory  of your &GAP; distribution.  This will create an <C>cubefree</C>
+subdirectory.
+</Section>
+<Section Label="Loading the Cubefree package">
+<Heading>Loading the Cubefree package</Heading>
+<Index>loading the &Cubefree; package</Index>
+To use the &Cubefree; Package you have to request it explicitly. This  is
+done by calling <C>LoadPackage</C> like this:
+<Example><![CDATA[
+gap> LoadPackage("cubefree");
+true
+]]></Example>
+</Section>
+</Chapter>

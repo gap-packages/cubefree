@@ -1,0 +1,103 @@
+<!-- W  intro.tex          Cubefree documentation              Heiko Dietrich -->
+<Chapter Label="Introduction">
+<Heading>Introduction</Heading>
+<Index>&Cubefree;</Index>
+<Section Label="Overview">
+<Heading>Overview</Heading>
+This manual describes the &Cubefree;  package,
+a &GAP; 4 package for constructing groups of cubefree order; i.e., groups
+whose order is not divisible by any third power of a prime.
+<P/>
+The groups of squarefree order are known for a long time: Hoelder
+<Cite Key="Hol93"/> investigated them at the end of the 19th century. Taunt
+<Cite Key="Tau55"/> has considered solvable groups of cubefree order, since he
+examined solvable groups with abelian Sylow subgroups. Cubefree groups in
+general are investigated firstly in <Cite Key="Di05"/>, <Cite Key="DiEi05"/>, and <Cite Key="DiEi05add"/>, and this
+package contains the implementation of the algorithms described
+there.
+<P/>
+Some general approaches to construct groups of an arbitrarily given order are
+described in <Cite Key="BeEia"/>, <Cite Key="BeEib"/>, and <Cite Key="BeEiO"/>.
+<P/>
+The main function of this package is a method to construct 
+all groups of a given cubefree order up to isomorphism. The algorithm behind this function is
+described completely in <Cite Key="Di05"/> and <Cite Key="DiEi05"/>. It is a refinement of
+the methods of the &GrpConst; package which are described in <Cite Key="GrpConst"/>.
+<P/>
+This main function needs a method to construct up to conjugacy the solvable
+cubefree subgroups of GL<M>(2,p)</M> coprime to <M>p</M>. We split this construction
+into the construction of reducible and irreducible subgroups of GL<M>(2,p)</M>. To determine the
+irreducible subgroups we use the method described in <Cite Key="FlOB05"/> for which this package
+also contains an implementation. Alternatively, the &IrredSol; package
+<Cite Key="Irredsol"/> could be used for primes <M>p\le 251</M>.
+<P/>
+The algorithm of <Cite Key="FlOB05"/> requires a method to rewrite a matrix
+representation. We use and implement the method of <Cite Key="GlHo97"/> for this purpose.
+<P/>
+One can modify the construction algorithm for cubefree groups to a very
+efficient algorithm to construct groups of squarefree order. This is already
+done in the  &SmallGroups; library. Thus for the construction of groups of squarefree order it is more practical to
+use <C>AllSmallGroups</C> of the &SmallGroups; library.
+<P/>
+A more detailed description of the implemented methods can be found in Chapter 2.
+<P/>
+Chapter <Ref Chap="Installing and loading the Cubefree package"/> explains
+how to install and load the &Cubefree; package.
+</Section>
+<Section Label="Theoretical background">
+<Heading>Theoretical background</Heading>
+In this section we give a brief survey about the main algorithm which is used
+to construct groups of cubefree order: the Frattini extension method. For a by
+far more detailed description
+we refer to the above references; e.g. see the online version of <Cite Key="Di05"/>.
+<P/>
+Let <M>G</M> be a finite group. The Frattini subgroup <M>\Phi(G)</M> is defined to be
+the intersection of all maximal subgroups of <M>G</M>. We say a group <M>H</M> is a
+Frattini extension by <M>G</M> if the Frattini factor <M>H/\Phi(H)</M> is isomorphic to
+<M>G</M>. The Frattini factor of <M>H</M> is Frattini-free; i.e. it has a trivial
+Frattini subgroup. It is known that every prime divisor of <M>|H|</M> is also a divisor of
+<M>|H/\Phi(H)|</M>. Thus the Frattini subgroup of a cubefree group has to be
+squarefree and, as it is nilpotent, it is a direct product of cyclic groups of
+prime order.
+<P/>
+Hence in order to construct all groups of a given cubefree order <M>n</M>, say, one can,
+firstly, construct all Frattini-free groups of suitable orders and, secondly, compute
+all corresponding Frattini extensions of order <M>n</M>. A first fundamental result
+is that  a group of cubefree order is either a solvable Frattini
+extension or a direct product of a PSL<M>(2,r)</M>, <M>r&gt;3</M> a prime, with a solvable
+Frattini extension. In particular, the simple groups of cubefree
+order are the groups PSL<M>(2,r)</M> with <M>r&gt;3</M> a prime such that <M>r\pm
+1</M> is cubefree. As a nilpotent group is the direct product of its Sylow subgroups, it
+is straightforward to compute all nilpotent groups of a given cubefree order.
+<P/>
+Another important result is
+that for a cubefree solvable Frattini-free group there is exactly one isomorphism
+type of suitable Frattini extensions, which restricts the construction of
+cubefree groups to the
+determination of cubefree solvable
+Frattini-free groups.  This uniqueness of Frattini extensions is the
+main reason why the Frattini extension method works so efficiently in the
+cubefree case.
+<P/>
+In other words, there is a one-to-one correspondence between
+the solvable cubefree groups of order <M>n</M> and  some Frattini-free groups of order
+dividing <M>n</M>. This allows to count the number of isomorphism types of cubefree groups of a given
+order without
+constructing Frattini extensions.
+<P/>
+In the remaining part of this section we consider the construction of the
+solvable Frattini-free groups of a given cubefree order up to
+isomorphism. Such a group is a split extension over its socle; i.e. over the
+product of its minimal normal subgroups. Let <M>F</M> be a solvable Frattini-free
+group of cubefree order with socle <M>S</M>. Then <M>S</M> is a (cubefree) direct product of cyclic
+groups of prime order and <M>F</M> can be written as <M>F=K\ltimes S</M>
+where <M>K\leq</M>Aut<M>(S)</M> is determined up to conjugacy. In particular, <M>K</M> is a subdirect product of certain
+cubefree subgroups of groups of the type GL<M>(2,p)</M> or
+<M>C_{p-1}</M>. Hence in order to determine all possible subgroups <M>K</M> one can
+determine all possible projections from such a subgroup into the direct factors
+of the types GL<M>(2,p)</M> and <M>C_{p-1}</M>, and then form all subdirect
+products having these projections. The construction of these subdirect
+products is one of the most time-consuming parts in the Frattini extension
+method for cubefree groups.
+</Section>
+</Chapter>
