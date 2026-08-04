@@ -8,7 +8,7 @@ This manual describes the &Cubefree;  package,
 a &GAP; 4 package for constructing groups of cubefree order; i.e., groups
 whose order is not divisible by any third power of a prime.
 <P/>
-The groups of squarefree order are known for a long time: Hoelder
+The groups of squarefree order have been known for a long time: Hoelder
 <Cite Key="Hol93"/> investigated them at the end of the 19th century. Taunt
 <Cite Key="Tau55"/> has considered solvable groups of cubefree order, since he
 examined solvable groups with abelian Sylow subgroups. Cubefree groups in
@@ -39,7 +39,8 @@ efficient algorithm to construct groups of squarefree order. This is already
 done in the  &SmallGroups; library. Thus for the construction of groups of squarefree order it is more practical to
 use <C>AllSmallGroups</C> of the &SmallGroups; library.
 <P/>
-A more detailed description of the implemented methods can be found in Chapter 2.
+A more detailed description of the implemented methods can be found in
+Chapter&nbsp;<Ref Chap="Functionality of the Cubefree package"/>.
 <P/>
 Chapter <Ref Chap="Installing and loading the Cubefree package"/> explains
 how to install and load the &Cubefree; package.
@@ -81,7 +82,7 @@ cubefree case.
 <P/>
 In other words, there is a one-to-one correspondence between
 the solvable cubefree groups of order <M>n</M> and  some Frattini-free groups of order
-dividing <M>n</M>. This allows to count the number of isomorphism types of cubefree groups of a given
+dividing <M>n</M>. This allows one to count the number of isomorphism types of cubefree groups of a given
 order without
 constructing Frattini extensions.
 <P/>

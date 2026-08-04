@@ -12,7 +12,7 @@ This section lists the implemented functions.
 <Description>
 The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
 type representatives of groups of this size. If possible, the groups are given
-as pc groups and as permutations groups otherwise.
+as pc groups and as permutation groups otherwise.
 </Description>
 </ManSection>
 <ManSection>
@@ -63,7 +63,7 @@ The input <A>n</A> has to be a positive cubefree integer and the output is the n
 cubefree groups of order <A>n</A>. The &SmallGroups; library  is used for squarefree
 orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
 50000. Only if <A>bool</A> is set to false, then only  the squarefree
-orders and orders of the type <M>p^2</M> and <M>p^2q</M>,are taken from the &SmallGroups;  library.
+orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &SmallGroups; library.
 </Description>
 </ManSection>
 <ManSection>
@@ -73,7 +73,7 @@ The input <A>n</A> has to be a positive cubefree integer and the output is the n
 cubefree solvable groups of order <A>n</A>. The &SmallGroups; library  is used for squarefree
 orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
 50000. Only if <A>bool</A> is set to false, then only  the squarefree
-orders and orders of the type <M>p^2</M> and <M>p^2q</M>,are taken from the &SmallGroups; library.
+orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &SmallGroups; library.
 </Description>
 </ManSection>
 <ManSection>
@@ -98,7 +98,7 @@ information about the complexity of the construction of the groups of
 <A>a</A> is the order of a Frattini-free group <A>F</A> with socle <A>S</A> of order <A>b</A> which
 has to be constructed in order to construct all groups of order <A>n</A>: In fact,
 for each of these pairs <A>(a,b)</A> one would have to construct up to conjugacy all
-subgroups of order &lt;a/b&gt; of Aut<A>(S)</A>. The sum of the numbers of these
+subgroups of order <A>a</A>/<A>b</A> of Aut<A>(S)</A>. The sum of the numbers of these
 subgroups for all pairs  <A>(a,b)</A> as above is the number of groups of order
 <A>n</A>. Thus the output of <C>CubefreeOrderInfo</C> is a trivial lower bound for the number of
 groups of order <A>n</A>. There is no additional information
@@ -160,18 +160,14 @@ methods of the required &GAP; &nbsp;package &GrpConst; &nbsp;are used.
 Since <C>ConstructAllCFGroups</C> requires only
 some special types of irreducible subgroups of GL<M>(2,p)</M> (e.g. of cubefree order), it
 contains a modified internal version of
-<C>IrreducibleSubgroupsOfGL</C>. This means that the latter is not called explicitely by
+<C>IrreducibleSubgroupsOfGL</C>. This means that the latter is not called explicitly by
 <C>ConstructAllCFGroups</C>.
-<P/>
-&nbsp;
-<P/>
-&nbsp;
 <P/>
 <E>ConstructAllCFSimpleGroups and ConstructAllCFNilpotentGroups</E>
 <P/>
 The construction of simple or nilpotent groups of cubefree
 order is rather easy, see <Cite Key="Di05"/> or <Cite Key="DiEi05"/>. In particular, the
-methods used in these cases are independent from the methods used in the general cubefree case.
+methods used in these cases are independent of the methods used in the general cubefree case.
 <P/>
 <E>CountAllCFGroupsUpTo</E>
 <P/>
@@ -179,7 +175,7 @@ As described in <Cite Key="Di05"/> and <Cite Key="DiEi05"/>, every cubefree grou
 the form <M>G=A\times I</M> where <M>A</M> is trivial or non-abelian simple and <M>I</M> is
 solvable. Further, there is a one-to-one correspondence between the solvable
 cubefree groups and <A>some</A> solvable Frattini-free groups. This one-to-one
-correspondence allows to count the number of groups of a given cubefree order without
+correspondence allows one to count the number of groups of a given cubefree order without
 computing any Frattini extension.
 To reduce runtime, the
 computed irreducible and reducible subgroups of the general linear groups
@@ -207,7 +203,7 @@ expected runtime is <M>O(rd^3)</M>.
 <Heading>Comments on the efficiency</Heading>
 The package &GrpConst; contains several implementations of algorithms to
 construct groups of a given order. One of these algorithms is the Frattini
-extension method, see Chapter 1. The algorithm used in
+extension method, see Chapter&nbsp;<Ref Chap="Introduction"/>. The algorithm used in
 &Cubefree; is a modification of the Frattini extension method to the case of
 cubefree orders.
 <P/>
@@ -246,7 +242,7 @@ permutation representation of GL<M>(2,p)</M> and apply this isomorphism to the
 constructed subgroups. Unfortunately, this is quite time and memory consuming
 for bigger primes.
 <P/>
-In other words,  &Cubefree; can note handle <A>unreasonable</A>
+In other words,  &Cubefree; can not handle <E>unreasonable</E>
 cubefree orders. To get a rough idea of the complexity of the computation of
 groups of order <M>n</M> and to get a trivial  lower bound for the number of
 groups, one can use <C>CubefreeOrderInfo(n)</C>.
@@ -426,7 +422,7 @@ order so that you can abort the test whenever you want.
 <P/>
 <C>RereadPackage("cubefree","tst/testSGlong.g");</C>
 <P/>
-Three of these four test files use the function <C>CubefreeTestOrder</C>, see Section 2.1.
+Three of these four test files use the function <C>CubefreeTestOrder</C>, see Section&nbsp;<Ref Sect="New methods"/>.
 <P/>
 The last test file compares some results of <C>IrreducibleSubgroupsOfGL</C> with the
 database of &IrredSol;. This may take a while:
