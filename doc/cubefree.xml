@@ -70,10 +70,10 @@ orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &Sm
 <Func Name="NumberCFSolvableGroups" Arg="n[, bool ]"/>
 <Description>
 The input <A>n</A> has to be a positive cubefree integer and the output is the number of all
-cubefree solvable groups of order <A>n</A>. The &SmallGroups; library  is used for squarefree
-orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
-50000. Only if <A>bool</A> is set to false, then only  the squarefree
-orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &SmallGroups; library.
+cubefree solvable groups of order <A>n</A>. The &SmallGroups; library is used for
+squarefree orders and orders of the type <M>p^2</M> and <M>p^2q</M>, where all groups
+are solvable. For other orders counting is faster than searching the library,
+so <A>bool</A> has no effect there; it is accepted for compatibility.
 </Description>
 </ManSection>
 <ManSection>
@@ -85,8 +85,9 @@ is cubefree and <M>L[i]</M> is not bound, otherwise, <M>1\leq i \leq n</M>. The
 &SmallGroups; library  is used for squarefree orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
 50000. Only if <A>bool</A> is set to false, then only  the squarefree
 orders and orders of the type <M>p^2</M> and <M>p^2q</M> are taken from the
-&SmallGroups; library. This function was implemented only for experimental
-purposes and its implementation could be improved.
+&SmallGroups; library. This is a plain loop over <C>NumberCFGroups</C>, which
+caches the data it computes and hence shares most of the work between the
+orders.
 </Description>
 </ManSection>
 <ManSection>
@@ -180,11 +181,20 @@ computing any Frattini extension.
 To reduce runtime, the
 computed irreducible and reducible subgroups of the general linear groups
 GL<M>(2,p)</M> and also the number of the computed solvable
-Frattini-free groups are stored during the whole computation. This is very
-memory consuming but reduces the runtime significantly. The alternative is to
-run a loop over <C>NumberCFGroups</C>.
-This function was implemented only for experimental purposes and its
-implementation could be improved.
+Frattini-free groups are stored during the whole computation. This caching is
+done by <C>NumberCFGroups</C> itself and persists between calls, so
+<C>CountAllCFGroupsUpTo</C> is just a loop over <C>NumberCFGroups</C>. Use
+<C>cf_ClearCountCaches()</C> to free the memory again. The solvable count is
+the trivial-factor term of the total, so calling <C>NumberCFSolvableGroups</C>
+for an order for which <C>NumberCFGroups</C> has already run costs next to
+nothing.
+<P/>
+Counting never constructs a group: each socle complement determines one
+Frattini-free group, and each Frattini-free group one group of the given order.
+The subgroups of GL<M>(2,p)</M> are also replaced by small isomorphic copies
+carrying the action of their normaliser, so the subdirect products are computed
+in groups of order a few thousand rather than in a permutation representation
+of GL<M>(2,p)</M> of degree <M>p^2-1</M>.
 <P/>
 <E>IrreducibleSubgroupsOfGL</E>
 <P/>
