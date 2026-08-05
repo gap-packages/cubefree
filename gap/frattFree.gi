@@ -245,216 +245,18 @@ end;
 
 ##############################################################################
 ##
-#F  cf_AutGroupsGL2( p )
-##
-## Returns the cube-free subgroups U of GL(2,p) with p \nmid |U|
-## up to conjugacy 
-##
-cf_AutGroupsGL2 := function( p )
-    local groups, lv, iso, inv, U, H, list, gen, imag, invh, gl, N, tmp;
-
-    Info(InfoCF,3,"     Start cf_AutGroupsGL2(",p,").");
-
-    # computing the subgroups
-    if p>2 then 
-        groups := Concatenation(cf_Th52Red(p),cf_Th53(p),cf_Th51(p));
-    else
-       groups  := [];
-       lv      := Group([[Z(2),0*Z(2)],[0*Z(2),Z(2)]]);
-       lv!.red := true;
-       Add(groups,lv);
-       lv      := Group([[Z(2),Z(2)],[Z(2),Z(2)*0]]);
-       lv!.red := false;
-       Add(groups,lv);
-
-    fi;
-
-    for lv in groups do SetIsSolvableGroup(lv, true); od;
-   
-    # for technical reasons:
-    # we need the matrix groups as permutation groups to form
-    # subdirect products later. Thus we compute IsomorphismPermGroup(GL(2,p)) 
-    # which allows to compute permutation representations of all
-    # previously computed subgroups of GL(2,p) 
-    Info(InfoCF,3,"      Compute permutation represenation of ",
-                         Length(groups)," groups");
-    gl   := GL(2,p);
-    iso  := IsomorphismPermGroup( gl );
-    imag := Image(iso);
-    inv  := InverseGeneralMapping( iso );
-    list := [];
-    for U in groups do
-        gen := GeneratorsOfGroup(U);
-        gen := List(gen,x->Image(iso,x));
-        if gen = [] then gen := One(imag); fi;
-        H   := Group(gen);
-        SetSize(H,Size(U));
-
-        ## later we need subdirect products up to conj. in GL(2,p), i.e. we 
-        ## need to act with N_Gl(2,p)(U). Therefore:
-        ## -- this is now done in cf_FrattFreeSolvGroups (& only if necessary) --
-        # N := Normalizer(imag,H);
-        # SetParent(H,N);
-
-        ## alternatively (then SubdirectProducts computes the normalizers):
-        # SetParent(H,imag);
-
-        SetProjections(H,[inv]);
-        if U!.red then
-            SetSocleDimensions(H,[1,1]);
-        else
-            SetSocleDimensions(H,[2]);
-        fi;
-        Add(list,H);
-    od; 
-
-    ## the original version without computing normalizer. This slows down
-    ## cf_SocleComplements as SubdirectProducts computes these normalizers
-    ## several time.  
-    #  for U in groups do
-    #      gen := GeneratorsOfGroup(U);
-    #      gen := List(gen,x->Image(iso,x));
-    #      if gen = [] then gen := One(imag); fi;
-    #      H   := Group(gen);
-    #      SetSize(H,Size(U));
-    #      ## later we need subdirect products up to conj. in GL(2,p), therefore:
-    #      SetParent(H,imag);
-    #      SetProjections(H,[inv]);
-    #      if U!.red then
-    #          SetSocleDimensions(H,[1,1]);
-    #      else
-    #          SetSocleDimensions(H,[2]);
-    #      fi;
-    #      Add(list,H);
-    #  od; 
-
-    return(list);
-end;
-
-
-##############################################################################
-##
-#F  cf_AutGroupsC( p )
-##
-## Computes the cube-free subgroups U of Z(GL(2,p))\cong C_{p-1} 
-##
-cf_AutGroupsC := function( p )
-    local b, divs, lv, groups, gr, list, inv, H, U, G, gen, imag,
-          C, e, gl;
-
-    Info(InfoCF,3,"     Start cf_AutGroupsC(",p,").");
-
-    # set up
-    gl     := GL(1,p);
-    if p = 2 then
-       b := [[1,0],[0,1]]*One(GF(2));
-    else
-      #b      := GeneratorsOfGroup(gl)[1];
-       b      := MinimalGeneratingSet(gl)[1];
-    fi;
-    divs   := DivisorsInt(p-1);
-    divs   := Filtered(divs,x->IsCubeFreeInt(x));
-    groups := [];
-
-    # computing the subgroups
-    for lv in divs do
-        gr := Group(b^((p-1)/lv));
-        SetParent(gr,gl);
-        SetSize(gr, lv);
-        SetIsSolvableGroup(gr,true);
-        Add(groups,gr);
-    od;
-
-    # for technical reasons
-    C    := CyclicGroup( p-1 );
-    imag := Image( IsomorphismPermGroup( C ) );
-   #e    := GeneratorsOfGroup( imag );
-    e    := MinimalGeneratingSet(imag);
-    if e = [] then e := (); else e := e[1]; fi;
-    inv  := GroupHomomorphismByImagesNC(imag, GL(1,p), [e], [b]);
-    list := [];
-    for U in groups do
-        gen := [e^((p-1)/Size(U))];
-        H   := Group(gen);
-        SetParent(H,imag);
-        AsSubgroup(imag,H);
-        SetSize(H,Size(U));
-        SetProjections(H,[inv]);
-        SetSocleDimensions(H,[1]);
-        Add(list,H);
-    od;
-    return(list);
-end; 
-
-
-
-
-##############################################################################
-##
-#F  cf_SocleComplements( gr, n )
-##
-## returns all subdirect products of the groups in the lists in gr of
-## size n. This is just a modification of SocleComplements, see GrpConst.
-##
-cf_SocleComplements := function ( gr, n )
-    local  all, i, tmp, U, V, sub, j, lGr;
-    all := gr[1];
-    lGr := Length(gr);
-    for i  in [ 2 .. lGr ]  do
-        tmp := [  ];
-        for U  in all  do
-            for V  in gr[i]  do
-                if i < lGr then 
-                    sub := SubdirectProducts( U, V );
-                    sub := Filtered( sub, x -> IsInt( n / Size( x ) ));
-                    Append( tmp, sub );
-                ## U \subd V is a subgroup of V\times U and thus
-                ## V \times U must have order divisible by n
-                elif (Size(U)*Size(V)) mod n = 0 then
-                    sub := SubdirectProducts( U, V );
-                    sub := Filtered( sub, x -> IsInt( n / Size( x ) ));
-                    Append( tmp, sub );
-                fi;
-            od;
-        od;
-        all := tmp;
-        for j  in [ 1 .. Length( all ) ]  do
-            RunSubdirectProductInfo( all[j] );
-        od;
-    od;
-    return Filtered(all, x->Size(x)=n);
-end;
-
-
-
-##############################################################################
-##
 #F  cf_FrattFreeSolvGroups( n, autPos, autGrps, pos )
 ##
 ## Returns all solvable Frattini-free groups of order n up to isomorphism
 ##
 cf_FrattFreeSolvGroups := function( n, autPos, autGrps, pos )
     local facN, facS, SocOrders, temp, lv, groups, s, ord, tempAutGr,
-          subDP, socExt, sd, i, all, facNS, possible, gr, N;
+          subDP, i, facNS, possible;
    
     Info(InfoCF,1,"  Compute solvable Frattini-free groups of order ",n,".");
 
     groups := [];
     facN   := Collected(FactorsInt(n));
-
-    # to store all necessary automorphism groups - or is the data
-    # available from the input?
-    if autPos=0 then
-        autPos := [];
-        for lv in facN do
-            Add(autPos,lv[1]);
-            if lv[2]=2 then
-                Add(autPos,lv[1]^2);
-            fi;
-        od;
-        autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
-        pos     := function(x) return Position( autPos, x); end;
-    fi;
 
     # compute all socles s with n/|s| divides |Aut(s)|
     SocOrders := Filtered(DivisorsInt(n),x->x>1);
@@ -511,46 +313,19 @@ cf_FrattFreeSolvGroups := function( n, autPos, autGrps, pos )
 
         if s < n then
 
-            # if not stored before, compute all necessary aut.-groups
+            # the small models of the subgroups of the GL(d,p), see count.gi
             for lv in facS do 
-
                 if lv[2]=1 then
-                    if autGrps[pos(lv[1])]=0 then
-                        autGrps[pos(lv[1])] := cf_AutGroupsC(lv[1]);
-                    fi;
-                    temp := Filtered(autGrps[pos(lv[1])],
-                                      x-> (n/s) mod Size(x) =0);
-                    Add(tempAutGr,temp);
+                    Add(tempAutGr,cf_ctAutGroupsC(lv[1],n/s));
                 else
-                    if autGrps[pos(lv[1]^2)]=0 then
-                        autGrps[pos(lv[1]^2)] := cf_AutGroupsGL2(lv[1]);
-                    fi;
-                    temp := [];
-                    Info(InfoCF,3,"      Compute ",
-                         Length(Filtered(autGrps[pos(lv[1]^2)],
-                         x->not HasParent(x) and (n/s) mod Size(x)=0)),
-                         " normalizers.");
-                    #temp := Filtered(autGrps[pos(lv[1]^2)],
-                    #                   x->(n/s) mod Size(x)=0);
-                    for gr in autGrps[pos(lv[1]^2)] do
-                        if (n/s) mod Size(gr) = 0 then
-                            if not HasParent(gr) then
-                                N := Normalizer(Source(Projections(gr)[1]),gr);
-                                SetParent(gr, N);
-                            fi;
-                            Add(temp,gr);
-                        fi;
-                    od;
-                    Add(tempAutGr,temp);
+                    Add(tempAutGr,cf_ctAutGroupsGL2(lv[1],n/s));
                 fi;
             od;
 
             # compute all subdirect products of tempAutGr of order n/s
             Info(InfoCF,2,"    Compute socle complements (subdir. prod.'s) of order "
                                ,n/s,".");
-            #subDP := SocleComplements(tempAutGr,n/s);
-            #subDP := Filtered(subDP,x->Size(x)=n/s);
-            subDP := cf_SocleComplements(tempAutGr,n/s);
+            subDP := cf_ctSocleComplementsFull(tempAutGr,n/s);
             Info(InfoCF,2,"    Compute extensions by socle of order ",n,".");
             for i in [1..Length( subDP )] do
                 subDP[i] := ExtensionBySocle( subDP[i] );
