@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "Cubefree",
 Subtitle := "Constructing the Groups of a Given Cubefree Order",
-Version := "1.21",
+Version := "1.22dev",
 Date := "29/08/2025", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
