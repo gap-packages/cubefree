@@ -1,0 +1,432 @@
+<!-- W  Cubefree.tex        Cubefree documentation             Heiko Dietrich -->
+<Chapter Label="Functionality of the Cubefree package">
+<Heading>Functionality of the Cubefree package</Heading>
+<Index>functionality                                             of the &Cubefree; package</Index>
+<P/>
+This chapter describes the methods available from the &Cubefree; package.
+<Section Label="New methods">
+<Heading>New methods</Heading>
+This section lists the implemented functions.
+<ManSection>
+<Func Name="ConstructAllCFGroups" Arg="order"/>
+<Description>
+The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of groups of this size. If possible, the groups are given
+as pc groups and as permutation groups otherwise.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="ConstructAllCFSolvableGroups" Arg="order"/>
+<Description>
+The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of solvable groups of this size. The groups are given as pc groups.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="ConstructAllCFNilpotentGroups" Arg="order"/>
+<Description>
+The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of nilpotent groups of this size. The groups are given as pc groups.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="ConstructAllCFSimpleGroups" Arg="order"/>
+<Description>
+The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of simple groups of this size. In particular, there
+exists either none or exactly one simple group of the given order.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="ConstructAllCFFrattiniFreeGroups" Arg="order"/>
+<Description>
+The input <A>order</A> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism
+type representatives of Frattini-free groups of this size.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="IsomorphismCubefreeGroups" Arg="G, H"/>
+<Description>
+Returns an isomorphism between two cubefree groups <A>G</A> and <A>H</A>, if exists, and fail otherwise. It is assumed that the input groups are permutation groups or pc groups. The algorithm is currently efficient only for solvable input groups due to the lack of a constructive recognition algorithm for the simple factors PSL.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="IsIsomorphicCubefreeGroups" Arg="G, H"/>
+<Description>
+Returns true/false, depending on whether two cubefree groups <A>G</A> and <A>H</A> are isomorphic. It is assumed that the input groups are permutation groups or pc groups.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="NumberCFGroups" Arg="n[, bool ]"/>
+<Description>
+The input <A>n</A> has to be a positive cubefree integer and the output is the number of all
+cubefree groups of order <A>n</A>. The &SmallGroups; library  is used for squarefree
+orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
+50000. Only if <A>bool</A> is set to false, then only  the squarefree
+orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &SmallGroups; library.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="NumberCFSolvableGroups" Arg="n[, bool ]"/>
+<Description>
+The input <A>n</A> has to be a positive cubefree integer and the output is the number of all
+cubefree solvable groups of order <A>n</A>. The &SmallGroups; library  is used for squarefree
+orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
+50000. Only if <A>bool</A> is set to false, then only  the squarefree
+orders and orders of the type <M>p^2</M> and <M>p^2q</M>, are taken from the &SmallGroups; library.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="CountAllCFGroupsUpTo" Arg="n[, bool ]"/>
+<Description>
+The input is a positive integer <A>n</A> and the output is a list <M>L</M> of size <A>n</A> such that
+<M>L[i]</M> contains the number of isomorphism types of groups of order <M>i</M> if <M>i</M>
+is cubefree and <M>L[i]</M> is not bound, otherwise, <M>1\leq i \leq n</M>. The
+&SmallGroups; library  is used for squarefree orders, orders of the type <M>p^2</M> and <M>p^2q</M>, and cubefree orders less than
+50000. Only if <A>bool</A> is set to false, then only  the squarefree
+orders and orders of the type <M>p^2</M> and <M>p^2q</M> are taken from the
+&SmallGroups; library. This function was implemented only for experimental
+purposes and its implementation could be improved.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="CubefreeOrderInfo" Arg="n[, bool ]"/>
+<Description>
+This function displays some (very vague)
+information about the complexity of the construction of the groups of
+(cubefree) order <A>n</A>. It returns the number of possible pairs <A>(a,b)</A> where
+<A>a</A> is the order of a Frattini-free group <A>F</A> with socle <A>S</A> of order <A>b</A> which
+has to be constructed in order to construct all groups of order <A>n</A>: In fact,
+for each of these pairs <A>(a,b)</A> one would have to construct up to conjugacy all
+subgroups of order <A>a</A>/<A>b</A> of Aut<A>(S)</A>. The sum of the numbers of these
+subgroups for all pairs  <A>(a,b)</A> as above is the number of groups of order
+<A>n</A>. Thus the output of <C>CubefreeOrderInfo</C> is a trivial lower bound for the number of
+groups of order <A>n</A>. There is no additional information
+displayed if <A>bool</A> is set to false.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="CubefreeTestOrder" Arg="n"/>
+<Description>
+The input has to be a cubefree integer between 1 and 50000. This function
+tests the functionality of &Cubefree;, i.e. functions (1)--(7), and compares it with the data
+of the &SmallGroups; library. It returns true if everything is okay,
+otherwise an error message will be displayed.
+</Description>
+</ManSection>
+<ManSection>
+<Prop Name="IsCubeFreeInt" Arg="n"/>
+<Description>
+The output is <A>true</A> if <A>n</A> is a cubefree integer and <A>false</A> otherwise.
+</Description>
+</ManSection>
+<ManSection>
+<Prop Name="IsSquareFreeInt" Arg="n"/>
+<Description>
+The output is <A>true</A> if <A>n</A> is a squarefree integer and <A>false</A> otherwise.
+</Description>
+</ManSection>
+<ManSection>
+<Oper Name="IrreducibleSubgroupsOfGL" Arg="n, q"/>
+<Description>
+The current version of this function allows only <A>n</A>=2. The input <A>q</A> has to be a prime-power <A>q</A><M>=p^r</M> with <M>p\geq 5</M> a prime. The output
+is a list of all irreducible subgroups of GL<M>(2,q)</M> up to conjugacy.
+</Description>
+</ManSection>
+<ManSection>
+<Func Name="RewriteAbsolutelyIrreducibleMatrixGroup" Arg="G"/>
+<Description>
+The input <M>G</M> has to be an absolutely irreducible matrix group over a finite
+field GF<M>(q)</M>. If possible, the output is
+<M>G</M> rewritten over the subfield of GF<M>(q)</M> generated by the traces of the
+elements of <M>G</M>. If no rewriting is possible, then the
+input <M>G</M> is returned.
+</Description>
+</ManSection>
+</Section>
+<Section Label="Comments on the implementation">
+<Heading>Comments on the implementation</Heading>
+This section provides some information about the implementations.
+<P/>
+<E>ConstructAllCFGroups</E>
+<P/>
+The function <C>ConstructAllCFGroups</C> constructs all groups of a given
+cubefree order up to isomorphism using the Frattini Extension Method as described in <Cite Key="Di05"/>,
+  <Cite Key="DiEi05"/>, <Cite Key="BeEia"/>, and <Cite Key="BeEib"/>. One step in the Frattini
+  Extension Method is to compute Frattini extensions 
+  and for this purpose some already implemented
+methods of the required &GAP; &nbsp;package &GrpConst; &nbsp;are used.
+<P/>
+Since <C>ConstructAllCFGroups</C> requires only
+some special types of irreducible subgroups of GL<M>(2,p)</M> (e.g. of cubefree order), it
+contains a modified internal version of
+<C>IrreducibleSubgroupsOfGL</C>. This means that the latter is not called explicitly by
+<C>ConstructAllCFGroups</C>.
+<P/>
+<E>ConstructAllCFSimpleGroups and ConstructAllCFNilpotentGroups</E>
+<P/>
+The construction of simple or nilpotent groups of cubefree
+order is rather easy, see <Cite Key="Di05"/> or <Cite Key="DiEi05"/>. In particular, the
+methods used in these cases are independent of the methods used in the general cubefree case.
+<P/>
+<E>CountAllCFGroupsUpTo</E>
+<P/>
+As described in <Cite Key="Di05"/> and <Cite Key="DiEi05"/>, every cubefree group <M>G</M> has
+the form <M>G=A\times I</M> where <M>A</M> is trivial or non-abelian simple and <M>I</M> is
+solvable. Further, there is a one-to-one correspondence between the solvable
+cubefree groups and <A>some</A> solvable Frattini-free groups. This one-to-one
+correspondence allows one to count the number of groups of a given cubefree order without
+computing any Frattini extension.
+To reduce runtime, the
+computed irreducible and reducible subgroups of the general linear groups
+GL<M>(2,p)</M> and also the number of the computed solvable
+Frattini-free groups are stored during the whole computation. This is very
+memory consuming but reduces the runtime significantly. The alternative is to
+run a loop over <C>NumberCFGroups</C>.
+This function was implemented only for experimental purposes and its
+implementation could be improved.
+<P/>
+<E>IrreducibleSubgroupsOfGL</E>
+<P/>
+If the input is a matrix group over GF<M>(q)</M>, then the algorithm needs to
+construct GF<M>(q^3)</M> or GF<M>(q^6)</M> internally.
+<P/>
+<E>RewriteAbsolutelyIrreducibleMatrixGroup</E>
+<P/>
+The function <C>RewriteAbsolutelyIrreducibleMatrixGroup</C> as described
+algorithmically in
+<Cite Key="GlHo97"/> is a probabilistic Las Vegas algorithm; it retries until a correct
+answer is returned. If the input is <M>G\leq</M>GL<M>(d,p^r)</M>, then the
+expected runtime is <M>O(rd^3)</M>.
+</Section>
+<Section Label="Comments on the efficiency">
+<Heading>Comments on the efficiency</Heading>
+The package &GrpConst; contains several implementations of algorithms to
+construct groups of a given order. One of these algorithms is the Frattini
+extension method, see Chapter&nbsp;<Ref Chap="Introduction"/>. The algorithm used in
+&Cubefree; is a modification of the Frattini extension method to the case of
+cubefree orders.
+<P/>
+The advantage of this modification is that the isomorphism
+problem at the construction of Frattini extensions is solved completely on a
+theoretic level. Also, the construction of the Frattini-free groups up to
+isomorphism is reduced to the determination of certain subgroups of groups of
+the type GL<M>(2,p)</M> and <M>C_{p-1}</M>, <M>p</M> a prime, and to the construction of subdirect products
+of these subgroups. As this is exponential, this is a main bottleneck of the current implementation.
+<P/>
+A modification of the Frattini extension method to squarefree orders yields a
+powerful 
+construction algorithm for squarefree groups which is based on number theory
+only. An implementation of this algorithm can be found
+in the &SmallGroups; library. Thus for squarefree
+groups one should definitely use <C>AllSmallGroups</C> and <C>NumberSmallGroups</C>
+instead of the functions of &Cubefree;. The same holds for groups of order
+<M>p^2</M> or <M>p^2q</M>.
+<P/>
+Moreover, using the functionality of &Cubefree;, the &SmallGroups; library now
+contains all groups of cubefree order at most 50000. Hence, also in this case,
+one should prefer <C>AllSmallGroups</C> and <C>NumberSmallGroups</C> to access the data
+of the library directly.
+<P/>
+For all other cubefree  orders <A>n</A> one can try to use
+&Cubefree; to construct or count the corresponding groups. Note, that the
+success of these computations depends basically on the complexity and number
+theory of the
+prime-power factorization of <A>n</A>. For each prime <M>p</M> with <M>p^2\mid n</M> one
+might have to construct subgroups of GL<M>(2,p)</M> and subdirect products
+involving these subgroups. One can use the info class <C>InfoCF</C> to get some
+information during the computation. 
+In order to construct subdirect products, we need a permutation representation of these
+matrix groups. To rewrite them at once, we compute a
+permutation representation of GL<M>(2,p)</M> and apply this isomorphism to the
+constructed subgroups. Unfortunately, this is quite time and memory consuming
+for bigger primes.
+<P/>
+In other words,  &Cubefree; can not handle <E>unreasonable</E>
+cubefree orders. To get a rough idea of the complexity of the computation of
+groups of order <M>n</M> and to get a trivial  lower bound for the number of
+groups, one can use <C>CubefreeOrderInfo(n)</C>.
+<P/>
+At the end of this section we consider the quotient <M>q(n)</M> of <C>NumberSmallGroups(n)</C>
+and  <C>CubefreeOrderInfo(n)</C> for cubefree <M>1\leq n\leq
+50000</M>. Although for most of these integers we have a small quotient, note
+that <M>q(n)</M> seems to be unbounded in general. There are 41597 cubefree integers between <M>1</M> and <M>50000</M> and <M>26414</M>
+of these integers fulfill <M>q(n)=1</M>. Moreover, 13065 of these integers fulfill
+<M>1&lt; q(n)&lt; 5</M> and the remaining 2118 integers have <M>5\leq q(n)\leq
+54</M>; e.g. <M>n=2^2.3.5.7^2.13</M> has <M>q(n)=1221/23</M>.
+</Section>
+<Section Label="An example session">
+<Heading>An example session</Heading>
+In this section we outline some examples of applications of
+the methods described above. We
+included runtimes for all examples, but omitted the output
+in some cases, since it would be too long to be printed.
+The runtimes have been obtained on an Intel(R) Pentium(R) 4 CPU 3.00GHz PC running under Linux.
+<Log><![CDATA[
+gap> n:=5^2*7*13^2*67^2*97*107;
+1377938614325
+gap> CubefreeOrderInfo(n,false);
+12
+gap> Length(ConstructAllCFGroups(n));time;
+12
+53111
+]]></Log>
+<Log><![CDATA[
+gap> n:=19^2*23^2*29*37*73^2*107^2;
+12501895704027377
+gap> CubefreeOrderInfo(n,false);
+24
+gap> NumberCFGroups(n);time;
+24
+190536
+gap> Length(ConstructAllCFGroups(n));time;
+24
+948319
+]]></Log>
+<Log><![CDATA[
+gap> n:=5^2*13*23^2*43^2*191;
+60716861075
+gap> CubefreeOrderInfo(n,false);
+16
+gap> Length(ConstructAllCFGroups(n)); time;
+16
+29146
+]]></Log>
+Now we compute some more data.
+<Log><![CDATA[
+gap>  n:=2*2*3*11*17*67;
+150348
+gap> CubefreeOrderInfo(n,false);
+20
+gap> NumberCFGroups(n);time;
+145
+12073
+gap> Length(ConstructAllCFGroups(n)); time;
+145
+20757
+gap> NumberCFSolvableGroups(n);time;
+144
+11925
+gap> Length(ConstructAllCFSolvableGroups(n)); time;
+144
+18893
+gap> Length(ConstructAllCFFrattiniFreeGroups(n)); time;
+109
+14421
+gap> Length(ConstructAllCFNilpotentGroups(n));time;
+2
+12
+gap> Length(ConstructAllCFSimpleGroups(n));time;
+1
+8
+]]></Log>
+We consider another example with some info class output.
+<Log><![CDATA[
+gap> SetInfoLevel(InfoCF,1);
+gap> ConstructAllCFGroups(4620);;time;
+#I  Construct all groups of order 4620.
+#I    Compute solvable Frattini-free groups of order 2310.
+#I    Compute solvable Frattini-free groups of order 4620.
+#I  Construct 138 Frattini extensions.
+#I    Compute solvable Frattini-free groups of order 77.
+#I  Construct 1 Frattini extensions.
+#I    Compute solvable Frattini-free groups of order 7.
+#I  Construct 1 Frattini extensions.
+15501
+]]></Log>
+<Log><![CDATA[
+gap> n:=101^2*97*37^2*29^2;
+1139236591513
+gap> CubefreeOrderInfo(n,false);
+8
+gap> NumberCFGroups(n);time;
+8
+36
+gap> SetInfoLevel(InfoCF,1);
+gap> ConstructAllCFGroups(n);time;
+#I  Construct all groups of order 1139236591513.
+#I    Compute solvable Frattini-free groups of order 10512181.
+#I    Compute solvable Frattini-free groups of order 304853249.
+#I    Compute solvable Frattini-free groups of order 388950697.
+#I    Compute solvable Frattini-free groups of order 1061730281.
+#I    Compute solvable Frattini-free groups of order 11279570213.
+#I    Compute solvable Frattini-free groups of order 30790178149.
+#I    Compute solvable Frattini-free groups of order 39284020397.
+#I    Compute solvable Frattini-free groups of order 1139236591513.
+#I  Construct 8 Frattini extensions.
+[ <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators>, 
+  <pc group of size 1139236591513 with 7 generators> ]
+1848
+]]></Log>
+The last example considers the cubefree order less than 50000 for which the
+number of groups with this order is maximal: there are 3093 groups of order 44100.
+<Log><![CDATA[
+gap> n:=2*2*3*3*5*5*7*7;
+44100
+gap> CubefreeOrderInfo(n,false);
+100
+gap> NumberCFSolvableGroups(n,false);time;
+3087
+572639
+gap> Length(ConstructAllCFSolvableGroups(n)); time;
+3087
+843085
+gap> NumberCFGroups(n,false);time;
+3093
+719245
+gap> Length(ConstructAllCFGroups(n)); time;
+3093
+1016763
+gap> Length(ConstructAllCFFrattiniFreeGroups(n)); time;
+1305
+504451
+gap> Length(ConstructAllCFNilpotentGroups(n));time;
+16
+180
+]]></Log>
+</Section>
+<Section Label="Accuracy check">
+<Heading>Accuracy check</Heading>
+We have compared the results of <C>ConstructAllCFGroups</C> with the library of
+cubefree groups of &SmallGroups;. Further, we compared the 
+solvable groups constructed by <C>IrreducibleSubgroupsOfGL</C> with the library of
+&IrredSol;. We have also done random isomorphism tests to verify that the
+list of groups we computed is not redundant.
+<P/>
+One can call the following test files. The first one constructs some groups of order at most 2000 and compares the results with the
+&SmallGroups; library:
+<P/>
+<C>RereadPackage("cubefree","tst/testQuick.g");</C>
+<P/>
+The command
+<P/>
+<C>RereadPackage("cubefree","tst/testBig.g");</C>
+<P/>
+constructs the solvable groups of a random cubefree (but not squarefree) order at most <M>2^{28}-1</M> and does a random isomorphism test. Depending on the chosen number, the computation might not terminate due to memory problems.
+<P/>
+The following constructs the groups of three random cubefree orders less than 50000 compares the result with the
+&SmallGroups; library. Depending on the chosen orders, this may take a while:
+<P/>
+<C>RereadPackage("cubefree","tst/testSG.g");</C>
+<P/>
+The test file <A>testSGlong.g</A> constructs all cubefree groups of order at most
+50000 compares the results with the
+&SmallGroups; library. There will be a positive progress report every 50th
+order so that you can abort the test whenever you want.
+<P/>
+<C>RereadPackage("cubefree","tst/testSGlong.g");</C>
+<P/>
+Three of these four test files use the function <C>CubefreeTestOrder</C>, see Section&nbsp;<Ref Sect="New methods"/>.
+<P/>
+The last test file compares some results of <C>IrreducibleSubgroupsOfGL</C> with the
+database of &IrredSol;. This may take a while:
+<P/>
+<C>RereadPackage("cubefree","tst/testMat.g");</C>
+</Section>
+</Chapter>
