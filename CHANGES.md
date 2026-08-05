@@ -1,6 +1,6 @@
 This file describes changes in the Cubefree package.
 
-## Unreleased
+## 1.22 (2026-08-06)
 
   - Speed up `NumberCFGroups` and `NumberCFSolvableGroups` by two orders of
     magnitude, and cache their data across calls
