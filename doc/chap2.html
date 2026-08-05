@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Cubefree) - Chapter 2: Functionality of the Cubefree package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X80083C09821C5C1A" name="X80083C09821C5C1A"></a></p>
+<div class="ChapSects"><a href="chap2.html#X80083C09821C5C1A">2 <span class="Heading">Functionality of the Cubefree package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X82EFE7467E0005CC">2.1 <span class="Heading">New methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X803964957AF4D273">2.1-1 ConstructAllCFGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C0BE76C80315E0E">2.1-2 ConstructAllCFSolvableGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81248EA578F98AA5">2.1-3 ConstructAllCFNilpotentGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B747C4C7D9A9753">2.1-4 ConstructAllCFSimpleGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X782D81527CBB592D">2.1-5 ConstructAllCFFrattiniFreeGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E6933DA7C4C81DD">2.1-6 IsomorphismCubefreeGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80D2FFB87C004167">2.1-7 IsIsomorphicCubefreeGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D10200B79AEDFFC">2.1-8 NumberCFGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X876FF07A87181ACE">2.1-9 NumberCFSolvableGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C9F7A857B561CF6">2.1-10 CountAllCFGroupsUpTo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7EC77F767A16DDB7">2.1-11 CubefreeOrderInfo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X784BB59E7CB73DF3">2.1-12 CubefreeTestOrder</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X879952A57A200B0C">2.1-13 IsCubeFreeInt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C4D486D79B66654">2.1-14 IsSquareFreeInt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X791E801D873E956E">2.1-15 IrreducibleSubgroupsOfGL</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X79FFB4427A3D69A2">2.1-16 RewriteAbsolutelyIrreducibleMatrixGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7F7475227B9749E7">2.2 <span class="Heading">Comments on the implementation</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X83EC00728356649C">2.3 <span class="Heading">Comments on the efficiency</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X78DF4DE18260BD80">2.4 <span class="Heading">An example session</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7808E01F8281999A">2.5 <span class="Heading">Accuracy check</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Functionality of the Cubefree package</span></h3>
+
+<p>This chapter describes the methods available from the <strong class="pkg">Cubefree</strong> package.</p>
+
+<p><a id="X82EFE7467E0005CC" name="X82EFE7467E0005CC"></a></p>
+
+<h4>2.1 <span class="Heading">New methods</span></h4>
+
+<p>This section lists the implemented functions.</p>
+
+<p><a id="X803964957AF4D273" name="X803964957AF4D273"></a></p>
+
+<h5>2.1-1 ConstructAllCFGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructAllCFGroups</code>( <var class="Arg">order</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism type representatives of groups of this size. If possible, the groups are given as pc groups and as permutation groups otherwise.</p>
+
+<p><a id="X7C0BE76C80315E0E" name="X7C0BE76C80315E0E"></a></p>
+
+<h5>2.1-2 ConstructAllCFSolvableGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructAllCFSolvableGroups</code>( <var class="Arg">order</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism type representatives of solvable groups of this size. The groups are given as pc groups.</p>
+
+<p><a id="X81248EA578F98AA5" name="X81248EA578F98AA5"></a></p>
+
+<h5>2.1-3 ConstructAllCFNilpotentGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructAllCFNilpotentGroups</code>( <var class="Arg">order</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism type representatives of nilpotent groups of this size. The groups are given as pc groups.</p>
+
+<p><a id="X7B747C4C7D9A9753" name="X7B747C4C7D9A9753"></a></p>
+
+<h5>2.1-4 ConstructAllCFSimpleGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructAllCFSimpleGroups</code>( <var class="Arg">order</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism type representatives of simple groups of this size. In particular, there exists either none or exactly one simple group of the given order.</p>
+
+<p><a id="X782D81527CBB592D" name="X782D81527CBB592D"></a></p>
+
+<h5>2.1-5 ConstructAllCFFrattiniFreeGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructAllCFFrattiniFreeGroups</code>( <var class="Arg">order</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">order</var> has to be a positive cubefree integer. The output is a complete and irredundant list of isomorphism type representatives of Frattini-free groups of this size.</p>
+
+<p><a id="X7E6933DA7C4C81DD" name="X7E6933DA7C4C81DD"></a></p>
+
+<h5>2.1-6 IsomorphismCubefreeGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphismCubefreeGroups</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns an isomorphism between two cubefree groups <var class="Arg">G</var> and <var class="Arg">H</var>, if exists, and fail otherwise. It is assumed that the input groups are permutation groups or pc groups. The algorithm is currently efficient only for solvable input groups due to the lack of a constructive recognition algorithm for the simple factors PSL.</p>
+
+<p><a id="X80D2FFB87C004167" name="X80D2FFB87C004167"></a></p>
+
+<h5>2.1-7 IsIsomorphicCubefreeGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsomorphicCubefreeGroups</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns true/false, depending on whether two cubefree groups <var class="Arg">G</var> and <var class="Arg">H</var> are isomorphic. It is assumed that the input groups are permutation groups or pc groups.</p>
+
+<p><a id="X7D10200B79AEDFFC" name="X7D10200B79AEDFFC"></a></p>
+
+<h5>2.1-8 NumberCFGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberCFGroups</code>( <var class="Arg">n</var>[, <var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">n</var> has to be a positive cubefree integer and the output is the number of all cubefree groups of order <var class="Arg">n</var>. The <strong class="pkg">SmallGroups</strong> library is used for squarefree orders, orders of the type <span class="SimpleMath">p^2</span> and <span class="SimpleMath">p^2q</span>, and cubefree orders less than 50000. Only if <var class="Arg">bool</var> is set to false, then only the squarefree orders and orders of the type <span class="SimpleMath">p^2</span> and <span class="SimpleMath">p^2q</span>, are taken from the <strong class="pkg">SmallGroups</strong> library.</p>
+
+<p><a id="X876FF07A87181ACE" name="X876FF07A87181ACE"></a></p>
+
+<h5>2.1-9 NumberCFSolvableGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberCFSolvableGroups</code>( <var class="Arg">n</var>[, <var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <var class="Arg">n</var> has to be a positive cubefree integer and the output is the number of all cubefree solvable groups of order <var class="Arg">n</var>. The <strong class="pkg">SmallGroups</strong> library is used for squarefree orders and orders of the type <span class="SimpleMath">p^2</span> and <span class="SimpleMath">p^2q</span>, where all groups are solvable. For other orders counting is faster than searching the library, so <var class="Arg">bool</var> has no effect there; it is accepted for compatibility.</p>
+
+<p><a id="X7C9F7A857B561CF6" name="X7C9F7A857B561CF6"></a></p>
+
+<h5>2.1-10 CountAllCFGroupsUpTo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CountAllCFGroupsUpTo</code>( <var class="Arg">n</var>[, <var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input is a positive integer <var class="Arg">n</var> and the output is a list <span class="SimpleMath">L</span> of size <var class="Arg">n</var> such that <span class="SimpleMath">L[i]</span> contains the number of isomorphism types of groups of order <span class="SimpleMath">i</span> if <span class="SimpleMath">i</span> is cubefree and <span class="SimpleMath">L[i]</span> is not bound, otherwise, <span class="SimpleMath">1≤ i ≤ n</span>. The <strong class="pkg">SmallGroups</strong> library is used for squarefree orders, orders of the type <span class="SimpleMath">p^2</span> and <span class="SimpleMath">p^2q</span>, and cubefree orders less than 50000. Only if <var class="Arg">bool</var> is set to false, then only the squarefree orders and orders of the type <span class="SimpleMath">p^2</span> and <span class="SimpleMath">p^2q</span> are taken from the <strong class="pkg">SmallGroups</strong> library. This is a plain loop over <code class="code">NumberCFGroups</code>, which caches the data it computes and hence shares most of the work between the orders.</p>
+
+<p><a id="X7EC77F767A16DDB7" name="X7EC77F767A16DDB7"></a></p>
+
+<h5>2.1-11 CubefreeOrderInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CubefreeOrderInfo</code>( <var class="Arg">n</var>[, <var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function displays some (very vague) information about the complexity of the construction of the groups of (cubefree) order <var class="Arg">n</var>. It returns the number of possible pairs <var class="Arg">(a,b)</var> where <var class="Arg">a</var> is the order of a Frattini-free group <var class="Arg">F</var> with socle <var class="Arg">S</var> of order <var class="Arg">b</var> which has to be constructed in order to construct all groups of order <var class="Arg">n</var>: In fact, for each of these pairs <var class="Arg">(a,b)</var> one would have to construct up to conjugacy all subgroups of order <var class="Arg">a</var>/<var class="Arg">b</var> of Aut<var class="Arg">(S)</var>. The sum of the numbers of these subgroups for all pairs <var class="Arg">(a,b)</var> as above is the number of groups of order <var class="Arg">n</var>. Thus the output of <code class="code">CubefreeOrderInfo</code> is a trivial lower bound for the number of groups of order <var class="Arg">n</var>. There is no additional information displayed if <var class="Arg">bool</var> is set to false.</p>
+
+<p><a id="X784BB59E7CB73DF3" name="X784BB59E7CB73DF3"></a></p>
+
+<h5>2.1-12 CubefreeTestOrder</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CubefreeTestOrder</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input has to be a cubefree integer between 1 and 50000. This function tests the functionality of <strong class="pkg">Cubefree</strong>, i.e. functions (1)--(7), and compares it with the data of the <strong class="pkg">SmallGroups</strong> library. It returns true if everything is okay, otherwise an error message will be displayed.</p>
+
+<p><a id="X879952A57A200B0C" name="X879952A57A200B0C"></a></p>
+
+<h5>2.1-13 IsCubeFreeInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCubeFreeInt</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>The output is <var class="Arg">true</var> if <var class="Arg">n</var> is a cubefree integer and <var class="Arg">false</var> otherwise.</p>
+
+<p><a id="X7C4D486D79B66654" name="X7C4D486D79B66654"></a></p>
+
+<h5>2.1-14 IsSquareFreeInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSquareFreeInt</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>The output is <var class="Arg">true</var> if <var class="Arg">n</var> is a squarefree integer and <var class="Arg">false</var> otherwise.</p>
+
+<p><a id="X791E801D873E956E" name="X791E801D873E956E"></a></p>
+
+<h5>2.1-15 IrreducibleSubgroupsOfGL</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IrreducibleSubgroupsOfGL</code>( <var class="Arg">n</var>, <var class="Arg">q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The current version of this function allows only <var class="Arg">n</var>=2. The input <var class="Arg">q</var> has to be a prime-power <var class="Arg">q</var><span class="SimpleMath">=p^r</span> with <span class="SimpleMath">p≥ 5</span> a prime. The output is a list of all irreducible subgroups of GL<span class="SimpleMath">(2,q)</span> up to conjugacy.</p>
+
+<p><a id="X79FFB4427A3D69A2" name="X79FFB4427A3D69A2"></a></p>
+
+<h5>2.1-16 RewriteAbsolutelyIrreducibleMatrixGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RewriteAbsolutelyIrreducibleMatrixGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The input <span class="SimpleMath">G</span> has to be an absolutely irreducible matrix group over a finite field GF<span class="SimpleMath">(q)</span>. If possible, the output is <span class="SimpleMath">G</span> rewritten over the subfield of GF<span class="SimpleMath">(q)</span> generated by the traces of the elements of <span class="SimpleMath">G</span>. If no rewriting is possible, then the input <span class="SimpleMath">G</span> is returned.</p>
+
+<p><a id="X7F7475227B9749E7" name="X7F7475227B9749E7"></a></p>
+
+<h4>2.2 <span class="Heading">Comments on the implementation</span></h4>
+
+<p>This section provides some information about the implementations.</p>
+
+<p><em>ConstructAllCFGroups</em></p>
+
+<p>The function <code class="code">ConstructAllCFGroups</code> constructs all groups of a given cubefree order up to isomorphism using the Frattini Extension Method as described in <a href="chapBib.html#biBDi05">[Die05]</a>, <a href="chapBib.html#biBDiEi05">[DE05]</a>, <a href="chapBib.html#biBBeEia">[BE99a]</a>, and <a href="chapBib.html#biBBeEib">[BE99b]</a>. One step in the Frattini Extension Method is to compute Frattini extensions and for this purpose some already implemented methods of the required <strong class="pkg">GAP</strong>  package <strong class="pkg">GrpConst</strong>  are used.</p>
+
+<p>Since <code class="code">ConstructAllCFGroups</code> requires only some special types of irreducible subgroups of GL<span class="SimpleMath">(2,p)</span> (e.g. of cubefree order), it contains a modified internal version of <code class="code">IrreducibleSubgroupsOfGL</code>. This means that the latter is not called explicitly by <code class="code">ConstructAllCFGroups</code>.</p>
+
+<p><em>ConstructAllCFSimpleGroups and ConstructAllCFNilpotentGroups</em></p>
+
+<p>The construction of simple or nilpotent groups of cubefree order is rather easy, see <a href="chapBib.html#biBDi05">[Die05]</a> or <a href="chapBib.html#biBDiEi05">[DE05]</a>. In particular, the methods used in these cases are independent of the methods used in the general cubefree case.</p>
+
+<p><em>CountAllCFGroupsUpTo</em></p>
+
+<p>As described in <a href="chapBib.html#biBDi05">[Die05]</a> and <a href="chapBib.html#biBDiEi05">[DE05]</a>, every cubefree group <span class="SimpleMath">G</span> has the form <span class="SimpleMath">G=A× I</span> where <span class="SimpleMath">A</span> is trivial or non-abelian simple and <span class="SimpleMath">I</span> is solvable. Further, there is a one-to-one correspondence between the solvable cubefree groups and <var class="Arg">some</var> solvable Frattini-free groups. This one-to-one correspondence allows one to count the number of groups of a given cubefree order without computing any Frattini extension. To reduce runtime, the computed irreducible and reducible subgroups of the general linear groups GL<span class="SimpleMath">(2,p)</span> and also the number of the computed solvable Frattini-free groups are stored during the whole computation. This caching is done by <code class="code">NumberCFGroups</code> itself and persists between calls, so <code class="code">CountAllCFGroupsUpTo</code> is just a loop over <code class="code">NumberCFGroups</code>. Use <code class="code">cf_ClearCountCaches()</code> to free the memory again. The solvable count is the trivial-factor term of the total, so calling <code class="code">NumberCFSolvableGroups</code> for an order for which <code class="code">NumberCFGroups</code> has already run costs next to nothing.</p>
+
+<p>Counting never constructs a group: each socle complement determines one Frattini-free group, and each Frattini-free group one group of the given order. The subgroups of GL<span class="SimpleMath">(2,p)</span> are also replaced by small isomorphic copies carrying the action of their normaliser, so the subdirect products are computed in groups of order a few thousand rather than in a permutation representation of GL<span class="SimpleMath">(2,p)</span> of degree <span class="SimpleMath">p^2-1</span>.</p>
+
+<p><em>IrreducibleSubgroupsOfGL</em></p>
+
+<p>If the input is a matrix group over GF<span class="SimpleMath">(q)</span>, then the algorithm needs to construct GF<span class="SimpleMath">(q^3)</span> or GF<span class="SimpleMath">(q^6)</span> internally.</p>
+
+<p><em>RewriteAbsolutelyIrreducibleMatrixGroup</em></p>
+
+<p>The function <code class="code">RewriteAbsolutelyIrreducibleMatrixGroup</code> as described algorithmically in <a href="chapBib.html#biBGlHo97">[GH97]</a> is a probabilistic Las Vegas algorithm; it retries until a correct answer is returned. If the input is <span class="SimpleMath">G≤</span>GL<span class="SimpleMath">(d,p^r)</span>, then the expected runtime is <span class="SimpleMath">O(rd^3)</span>.</p>
+
+<p><a id="X83EC00728356649C" name="X83EC00728356649C"></a></p>
+
+<h4>2.3 <span class="Heading">Comments on the efficiency</span></h4>
+
+<p>The package <strong class="pkg">GrpConst</strong> contains several implementations of algorithms to construct groups of a given order. One of these algorithms is the Frattini extension method, see Chapter <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink">1</span></a>. The algorithm used in <strong class="pkg">Cubefree</strong> is a modification of the Frattini extension method to the case of cubefree orders.</p>
+
+<p>The advantage of this modification is that the isomorphism problem at the construction of Frattini extensions is solved completely on a theoretic level. Also, the construction of the Frattini-free groups up to isomorphism is reduced to the determination of certain subgroups of groups of the type GL<span class="SimpleMath">(2,p)</span> and <span class="SimpleMath">C_p-1</span>, <span class="SimpleMath">p</span> a prime, and to the construction of subdirect products of these subgroups. As this is exponential, this is a main bottleneck of the current implementation.</p>
+
+<p>A modification of the Frattini extension method to squarefree orders yields a powerful construction algorithm for squarefree groups which is based on number theory only. An implementation of this algorithm can be found in the <strong class="pkg">SmallGroups</strong> library. Thus for squarefree groups one should definitely use <code class="code">AllSmallGroups</code> and <code class="code">NumberSmallGroups</code> instead of the functions of <strong class="pkg">Cubefree</strong>. The same holds for groups of order <span class="SimpleMath">p^2</span> or <span class="SimpleMath">p^2q</span>.</p>
+
+<p>Moreover, using the functionality of <strong class="pkg">Cubefree</strong>, the <strong class="pkg">SmallGroups</strong> library now contains all groups of cubefree order at most 50000. Hence, also in this case, one should prefer <code class="code">AllSmallGroups</code> and <code class="code">NumberSmallGroups</code> to access the data of the library directly.</p>
+
+<p>For all other cubefree orders <var class="Arg">n</var> one can try to use <strong class="pkg">Cubefree</strong> to construct or count the corresponding groups. Note, that the success of these computations depends basically on the complexity and number theory of the prime-power factorization of <var class="Arg">n</var>. For each prime <span class="SimpleMath">p</span> with <span class="SimpleMath">p^2∣ n</span> one might have to construct subgroups of GL<span class="SimpleMath">(2,p)</span> and subdirect products involving these subgroups. One can use the info class <code class="code">InfoCF</code> to get some information during the computation. In order to construct subdirect products, we need a permutation representation of these matrix groups. To rewrite them at once, we compute a permutation representation of GL<span class="SimpleMath">(2,p)</span> and apply this isomorphism to the constructed subgroups. Unfortunately, this is quite time and memory consuming for bigger primes.</p>
+
+<p>In other words, <strong class="pkg">Cubefree</strong> can not handle <em>unreasonable</em> cubefree orders. To get a rough idea of the complexity of the computation of groups of order <span class="SimpleMath">n</span> and to get a trivial lower bound for the number of groups, one can use <code class="code">CubefreeOrderInfo(n)</code>.</p>
+
+<p>At the end of this section we consider the quotient <span class="SimpleMath">q(n)</span> of <code class="code">NumberSmallGroups(n)</code> and <code class="code">CubefreeOrderInfo(n)</code> for cubefree <span class="SimpleMath">1≤ n≤ 50000</span>. Although for most of these integers we have a small quotient, note that <span class="SimpleMath">q(n)</span> seems to be unbounded in general. There are 41597 cubefree integers between <span class="SimpleMath">1</span> and <span class="SimpleMath">50000</span> and <span class="SimpleMath">26414</span> of these integers fulfill <span class="SimpleMath">q(n)=1</span>. Moreover, 13065 of these integers fulfill <span class="SimpleMath">1&lt; q(n)&lt; 5</span> and the remaining 2118 integers have <span class="SimpleMath">5≤ q(n)≤ 54</span>; e.g. <span class="SimpleMath">n=2^2.3.5.7^2.13</span> has <span class="SimpleMath">q(n)=1221/23</span>.</p>
+
+<p><a id="X78DF4DE18260BD80" name="X78DF4DE18260BD80"></a></p>
+
+<h4>2.4 <span class="Heading">An example session</span></h4>
+
+<p>In this section we outline some examples of applications of the methods described above. We included runtimes for all examples, but omitted the output in some cases, since it would be too long to be printed. The runtimes have been obtained on an Intel(R) Pentium(R) 4 CPU 3.00GHz PC running under Linux.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:=5^2*7*13^2*67^2*97*107;</span>
+1377938614325
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+12
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFGroups(n));time;</span>
+12
+53111
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:=19^2*23^2*29*37*73^2*107^2;</span>
+12501895704027377
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+24
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFGroups(n);time;</span>
+24
+190536
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFGroups(n));time;</span>
+24
+948319
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:=5^2*13*23^2*43^2*191;</span>
+60716861075
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+16
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFGroups(n)); time;</span>
+16
+29146
+</pre></div>
+
+<p>Now we compute some more data.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> n:=2*2*3*11*17*67;</span>
+150348
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+20
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFGroups(n);time;</span>
+145
+12073
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFGroups(n)); time;</span>
+145
+20757
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFSolvableGroups(n);time;</span>
+144
+11925
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFSolvableGroups(n)); time;</span>
+144
+18893
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFFrattiniFreeGroups(n)); time;</span>
+109
+14421
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFNilpotentGroups(n));time;</span>
+2
+12
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFSimpleGroups(n));time;</span>
+1
+8
+</pre></div>
+
+<p>We consider another example with some info class output.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoCF,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConstructAllCFGroups(4620);;time;</span>
+#I  Construct all groups of order 4620.
+#I    Compute solvable Frattini-free groups of order 2310.
+#I    Compute solvable Frattini-free groups of order 4620.
+#I  Construct 138 Frattini extensions.
+#I    Compute solvable Frattini-free groups of order 77.
+#I  Construct 1 Frattini extensions.
+#I    Compute solvable Frattini-free groups of order 7.
+#I  Construct 1 Frattini extensions.
+15501
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:=101^2*97*37^2*29^2;</span>
+1139236591513
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+8
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFGroups(n);time;</span>
+8
+36
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoCF,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConstructAllCFGroups(n);time;</span>
+#I  Construct all groups of order 1139236591513.
+#I    Compute solvable Frattini-free groups of order 10512181.
+#I    Compute solvable Frattini-free groups of order 304853249.
+#I    Compute solvable Frattini-free groups of order 388950697.
+#I    Compute solvable Frattini-free groups of order 1061730281.
+#I    Compute solvable Frattini-free groups of order 11279570213.
+#I    Compute solvable Frattini-free groups of order 30790178149.
+#I    Compute solvable Frattini-free groups of order 39284020397.
+#I    Compute solvable Frattini-free groups of order 1139236591513.
+#I  Construct 8 Frattini extensions.
+[ &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt;, 
+  &lt;pc group of size 1139236591513 with 7 generators&gt; ]
+1848
+</pre></div>
+
+<p>The last example considers the cubefree order less than 50000 for which the number of groups with this order is maximal: there are 3093 groups of order 44100.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:=2*2*3*3*5*5*7*7;</span>
+44100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CubefreeOrderInfo(n,false);</span>
+100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFSolvableGroups(n,false);time;</span>
+3087
+572639
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFSolvableGroups(n)); time;</span>
+3087
+843085
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberCFGroups(n,false);time;</span>
+3093
+719245
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFGroups(n)); time;</span>
+3093
+1016763
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFFrattiniFreeGroups(n)); time;</span>
+1305
+504451
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(ConstructAllCFNilpotentGroups(n));time;</span>
+16
+180
+</pre></div>
+
+<p><a id="X7808E01F8281999A" name="X7808E01F8281999A"></a></p>
+
+<h4>2.5 <span class="Heading">Accuracy check</span></h4>
+
+<p>We have compared the results of <code class="code">ConstructAllCFGroups</code> with the library of cubefree groups of <strong class="pkg">SmallGroups</strong>. Further, we compared the solvable groups constructed by <code class="code">IrreducibleSubgroupsOfGL</code> with the library of <strong class="pkg">IrredSol</strong>. We have also done random isomorphism tests to verify that the list of groups we computed is not redundant.</p>
+
+<p>One can call the following test files. The first one constructs some groups of order at most 2000 and compares the results with the <strong class="pkg">SmallGroups</strong> library:</p>
+
+<p><code class="code">RereadPackage("cubefree","tst/testQuick.g");</code></p>
+
+<p>The command</p>
+
+<p><code class="code">RereadPackage("cubefree","tst/testBig.g");</code></p>
+
+<p>constructs the solvable groups of a random cubefree (but not squarefree) order at most <span class="SimpleMath">2^28-1</span> and does a random isomorphism test. Depending on the chosen number, the computation might not terminate due to memory problems.</p>
+
+<p>The following constructs the groups of three random cubefree orders less than 50000 compares the result with the <strong class="pkg">SmallGroups</strong> library. Depending on the chosen orders, this may take a while:</p>
+
+<p><code class="code">RereadPackage("cubefree","tst/testSG.g");</code></p>
+
+<p>The test file <var class="Arg">testSGlong.g</var> constructs all cubefree groups of order at most 50000 compares the results with the <strong class="pkg">SmallGroups</strong> library. There will be a positive progress report every 50th order so that you can abort the test whenever you want.</p>
+
+<p><code class="code">RereadPackage("cubefree","tst/testSGlong.g");</code></p>
+
+<p>Three of these four test files use the function <code class="code">CubefreeTestOrder</code>, see Section <a href="chap2.html#X82EFE7467E0005CC"><span class="RefLink">2.1</span></a>.</p>
+
+<p>The last test file compares some results of <code class="code">IrreducibleSubgroupsOfGL</code> with the database of <strong class="pkg">IrredSol</strong>. This may take a while:</p>
+
+<p><code class="code">RereadPackage("cubefree","tst/testMat.g");</code></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
