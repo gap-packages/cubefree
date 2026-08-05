@@ -245,11 +245,11 @@ end;
 
 ##############################################################################
 ##
-#F  cf_FrattFreeSolvGroups( n, autPos, autGrps, pos )
+#F  cf_FrattFreeSolvGroups( n )
 ##
 ## Returns all solvable Frattini-free groups of order n up to isomorphism
 ##
-cf_FrattFreeSolvGroups := function( n, autPos, autGrps, pos )
+cf_FrattFreeSolvGroups := function( n )
     local facN, facS, SocOrders, temp, lv, groups, s, ord, tempAutGr,
           subDP, i, facNS, possible;
    
@@ -343,7 +343,7 @@ cf_FrattFreeSolvGroups := function( n, autPos, autGrps, pos )
         fi;
     od;
 
-    return([groups, autGrps]);
+    return groups;
 end;
 
 
@@ -354,8 +354,7 @@ end;
 ## Returns all Frattini-free groups of order n up to isomorphism
 ##
 InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
-    local nonAb, G, p, cl, A, nSize, solvFF, groups, pos, autPos,
-          autGrps, tmp, lv;
+    local nonAb, G, p, cl, A, nSize, solvFF, groups;
 
     Info(InfoCF,1,"Construct all Frattini-free groups of order ",n,".");
 
@@ -372,16 +371,6 @@ InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
     # set up
     groups := [];
     cl     := Collected( Factors( n ) ); 
-    autPos := [];
-    for lv in cl do
-        Add(autPos,lv[1]);
-        if lv[2]=2 then
-            Add(autPos,lv[1]^2);
-        fi;
-    od;
-    autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
-    pos     := function(x) return Position( autPos, x); end;
-    
 
     # determine the possible non-abelian factors PSL(2,p)
     nonAb:=[TrivialGroup()];
@@ -401,9 +390,7 @@ InstallGlobalFunction( ConstructAllCFFrattiniFreeGroups, function( n )
     # for every non-abelian A compute a solvable complement
     for A in nonAb do
         nSize   := n/Size(A);
-        tmp     := cf_FrattFreeSolvGroups(nSize,autPos, autGrps,pos);
-        autGrps := tmp[2];
-        solvFF  := List(tmp[1],PcGroupCodeRec);
+        solvFF  := List(cf_FrattFreeSolvGroups(nSize),PcGroupCodeRec);
         groups  := Concatenation(groups, List(solvFF,x->DirectProduct(A,x)));
     od;
   
