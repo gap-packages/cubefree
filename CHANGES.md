@@ -2,6 +2,8 @@ This file describes changes in the Cubefree package.
 
 ## Unreleased
 
+  - Speed up `NumberCFGroups` and `NumberCFSolvableGroups` by two orders of
+    magnitude, and cache their data across calls
   - Convert the manual to GAPDoc/AutoDoc
   - Various janitorial changes
 
