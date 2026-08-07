@@ -19,6 +19,9 @@
 ## No extension is built either: ExtensionBySocle returns one group per socle
 ## complement, so counting subdirect products suffices.
 ##
+## The models carry the isomorphism back into GL(d,p) as Projections, so
+## cf_FrattFreeSolvGroups uses them for the construction as well.
+##
 
 #############################################################################
 ##
@@ -26,12 +29,14 @@
 ##
 cf_ctMats   := rec();   # p -> the cube-free subgroups of GL(2,p)
 cf_ctModels := rec();   # p -> their models, bound only where already computed
-cf_ctCyc    := rec();   # p -> models for the subgroups of GL(1,p)
+cf_ctCycMats:= rec();   # p -> the cube-free subgroups of GL(1,p)
+cf_ctCyc    := rec();   # p -> their models, bound only where already computed
 cf_ctNrFF   := rec();   # n -> number of solvable Frattini-free groups of order n
 
 cf_ClearCountCaches := function()
     cf_ctMats   := rec();
     cf_ctModels := rec();
+    cf_ctCycMats:= rec();
     cf_ctCyc    := rec();
     cf_ctNrFF   := rec();
 end;
@@ -42,23 +47,38 @@ end;
 ##
 ## U <= GL(d,p) with p not dividing |U| and d in {1,2}. Returns M isomorphic
 ## to U, normal in W := Parent(M), such that W induces on M exactly the
-## automorphisms N_{GL(d,p)}(U) induces on U.
+## automorphisms N_{GL(d,p)}(U) induces on U. The isomorphism back to U is
+## stored as Projections(M), which is what ExtensionBySocle needs.
 ##
-## Those are found without touching GL(d,p): the natural module is semisimple
-## and p > d, so by Brauer-Nesbitt two d-dimensional GF(p)-representations of
-## U agree iff their trace functions do; hence an automorphism is induced by
-## conjugation in GL(d,p) iff it preserves traces.
+## The induced automorphisms are found without touching GL(d,p): the natural
+## module is semisimple and p > d, so by Brauer-Nesbitt two d-dimensional
+## GF(p)-representations of U agree iff their trace functions do; hence an
+## automorphism is induced by conjugation in GL(d,p) iff it preserves traces.
 ##
 cf_SmallModel := function( Umat )
-    local iso, U, elms, tr, A, hom, stab, v, poss, reg, W, M, small;
+    local d, gl, iso, U, gens, mats, finish, elms, tr, A, hom, stab, v, poss,
+          reg, W, M, small;
 
+    d   := Length( One( Umat ) );
+    gl  := GL( d, Characteristic( One(Umat)[1][1] ) );
     iso := IsomorphismPermGroup( Umat );
     U   := Image( iso );
     SetSize( U, Size( Umat ) );
 
-    if Size( U ) = 1 then
-        SetParent( U, U );
-        return U;
+    finish := function( M, W, mgens )
+        SetSize( M, Size( Umat ) );
+        SetParent( M, W );
+        SetProjections( M,
+            [ GroupHomomorphismByImagesNC( M, gl, mgens, mats ) ] );
+        return M;
+    end;
+
+    gens := GeneratorsOfGroup( U );
+    mats := List( gens, x -> PreImagesRepresentative( iso, x ) );
+
+    # GL(1,p) is abelian and induces nothing on its subgroups
+    if d = 1 or Size( U ) = 1 then
+        return finish( U, U, gens );
     fi;
 
     elms := AsSSortedList( U );
@@ -79,14 +99,12 @@ cf_SmallModel := function( Umat )
     fi;
 
     if stab = fail then
-        SetParent( U, U );
-        return U;
+        return finish( U, U, gens );
     fi;
 
     # the trace preserving automorphisms already permute the elements of U,
     # so they normalise the regular representation of U on that set
-    reg := List( GeneratorsOfGroup( U ),
-                 u -> PermListList( elms, List( elms, x -> x*u ) ) );
+    reg := List( gens, u -> PermListList( elms, List( elms, x -> x*u ) ) );
     M   := Group( reg );
     SetSize( M, Size(U) );
     W   := Group( Concatenation( reg, GeneratorsOfGroup( stab ) ) );
@@ -94,16 +112,13 @@ cf_SmallModel := function( Umat )
 
     small := SmallerDegreePermutationRepresentation( W : cheap );
     if NrMovedPoints( Image( small ) ) < NrMovedPoints( W ) then
-        M := Image( small, M );
-        W := Image( small );
-        SetSize( M, Size( Umat ) );
+        reg := List( reg, x -> Image( small, x ) );
+        M   := Group( reg );
+        W   := Image( small );
     fi;
-    SetParent( M, W );
-    return M;
+    return finish( M, W, reg );
 end;
 
-#############################################################################
-##
 #F  cf_ctMatGroupsGL2( p ) . . cube-free subgroups of GL(2,p) up to conjugacy
 ##
 cf_ctMatGroupsGL2 := function( p )
@@ -138,7 +153,7 @@ end;
 ## Built lazily: GL(2,461) has 1388 cube-free subgroups, of which 9 have order
 ## dividing a k that can occur below 200000.
 ##
-cf_ctAutGroupsGL2 := function( p, k )
+InstallGlobalFunction( cf_ctAutGroupsGL2, function( p, k )
     local mats, models, res, i, M;
 
     mats   := cf_ctMatGroupsGL2( p );
@@ -160,36 +175,54 @@ cf_ctAutGroupsGL2 := function( p, k )
         fi;
     od;
     return res;
+end );
+
+#############################################################################
+##
+#F  cf_ctMatGroupsC( p ) . . . . . . . . cube-free subgroups of GL(1,p)
+##
+cf_ctMatGroupsC := function( p )
+    local key, b, groups, d, gr;
+
+    key := String( p );
+    if IsBound( cf_ctCycMats.(key) ) then return cf_ctCycMats.(key); fi;
+
+    b      := [[ Z(p) ]];
+    groups := [];
+    for d in Filtered( DivisorsInt( p-1 ), IsCubeFreeInt ) do
+        gr := Group( b^((p-1)/d) );
+        SetSize( gr, d );
+        Add( groups, gr );
+    od;
+
+    cf_ctCycMats.(key) := groups;
+    cf_ctCyc.(key)     := [];
+    return groups;
 end;
 
 #############################################################################
 ##
 #F  cf_ctAutGroupsC( p, k ) . . . models of the subgroups of GL(1,p) = C_{p-1}
 ##
-## GL(1,p) is abelian and induces no automorphisms on its subgroups, so the
-## model of the subgroup of order d is C_d with itself as parent.
-##
-cf_ctAutGroupsC := function( p, k )
-    local key, list, res, d, gr;
+InstallGlobalFunction( cf_ctAutGroupsC, function( p, k )
+    local mats, models, res, i, M;
 
-    key := String( p );
-    if not IsBound( cf_ctCyc.(key) ) then cf_ctCyc.(key) := rec(); fi;
-    list := cf_ctCyc.(key);
+    mats   := cf_ctMatGroupsC( p );
+    models := cf_ctCyc.(String(p));
 
     res := [];
-    for d in Filtered( DivisorsInt( p-1 ),
-                       x -> IsCubeFreeInt(x) and k mod x = 0 ) do
-        if not IsBound( list.(String(d)) ) then
-            gr := CyclicGroup( IsPermGroup, d );
-            SetSize( gr, d );
-            SetParent( gr, gr );
-            SetSocleDimensions( gr, [1] );
-            list.(String(d)) := gr;
+    for i in [1..Length(mats)] do
+        if k mod Size( mats[i] ) = 0 then
+            if not IsBound( models[i] ) then
+                M := cf_SmallModel( mats[i] );
+                SetSocleDimensions( M, [1] );
+                models[i] := M;
+            fi;
+            Add( res, models[i] );
         fi;
-        Add( res, list.(String(d)) );
     od;
     return res;
-end;
+end );
 
 #############################################################################
 ##
@@ -293,9 +326,9 @@ end;
 ## with |S| dividing k, each with its parent set to its normaliser so that the
 ## invariant holds again next round.
 ##
-cf_ctSubdirect := function( U, V, k, last )
-    local sU, sV, prod, inds, primes, quU, quV, G, H, D, e1, e2, res, cnt,
-          du, dv, iso, autV, reps, rep, gens, r, g, h, S;
+cf_ctSubdirect := function( U, V, k, last, proj )
+    local sU, sV, prod, inds, primes, quU, quV, G, H, D, e1, e2, p1, p2, res,
+          cnt, du, dv, iso, autV, reps, rep, gens, r, g, h, S, gensS;
 
     sU   := Size( U );
     sV   := Size( V );
@@ -329,6 +362,10 @@ cf_ctSubdirect := function( U, V, k, last )
         D  := DirectProduct( G, H );
         e1 := Embedding( D, 1 );
         e2 := Embedding( D, 2 );
+        if proj then
+            p1 := Projection( D, 1 );
+            p2 := Projection( D, 2 );
+        fi;
     fi;
 
     for du in quU do
@@ -369,6 +406,20 @@ cf_ctSubdirect := function( U, V, k, last )
                     # rebuild S inside its normaliser, restoring the invariant
                     S := SubgroupNC( Normalizer( D, S ), gens );
                     SetSize( S, prod/du.ind );
+                    # S projects onto U and onto V, so the maps into the
+                    # general linear groups compose
+                    if proj then
+                        gensS := GeneratorsOfGroup( S );
+                        SetProjections( S, Concatenation(
+                          List( Projections(U), x ->
+                            GroupHomomorphismByImagesNC( S, U, gensS,
+                              List( gensS, y -> Image(p1,y) ) ) * x ),
+                          List( Projections(V), x ->
+                            GroupHomomorphismByImagesNC( S, V, gensS,
+                              List( gensS, y -> Image(p2,y) ) ) * x ) ) );
+                        SetSocleDimensions( S, Concatenation(
+                          SocleDimensions(U), SocleDimensions(V) ) );
+                    fi;
                     Add( res, S );
                 od;
             fi;
@@ -406,7 +457,7 @@ cf_ctSocleComplements := function( gr, k )
         tmp  := [];
         for U in all do
             for V in gr[i] do
-                Append( tmp, cf_ctSubdirect( U, V, k, false ) );
+                Append( tmp, cf_ctSubdirect( U, V, k, false, false ) );
             od;
         od;
         all := Filtered( tmp, x -> (Size(x)*rest) mod k = 0 );
@@ -415,11 +466,43 @@ cf_ctSocleComplements := function( gr, k )
     cnt := 0;
     for U in all do
         for V in gr[lGr] do
-            cnt := cnt + cf_ctSubdirect( U, V, k, true );
+            cnt := cnt + cf_ctSubdirect( U, V, k, true, false );
         od;
     od;
     return cnt;
 end;
+
+#############################################################################
+##
+#F  cf_ctSocleComplementsFull( gr, k ) . . . . . . . . the socle complements
+##
+## As cf_ctSocleComplements, but returns the groups, each with the maps into
+## the general linear groups as Projections. The factors are kept in the given
+## order, so that Projections and SocleDimensions match the socle.
+##
+InstallGlobalFunction( cf_ctSocleComplementsFull, function( gr, k )
+    local lGr, all, i, tmp, U, V, rest;
+
+    gr := List( gr, x -> Filtered( x, y -> k mod Size(y) = 0 ) );
+    if ForAny( gr, IsEmpty ) then return []; fi;
+    lGr := Length( gr );
+    if lGr = 1 then
+        return Filtered( gr[1], x -> Size(x) = k );
+    fi;
+
+    all := gr[1];
+    for i in [ 2 .. lGr ] do
+        rest := Product( [i+1..lGr], j -> Lcm( List( gr[j], Size ) ) );
+        tmp  := [];
+        for U in all do
+            for V in gr[i] do
+                Append( tmp, cf_ctSubdirect( U, V, k, false, true ) );
+            od;
+        od;
+        all := Filtered( tmp, x -> (Size(x)*rest) mod k = 0 );
+    od;
+    return Filtered( all, x -> Size(x) = k );
+end );
 
 #############################################################################
 ##
