@@ -60,7 +60,7 @@ end);
 ##
 InstallGlobalFunction(ConstructAllCFGroups, function ( size ) 
     local cl, free, ext, t, primes, ffOrd, lv, nonAb, p, A, nSize, facNSize,
-          groups, arg1, arg2, pos, autPos, autGrps, tmp; 
+          groups, arg1, arg2; 
  
     Info(InfoCF,1,"Construct all groups of order ",size,".");   
 
@@ -77,24 +77,13 @@ InstallGlobalFunction(ConstructAllCFGroups, function ( size )
     # if size is square-free then the groups of order size
     # are Frattini-free and solvable
     if IsSquareFreeInt(size) then
-        return(List(cf_FrattFreeSolvGroups(size,0,0,0)[1] ,
+        return(List(cf_FrattFreeSolvGroups(size) ,
                      x->PcGroupCodeRec(x)));
     fi;
 
     # set up
     groups := [];
     cl     := Collected( Factors( size ) ); 
-    # to store the subgroups and normalizers of GL(2,p)
-    autPos := [];
-    for t in cl do
-        Add(autPos,t[1]);
-        if t[2]=2 then
-            Add(autPos,t[1]^2);
-        fi;
-    od;
-    autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
-    pos     := function(x) return Position( autPos, x); end;
-
     # determine the possible non-abelian factors PSL(2,p)
     nonAb:=[TrivialGroup()];
     if size mod 4 = 0 then
@@ -122,9 +111,7 @@ InstallGlobalFunction(ConstructAllCFGroups, function ( size )
         ffOrd  := Filtered(DivisorsInt(nSize),x-> x mod primes =0);
         free   := [];
         for lv in ffOrd do
-            tmp     := cf_FrattFreeSolvGroups(lv,autPos, autGrps, pos);
-            autGrps := tmp[2];
-            free    := Concatenation(free,tmp[1]);
+            free    := Concatenation(free,cf_FrattFreeSolvGroups(lv));
         od;
         Info(InfoCF,1,"Construct ",Length(free)," Frattini extensions.");
         ext    := List(free,x -> FrattiniExtensionCF(x,nSize)); 
@@ -141,8 +128,7 @@ end );
 ## Computes all cube-free solvable groups of order n up to isomorphism
 ##
 InstallGlobalFunction(ConstructAllCFSolvableGroups, function ( size ) 
-    local cl, free, ext, t, primes, ffOrd, lv, p, groups, pos, autGrps,
-          autPos, tmp; 
+    local cl, free, ext, t, primes, ffOrd, lv, p, groups; 
 
     # check
     if not IsPosInt( size ) or not IsCubeFreeInt( size ) then
@@ -159,32 +145,19 @@ InstallGlobalFunction(ConstructAllCFSolvableGroups, function ( size )
     # if size is square-free, then the groups of order size
     # are Frattini-free and solvable
     if IsSquareFreeInt(size) then
-        return(List(cf_FrattFreeSolvGroups(size,0,0,0)[1] ,
+        return(List(cf_FrattFreeSolvGroups(size) ,
                      x->PcGroupCodeRec(x)));
     fi;
 
     # set up
     groups := [];
     cl     := Collected( Factors( size ) );  
-    # to store the subgroups and normalizers of GL(2,p)
-    autPos := [];
-    for t in cl do
-        Add(autPos,t[1]);
-        if t[2]=2 then
-            Add(autPos,t[1]^2);
-        fi;
-    od;
-    autGrps := ListWithIdenticalEntries( Length( autPos ), 0 );
-    pos     := function(x) return Position( autPos, x); end;
- 
     # determine the possible Frattini-factors
     primes := Product(List(cl,x->x[1]));
     ffOrd  := Filtered(DivisorsInt(size),x-> x mod primes =0);
     free   := [];
     for lv in ffOrd do
-        tmp     := cf_FrattFreeSolvGroups(lv,autPos, autGrps, pos);
-        autGrps := tmp[2];
-        free    := Concatenation(free,tmp[1]);
+        free    := Concatenation(free,cf_FrattFreeSolvGroups(lv));
     od;
     Info(InfoCF,1,"Construct ",Length(free)," Frattini extensions.");
     ext    := List(free,x -> FrattiniExtensionCF(x,size)); 

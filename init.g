@@ -27,6 +27,7 @@ ReadPackage(CubefreePkgName,"gap/frattExt.gd");    #construct frat. ext.
 ReadPackage(CubefreePkgName,"gap/frattFree.gd");   #construct frat. free gr.
 ReadPackage(CubefreePkgName,"gap/glasby.gd");      #matrix rewriting alg.
 ReadPackage(CubefreePkgName,"gap/irrGL2.gd");      #irred. subg. of gl(2,p)
+ReadPackage(CubefreePkgName,"gap/count.gd");       #count cf groups
 ReadPackage(CubefreePkgName,"gap/number.gd");      #count cf groups
 ReadPackage(CubefreePkgName,"gap/allCubeFree.gd"); #count cf groups up to
 ReadPackage(CubefreePkgName,"gap/isom.gd");        #isom test
